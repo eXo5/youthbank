@@ -2,9 +2,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ChildSchema = new Schema({
-	childName: {
+	childFirstName: {
 		type: String,
-		required: "Username required"
+		required: true
+	},
+
+	childLastName: {
+		type: String,
+		required: true
 	},
 
 	childEmail: {
@@ -20,7 +25,7 @@ var ChildSchema = new Schema({
 
 	password: {
 		type: String,
-		required: true
+		required: true,
 		validate: [
 		function(input){
 			input.length >= 6;
@@ -37,9 +42,14 @@ var ChildSchema = new Schema({
 		name: {type: String}, 
 		value: {type: Number},
 		goalAttained: {type: Boolean}
-	}
+	},
+
+	parents: [{
+		type: Schema.Types.ObjectId,
+		ref: "Parent"
+	}]
 });
 
-var Child = mongoose.model("Child", UserSchema);
+var Child = mongoose.model("Child", ChildSchema);
 
 module.exports = Child;

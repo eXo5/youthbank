@@ -3,15 +3,20 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ParentSchema = new Schema({
-	parentName: {
+	parentFirstName: {
+		type: String,
+		required: true
+	},
+
+	parentLastName: {
 		type: String,
 		required: true
 	},
 
 	parentEmail: {
 		type: String,
-		required: true
-	validate: [
+		required: true,
+		validate: [
 		function(input){
 			input.length >= 3;
 		},
@@ -21,7 +26,7 @@ var ParentSchema = new Schema({
 
 	password: {
 	type: String,
-	required: true
+	required: true,
 	validate: [
 		function(input){
 			input.length >= 6;

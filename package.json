@@ -17,7 +17,7 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
-    "dev": "concurrently \"react-scripts start\" \"node server\"",
+    "dev": "concurrently \"react-scripts start\" \"nodemon server.js\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

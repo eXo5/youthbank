@@ -15,8 +15,6 @@ class App extends Component {
 					<NavItem href='components.html'>Components</NavItem>
 				</Navbar>
 			</header>
-			
-
 
 	      <main>
 		      <Row>
@@ -29,6 +27,7 @@ class App extends Component {
 	    	<footer className="page-footer">
 	    		<h3>footer will go here</h3>
 	    	</footer>
+	    	
 </Row>
     );
   }
