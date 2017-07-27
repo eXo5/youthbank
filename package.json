@@ -7,18 +7,20 @@
     "body-parser": "^1.17.2",
     "concurrently": "^3.5.0",
     "express": "^4.15.3",
+    "material-ui": "^0.18.7",
     "mongoose": "^4.11.3",
     "morgan": "^1.8.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-materialize": "^1.0.6"
+    "react-materialize": "^1.0.6",
+    "react-tap-event": "^2.0.1",
+    "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
     "react-scripts": "1.0.10"
   },
   "scripts": {
-    "dev": "concurrently \"react-scripts start\" \"node server\"",
-    "start": "react-scripts start",
+    "start": "react-scripts start & node server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

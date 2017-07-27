@@ -23,6 +23,7 @@ class App extends Component {
 				</Navbar>
 		</header>
 
+			{/* SLIDESHOW FRONT PAGE */}
 	      <main>
 		      <Row>
 		    		<Col s={12} className="grid6">
@@ -58,7 +59,7 @@ class App extends Component {
 	    		</Row>
     		</main>
 
-
+    	{/* FOOTER */}
 	    	<Footer copyrights="&copy 2015 Copyright Text"
 				moreLinks={
 					<a className="grey-text text-lighten-4 right" href="#!">More Links</a>

@@ -1,0 +1,17 @@
+body {
+	background-color: #fa7c92;
+	align-items: center;
+}
+
+.childCard {
+
+	height: 30%;
+	width: 40%;
+	float: right;
+
+}
+
+div.collapsible-body {
+
+	background-color: white;
+}
