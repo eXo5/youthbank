@@ -13,14 +13,14 @@ class List extends React.Component {
 
 	render(){
 		//for future use to display tasks, sample code
-		{/*
+		/*
 			const tasks = this.state.list;
 	    const listTasks = tasks.map((task, index) => 
 				(    	
 	        <Input type="checkbox" value="completed" label={tasks.task}> /><br />
 	      )
 			);
-		*/}
+		*/
 
 		return(
 
