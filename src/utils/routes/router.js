@@ -3,15 +3,14 @@ var Parent = require("../models/parent-model.js");
 var Child = require("../models/kid-model.js");
 
 module.exports = function(app) {
-
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
 //post route for new users, parents AND children
 app.post("/api/new/:person", function(req, res) {
 //if person is newparent, then add a new parent to the db: 
+console.log(req.body);
 	if (req.params.person === "parent") {
-		console.log(req.body);
 	//define new Parent by req.body inputs
 	var parent = new Parent({
 		parentFirstName: req.body.parentFirstName,
@@ -56,7 +55,7 @@ else if (req.params.person === "kid") {
 
 	});//end New Person
 //route for viewing chores
-app.get("/api/get/:chores", function(req, res){
+app.get("/api/get/chores", function(req, res){
 	//we'll use the id it returns after they login, but for testing I used parentFirstName and specified a value to find.
 	//We'll also probably end up having /api/:username/:chores?
 if (req.params.chores === "chores"){ 
@@ -69,12 +68,16 @@ if (req.params.chores === "chores"){
 })//END get Chores
 
 //route for inserting chores
-app.post("/api/post/:chores", function(req, res){
+app.post("/api/post/chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
+	var parentFirstName = req.body.parentFirstName;
+	var parentLastName = req.body.parentLastName;
 	var choreName = req.body.choreName;
-	var choreReqs = req.body.choreReqs;
-	Parent.findOneAndUpdate({parentFirstName:"Michael", parentLastName: "Yingling"}, {$push: {chores: {choreName: choreName, choreReqs: choreReqs, complete: false}}}).exec(function(err, doc){
+	var choreDesc = req.body.choreDesc;
+	var choreValue = req.body.choreValue;
+	var choreRegExp = choreName.replace(/ /g, "_");
+	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName}, {$push: {chores: {choreName: choreRegExp, choreDesc: choreDesc, choreValue: choreValue, complete: false}}}).exec(function(err, doc){
 		if(err) {console.log(err)}
 		console.log(doc);
 	})
@@ -82,9 +85,16 @@ app.post("/api/post/:chores", function(req, res){
 })//END new Chores
 
 app.post("/api/post/:chorecomplete", function(req, res){
-	Parent.findOneAndUpdate({})
+	//if (req.params.chorecomplete === 'chorecomplete'){
+	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
+		if (err){ console.log(err); res.send("not ok");}
+			else{
+				console.log(doc);
+				res.send("ok");
+			}
+		})
+	//}//end if req.params.chorecomplete test condition
 })
-
 	
 
 }
