@@ -99,7 +99,7 @@ else if (req.params.person === "kid") {
 
 	});//end New Person
 //route for viewing chores
-app.get("/api/get/:chores", function(req, res){
+app.get("/api/get/chores", function(req, res){
 	//we'll use the id it returns after they login, but for testing I used parentFirstName and specified a value to find.
 	//We'll also probably end up having /api/:username/:chores?
 if (req.params.chores === "chores"){ 
@@ -112,7 +112,7 @@ if (req.params.chores === "chores"){
 })//END get Chores
 
 //route for inserting chores
-app.post("/api/post/:chores", function(req, res){
+app.post("/api/post/chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
 	var parentFirstName = req.body.parentFirstName;
@@ -128,11 +128,11 @@ app.post("/api/post/:chores", function(req, res){
 })//END new Chores
 
 app.post("/api/post/:chorecomplete", function(req, res){
-	Parent.findByIdAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": "firstChore"}, {$set: {"chores.$.complete": "true"}}).exec(function(err, doc){
+	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": "firstChore"}, {$set: {"chores.$.complete": "true"}}).exec(function(err, doc){
 		if (err){ console.log(err); res.send("not ok");}
 			else{
 				console.log(doc);
-				res.send(ok);
+				res.send("ok");
 			}
 	})
 })
