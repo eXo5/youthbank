@@ -9,7 +9,6 @@ render(){
 
   return(
       <Col s={12}>
-
         <div>
 
           <Collapsible popout>

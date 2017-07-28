@@ -3,6 +3,7 @@ var Parent = require("../models/parent-model.js");
 var Child = require("../models/kid-model.js");
 
 module.exports = function(app) {
+
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
@@ -95,6 +96,5 @@ app.post("/api/post/:chorecomplete", function(req, res){
 		})
 	//}//end if req.params.chorecomplete test condition
 })
-	
 
 }

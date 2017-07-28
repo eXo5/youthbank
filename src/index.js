@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './index.css';
+// import './index.css';
 // import App from './App';
-import ParentScreen from './components/ViewParent';
+import ViewParent from './components/ParentView/ViewParent';
 //import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<ParentScreen />, document.getElementById('root'));
+ReactDOM.render(<ViewParent />, document.getElementById('root'));
 //registerServiceWorker();
+
