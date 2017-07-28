@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import {Navbar, NavItem, Row, Col, Form, Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
+
 import './index.css';
 import logo from './logo.svg';
 
@@ -14,6 +16,7 @@ class App extends Component {
 					<NavItem href='get-started.html'>Getting started</NavItem>
 					<NavItem href='components.html'>Components</NavItem>
 					<Modal
+
 						header='Sign In'
 						trigger={
 							<Button waves='light'>Sign In</Button>
@@ -30,6 +33,8 @@ class App extends Component {
 		</header>
 
 
+
+			{/* SLIDESHOW FRONT PAGE */}
 	      <main>
 		      <Row>
 		    		<Col s={12} className="grid6">
@@ -39,6 +44,7 @@ class App extends Component {
 								title="Welcome to Kids Bank">
 								Caption
 								<Modal
+
 									header='Sign Up'
 									trigger={
 										<Button waves='light' className="signUpModal">Sign Up</Button>
@@ -55,6 +61,7 @@ class App extends Component {
 												</Input>
 											</Row>
 									</Row>
+
 								</Modal>
 							</Slide>
 							<Slide
@@ -75,8 +82,6 @@ class App extends Component {
 		    		</Col>
 	    		</Row>
     		</main>
-
-
 
 	    	<Footer copyrights="&copy 2015 Copyright Text"
 				moreLinks={
