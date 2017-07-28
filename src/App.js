@@ -26,7 +26,9 @@ class App extends Component {
 						</Row>
 					</Modal>
 				</Navbar>
+
 		</header>
+
 
 	      <main>
 		      <Row>
@@ -75,6 +77,7 @@ class App extends Component {
     		</main>
 
 
+
 	    	<Footer copyrights="&copy 2015 Copyright Text"
 				moreLinks={
 					<a className="grey-text text-lighten-4 right" href="#!">More Links</a>
@@ -92,6 +95,7 @@ class App extends Component {
 					<p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
 			</Footer>;
 	</Row>
+
     );
   }
 }
