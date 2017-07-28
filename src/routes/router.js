@@ -1,60 +1,17 @@
-// Include Server Dependencies
-var express = require("express");
-var bodyParser = require("body-parser");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+var path = require("path");
+var Parent = require("../models/parent-model.js");
+var Child = require("../models/kid-model.js");
 
-//parent-model module.exports === Parent;
-var Parent = require("./src/models/parent-model.js");
-//kid-model module.exports === Child;
-var Child = require("./src/models/kid-model.js");
+module.exports = function(app) {
 
-
-
- // Create express app
-var app = express();
-// Sets initial port to environment variable or 3001 for localhost proxy. 
-var PORT = process.env.PORT || 3001;
-
-// Run Morgan and bodyParser for Logging
-app.use(logger("dev"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-//set the static build.
-app.use(express.static("build"));
-
-// -------------------------------------------------
-mongoose.Promise = Promise;
-// MongoDB configuration (Change this URL to your own DB)
-if (process.env.MONGODB_URI) {
-	mongoose.connect(process.env.MONGODB_URI)
-	}
-	else {
-		mongoose.connect("mongodb://localhost/testingdb");
-}
-
-var db = mongoose.connection;
-// MongoDB connection assurance.
-db.on("error", function(err) {
-  console.log("Mongoose Error: ", err);
-});
-
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
-//-------------------------------------------------
-//routes:
-// require("./src/routes/router.js")(app);
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
 //post route for new users, parents AND children
 app.post("/api/new/:person", function(req, res) {
 //if person is newparent, then add a new parent to the db: 
-console.log(req.body);
 	if (req.params.person === "parent") {
+		console.log(req.body);
 	//define new Parent by req.body inputs
 	var parent = new Parent({
 		parentFirstName: req.body.parentFirstName,
@@ -115,12 +72,9 @@ if (req.params.chores === "chores"){
 app.post("/api/post/:chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
-	var parentFirstName = req.body.parentFirstName;
-	var parentLastName = req.body.parentLastName;
 	var choreName = req.body.choreName;
-	var choreDesc = req.body.choreDesc;
-	var choreValue = req.body.choreValue;
-	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName}, {$push: {chores: {choreName: choreName, choreDesc: choreDesc, choreValue: choreValue, complete: false}}}).exec(function(err, doc){
+	var choreReqs = req.body.choreReqs;
+	Parent.findOneAndUpdate({parentFirstName:"Michael", parentLastName: "Yingling"}, {$push: {chores: {choreName: choreName, choreReqs: choreReqs, complete: false}}}).exec(function(err, doc){
 		if(err) {console.log(err)}
 		console.log(doc);
 	})
@@ -128,20 +82,9 @@ app.post("/api/post/:chores", function(req, res){
 })//END new Chores
 
 app.post("/api/post/:chorecomplete", function(req, res){
-	Parent.findByIdAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": "firstChore"}, {$set: {"chores.$.complete": "true"}}).exec(function(err, doc){
-		if (err){ console.log(err); res.send("not ok");}
-			else{
-				console.log(doc);
-				res.send(ok);
-			}
-	})
+	Parent.findOneAndUpdate({})
 })
 
 	
 
-// -------------------------------------------------
-
-// Starting our express server
-app.listen(PORT, function() {
-  console.log("App listening on PORT: " + PORT);
-});
+}
