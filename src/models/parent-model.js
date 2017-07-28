@@ -1,4 +1,4 @@
-//article Schema
+//Parent Schema
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
@@ -26,7 +26,7 @@ var ParentSchema = new Schema({
 
 	password: {
 	type: String,
-	required: true,
+	//required: true,
 	validate: [
 		function(input){
 			input.length >= 6;
