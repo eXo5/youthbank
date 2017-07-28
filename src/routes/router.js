@@ -84,7 +84,4 @@ app.post("/api/post/:chores", function(req, res){
 app.post("/api/post/:chorecomplete", function(req, res){
 	Parent.findOneAndUpdate({})
 })
-
-	
-
 }
