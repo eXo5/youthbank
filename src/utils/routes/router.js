@@ -1,7 +1,8 @@
 var path = require("path");
-var Parent = require("../models/parent-model.js");
-var Child = require("../models/kid-model.js");
-var Chore = require("../models/chore-model.js"); //JD 
+var axios = require("axios");
+var Parent = require("../db/models/parent-model.js");
+var Child = require("../db/models/kid-model.js");
+var Chore = require("../db/models/chore-model.js"); //JD 
 
 module.exports = function(app) {
 
@@ -53,7 +54,7 @@ else if (req.params.person === "kid") {
 			}
 	})
 	res.send("New Kid on the Block")
-}
+}//THESE 2 ROUTES NEED TO BE IN THE AUTH ROUTER
 
 	});//end New Person
 //route for viewing chores
