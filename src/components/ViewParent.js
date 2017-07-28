@@ -36,12 +36,15 @@ render() {
           {/* MODAL FOR NEW TASKS */}
           <Modal
             header='Add A New Task'
+            fixedFooter
             trigger={
               <NavItem>Add A New Task</NavItem>
             }>
             <Row>
               <Input s={12} label="Task"><Icon>build</Icon></Input>
-              <Input s={12} label="Amount"><Icon>attach money</Icon></Input>
+              <Input s={12} label="Description of Task"><Icon></Icon></Input>
+              <Input s={12} label="Amount"><Icon></Icon></Input>
+              
               <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
             </Row>
           </Modal>
@@ -57,14 +60,14 @@ render() {
         {/* MODAL FOR NEW CHILD */}
           <Modal
             header='Set Up a New Account for Child'
+            fixedFooter
             trigger={
               <NavItem>Add A New Child</NavItem>
             }>
             <Row>
               <Input s={12} label="Child Name"><Icon>face</Icon></Input>
-
-              <Input s={12} label="User Name"></Input>
-              <Input s={12} label="Password"></Input>
+              <Input s={12} label="User Name"><Icon></Icon></Input>
+              <Input s={12} label="Password"><Icon></Icon></Input>
               <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
             </Row>
           </Modal>
