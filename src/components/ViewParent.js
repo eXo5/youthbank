@@ -72,11 +72,11 @@ class ViewParent extends React.Component {
               }>
               <Row>
                 <form>
-                <Input s={12} label="Task" id="task" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
-                <Input s={12} label="Description of Task" id="descript" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
-                <Input s={12} label="Amount" id="amount" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
-                
-                <Button type="submit" waves='light' className="mainBtn" >Submit</Button>
+                  <Input s={12} label="Task" id="task" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
+                  <Input s={12} label="Description of Task" id="descript" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Amount" id="amount" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
+                  
+                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
                 </form>
               </Row>
             </Modal>
@@ -97,10 +97,12 @@ class ViewParent extends React.Component {
                 <NavItem>Add A New Child</NavItem>
               }>
               <Row>
-                <Input s={12} label="Child Name"><Icon>face</Icon></Input>
-                <Input s={12} label="User Name"><Icon></Icon></Input>
-                <Input s={12} label="Password"><Icon></Icon></Input>
-                <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
+                <form>
+                  <Input s={12} label="Child Name" id="kidName" value={this.state.kidName} onChange={this.handleChange}><Icon>face</Icon></Input>
+                  <Input s={12} label="User Name" id="kidUN" value={this.state.kidUN} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Password" id="kidPW" value={this.state.kidPW} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
+                </form>
               </Row>
             </Modal>
             
