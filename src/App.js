@@ -2,9 +2,36 @@ import React, { Component } from 'react';
 import {Navbar, NavItem, Row, Col, Form, Button, Slider, Slide, Modal, Footer} from 'react-materialize';
 import './index.css';
 import logo from './logo.svg';
+const newState = {};
 
 
 class App extends Component {
+
+	constructor() {
+    super()
+
+    this.state = {
+      //state for signup
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: ""
+
+    }
+  }
+
+    //sets state of data put in input fields
+  handleChange = (event) => {
+    
+    newState[event.target.id] = event.target.value;
+    this.setState(
+      newState
+    );
+
+    console.log("This State: " + JSON.stringify(this.state));
+
+  }//end of handleChange
+
   render() {
     return (
    <Row>
@@ -18,7 +45,17 @@ class App extends Component {
 						trigger={
 							<Button waves='light'>Sign In</Button>
 						}>
+<<<<<<< Updated upstream
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+=======
+						<Row>
+							<form>
+								<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
+								<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
+								<Button type="submit" waves='light' className="mainBtn">Submit</Button>
+							</form>
+						</Row>
+>>>>>>> Stashed changes
 					</Modal>
 				</Navbar>
 		</header>
@@ -37,7 +74,21 @@ class App extends Component {
 									trigger={
 										<Button waves='light' className="signUpModal">Sign Up</Button>
 									}>
+<<<<<<< Updated upstream
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+=======
+									<Row>
+											<form>
+												<Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
+												<Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
+												<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
+												<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
+												<Button type="submit" waves='light' className="mainBtn">Submit</Button>
+											</form>
+										</Row>
+								
+
+>>>>>>> Stashed changes
 								</Modal>
 							</Slide>
 							<Slide

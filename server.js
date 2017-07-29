@@ -22,6 +22,44 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+<<<<<<< Updated upstream
+=======
+
+// Run session for reasons
+app.use(
+	session({
+		secret: process.env.APP_SECRET || "this is the default passphrase",
+		store: new MongoStore({ mongooseConnection: dbConnection}),
+		resave: false,
+		saveUninitialized: false
+	})
+)
+// ==== testing middleware ====
+app.use(function(req, res, next) {
+	console.log("=== passport user ===");
+	console.log(req.session);
+	console.log(req.user);
+	console.log("=== END ===");
+	next()
+})
+
+app.use(passport.initialize())
+app.use(passport.session())
+// === if production env
+if(process.env.NODE_ENV === 'production') {
+	const path = require("path")
+	console.log("YOU ARE IN THE PRODUCTION ENV")
+	app.use("/static", express.static(path.join(__dirname, + "../build/static")))
+	app.get("/", (req, res) => {
+		res.sendFile(path.join(__dirname, '../build/'))
+	})
+}
+
+// Express app ROUTING??
+app.use("/", require("./src/utils/auth"))
+
+
+>>>>>>> Stashed changes
 //set the static build.
 app.use(express.static("build"));
 
