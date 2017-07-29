@@ -1,5 +1,6 @@
 var path = require("path");
 var axios = require("axios");
+var moment = require("moment");//bringing in the moment package
 var Parent = require("../db/models/parent-model.js");
 var Child = require("../db/models/kid-model.js");
 var Chore = require("../db/models/chore-model.js"); //JD 
@@ -18,8 +19,8 @@ console.log(req.body);
 	var parent = new Parent({
 		parentFirstName: req.body.parentFirstName,
 		parentLastName: req.body.parentLastName,
-		parentEmail: req.body.parentEmail,
-		password: req.body.parentPassword
+		email: req.body.email,
+		password: req.body.password
 	})
 	//save a parent to the parents collection
 	parent.save(function(err) {
@@ -40,7 +41,7 @@ else if (req.params.person === "kid") {
 	var child = new Child({
 		childFirstName: req.body.childFirstName,
 		childLastName: req.body.childLastName,
-		childEmail: req.body.childEmail,
+		email: req.body.email,
 		password: req.body.childPassword
 	})
 	//save new child to the children collection
@@ -58,16 +59,35 @@ else if (req.params.person === "kid") {
 
 	});//end New Person
 //route for viewing chores
-app.get("/api/get/chores", function(req, res){
+app.get("/api/get/chores", function(req, res){ //here we will get a dueDate for when the chores should be complete
 	//we'll use the id it returns after they login, but for testing I used parentFirstName and specified a value to find.
 	//We'll also probably end up having /api/:username/:chores?
-if (req.params.chores === "chores"){ 
-	Parent.findOne({parentFirstName: "Michael" }).exec(function(err, doc) {if(err){console.log(err)}
-		console.log("Document Response: " + doc);
-		console.log(doc.chores);
+// if (req.params.chores === "chores"){ 
+	//changing this route just a little bit
+	Chore.find({choreName: "fix_the_boiler" }).exec(function(err, doc) {if(err){console.log(err)}
+		
+		if(err){
+			console.log(err)
+		}else{
+			console.log("Document Response: " + doc);
+		console.log(doc);
+		//JD ///////////////////////////////////////////////////////////////
+		// var currentDate = moment(); //getting the current date and storing it
+		// var dueDate = moment(doc.chores.createdAt).add(7, 'days'); //getting the time that the chore was created and adding a week to it
+		// console.log(dueDate)
+
+		// if(currentDate > dueDate ){
+			// Child.findOne({choreName: findAll({})})
+		// }
+		//JD ///////////////////////////////////////////////////////////////
+		// res.send("Ok");
+		res.json(doc);
+		}
+		
 	})
-	}
-	res.send("Ok");
+	// }
+
+
 })//END get Chores
 
 //route for inserting chores
@@ -84,8 +104,10 @@ app.post("/api/post/chores", function(req, res){
 	var chore = new Chore({ //JD
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
-		choreValue: req.body.choreValues,
-		complete: false
+		choreValue: req.body.choreValue,
+		dueDate: moment(req.body.createdAt
+			).add(7, 'days') ///create a due for when the child
+		                      //is to complete the task
 	})
 
 	chore.save(function(err){
@@ -97,7 +119,7 @@ app.post("/api/post/chores", function(req, res){
 		}
 	})
 	
-	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName}, {$push: {chores: {chore}}}).exec(function(err, doc){
+	Parent.findOneAndUpdate({parentFirstName: parentFirstName, parentLastName: parentLastName}, {$push: {chores: chore}}).exec(function(err, doc){
 		if(err) {console.log(err)}
 		console.log(doc);
 	})
@@ -112,7 +134,7 @@ app.delete("/api/drop/:collection",function(req, res){
 
 app.post("/api/post/:chorecomplete", function(req, res){
 	//if (req.params.chorecomplete === 'chorecomplete'){
-	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
+	parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
 		if (err){ console.log(err); res.send("not ok");}
 			else{
 				console.log(doc);

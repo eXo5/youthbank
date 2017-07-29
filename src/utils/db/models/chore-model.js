@@ -18,6 +18,18 @@ var ChoreSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+		required: true
+	},
+	dueDate:{
+		type:Date
+	},
+	pastDue:{
+		type:Boolean,
+		default: false
+	},
 //This might allow us to add children to specific chores.
 	child: [{
 		type: Schema.Types.ObjectId,
