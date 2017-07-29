@@ -17,7 +17,12 @@ var ChoreSchema = new Schema({
 	complete: {
 		type: Boolean,
 		default: false
-	}
+	},
+//This might allow us to add children to specific chores.
+	child: [{
+		type: Schema.Type.ObjectId,
+		ref: "Child"
+	}]
 
 
 });

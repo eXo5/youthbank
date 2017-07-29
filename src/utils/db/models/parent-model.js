@@ -1,5 +1,7 @@
 //Parent Schema
 var mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+mongoose.promise = Promise;
 var Schema = mongoose.Schema;
 
 var ParentSchema = new Schema({
@@ -13,9 +15,10 @@ var ParentSchema = new Schema({
 		required: true
 	},
 
-	parentEmail: {
+	email: {
 		type: String,
 		required: true,
+		unique: true,
 		validate: [
 		function(input){
 			input.length >= 3;
@@ -44,7 +47,21 @@ var ParentSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "Child"
 	}]
-});
+})
+
+ParentSchema.methods = {
+	checkPassword: function(inputPassword){
+		return bcrypt.compareSync(inputPasword, this.password)
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
+}
+
+ParentSchema.pre("save", function(next) {
+	this.password = this.hashPassword(this.password)
+	next()
+})
 
 var Parent = mongoose.model("Parent", ParentSchema);
 
