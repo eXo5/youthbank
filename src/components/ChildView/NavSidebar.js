@@ -40,7 +40,7 @@ class NavSidebar extends React.Component {
 	render(){
 		return (
  	<div> 
-       <Navbar brand='logo' right>
+       <Navbar brand='KidsBank' right>
    
         <SideNav
           trigger={<Button className="menuBtn">MENU</Button>}
@@ -82,7 +82,7 @@ class NavSidebar extends React.Component {
           
            {/* MANAGE CHILDREN */}
           <Dropdown trigger={
-              <SideNavItem href='#!second' icon='face'>Manage Children</SideNavItem>
+              <SideNavItem href='#!second' icon='face'>Manage Goal</SideNavItem>
             }>
 
           {/* MODAL FOR NEW CHILD */}
@@ -90,7 +90,7 @@ class NavSidebar extends React.Component {
               header='Set Up a New Account for Child'
               fixedFooter
               trigger={
-                <NavItem>Add A New Child</NavItem>
+                <NavItem>Modify Existing Goal</NavItem>
               }>
               <Row>
                 <form>
@@ -102,7 +102,7 @@ class NavSidebar extends React.Component {
               </Row>
             </Modal>
             
-            <NavItem>Edit An Exisiting Child</NavItem>
+            <NavItem>Edit </NavItem>
           </Dropdown>
 
            {/* MENU FOOTER */}

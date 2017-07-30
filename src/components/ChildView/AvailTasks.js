@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, CardPanel, Input} from 'react-materialize';
+import {Row, Col, Collapsible, CollapsibleItem} from 'react-materialize';
 
 class AvailTasks extends React.Component {
 	render(){
@@ -7,12 +7,18 @@ class AvailTasks extends React.Component {
 				<Row>
 						
 						<Col >
-								<h6>Tasks Awaiting Approval</h6>
-									<Input name='group1' type='checkbox' value='red' label='Do the dishes' /><br />
-									<Input name='group2' type='checkbox' value='red' label='Mow the lawn' /><br />
-									<Input name='group3' type='checkbox' value='red' label='Wash the car' /><br />
-									<Input name='group4' type='checkbox' value='red' label='Help Mr. Jones with his yardwork' /><br />
-									<hr />
+									<h6> List of Available Tasks </h6>
+									<Collapsible popout>
+										<CollapsibleItem header='Walk Dogs' icon='pets'>
+											Worth: $8. Other details..
+										</CollapsibleItem>
+										<CollapsibleItem header='Take Out Trash' icon='delete'>
+											Worth: $3. Other details..
+										</CollapsibleItem>
+										<CollapsibleItem header='Paint Garage' icon='format_paint'>
+											Worth: $25. Other details..
+										</CollapsibleItem>
+									</Collapsible>
 						</Col>
 				</Row>
 		)

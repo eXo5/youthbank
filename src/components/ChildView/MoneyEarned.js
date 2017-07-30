@@ -1,20 +1,46 @@
 import React from 'react';
-import {Row, Col, CardPanel, Input} from 'react-materialize';
+import {Row, Col, CardPanel, Icon, Table} from 'react-materialize';
 
 class MoneyEarned extends React.Component {
 	render(){
 		return(
-				<Row>
-						
-						<Col s={12} m={7}>
-								<h6>Tasks Awaiting Approval</h6>
-									<Input name='group1' type='checkbox' value='red' label='Do the dishes' /><br />
-									<Input name='group2' type='checkbox' value='red' label='Mow the lawn' /><br />
-									<Input name='group3' type='checkbox' value='red' label='Wash the car' /><br />
-									<Input name='group4' type='checkbox' value='red' label='Help Mr. Jones with his yardwork' /><br />
-									<hr />
+				<div>
+					<Row> 
+						<Col>
+						<Icon>account_balance</Icon>
+						<h6> Account Balance : $24.00</h6>
+						<h8> Recent Transactions (10 days): </h8>
+						<Table>
+							<thead>
+								<tr>
+									<th data-field="id">Task</th>
+									<th data-field="name">Deposit Added</th>
+									<th data-field="price">Total After </th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>Do Laundry</td>
+									<td>$10.00</td>
+									<td>$24.00</td>
+								</tr>
+								<tr>
+									<td>Help Sis w. homework</td>
+									<td>$4.00</td>
+									<td>$14.00</td>
+								</tr>
+								<tr>
+									<td>Clean Bathroom</td>
+									<td>$8.00</td>
+									<td>$10.00</td>
+								</tr>
+							</tbody>
+						</Table>
 						</Col>
-				</Row>
+					</Row>
+					<hr/>
+				</div>
 		)
 	}
 }

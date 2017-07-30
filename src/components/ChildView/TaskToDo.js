@@ -11,7 +11,7 @@ class TaskToDo extends React.Component {
             
             <Col >
               <hr />
-                <h6>Tasks Awaiting Approval</h6>
+                <h6>Tasks To Do</h6>
                   <Input name='group1' type='checkbox' value='red' label='Do the dishes' /><br />
                   <Input name='group2' type='checkbox' value='red' label='Mow the lawn' /><br />
                   <Input name='group3' type='checkbox' value='red' label='Wash the car' /><br />

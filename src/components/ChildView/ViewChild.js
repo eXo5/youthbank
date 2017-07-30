@@ -53,21 +53,20 @@ class ViewChild extends React.Component {
 
         <Row>
           <Col s={3} className='grid-example'>
-            <AvailTasks />
+              <TaskToDo />
           </Col>
-
 
         {/*HERE GOES AVAILABLE TASKS*/}
           <Col s={9} className='grid-example'>
             <Card className='small'
               header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
               actions={[<a href='#'></a>]}>
-              THIS IS TEXT
+              Keep working on your goal for Concert Tickets!
             </Card>
 
               <Row>
-                <Col s={4} className='grid-example'>
-                     <TaskToDo />
+                <Col s={4} className='grid-example AvailTasks'>
+                  <AvailTasks />
                 </Col> 
                 <Col s={8} className='grid-example'>
                   <Row> 

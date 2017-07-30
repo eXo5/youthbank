@@ -16,6 +16,9 @@ div.collapsible-body {
 	background-color: white;
 }
 
+.AvailTasks {
+	border-right: solid black;
+}
 .menuBtn, .mainBtn {
 
 	float: right;
