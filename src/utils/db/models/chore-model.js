@@ -25,7 +25,7 @@ var ChoreSchema = new Schema({
 	},
 	createdAt:{
 		type: String, ///////must be given datatype of string in order to to be formatted by the moment function
-		default: moment().format("MMM Do YY")
+		default: moment().format("YYYY-MM-DD")
 	},
 	dueDate:{
 		type:String,
