@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Navbar, NavItem, Row, Col, Form, Button, Slider, Slide, Modal, Footer} from 'react-materialize';
+
+import {Navbar, NavItem, Row, Col, Form, Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
+
 import './index.css';
 import logo from './logo.svg';
 const newState = {};
@@ -41,13 +43,11 @@ class App extends Component {
 					<NavItem href='get-started.html'>Getting started</NavItem>
 					<NavItem href='components.html'>Components</NavItem>
 					<Modal
-						header='Modal Header'
+
+						header='Sign In'
 						trigger={
 							<Button waves='light'>Sign In</Button>
 						}>
-<<<<<<< Updated upstream
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-=======
 						<Row>
 							<form>
 								<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
@@ -55,10 +55,12 @@ class App extends Component {
 								<Button type="submit" waves='light' className="mainBtn">Submit</Button>
 							</form>
 						</Row>
->>>>>>> Stashed changes
 					</Modal>
 				</Navbar>
+
 		</header>
+
+
 
 			{/* SLIDESHOW FRONT PAGE */}
 	      <main>
@@ -70,13 +72,11 @@ class App extends Component {
 								title="Welcome to Kids Bank">
 								Caption
 								<Modal
-									header='Modal Header'
+
+									header='Sign Up'
 									trigger={
 										<Button waves='light' className="signUpModal">Sign Up</Button>
 									}>
-<<<<<<< Updated upstream
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-=======
 									<Row>
 											<form>
 												<Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
@@ -88,7 +88,6 @@ class App extends Component {
 										</Row>
 								
 
->>>>>>> Stashed changes
 								</Modal>
 							</Slide>
 							<Slide
@@ -110,7 +109,6 @@ class App extends Component {
 	    		</Row>
     		</main>
 
-    	{/* FOOTER */}
 	    	<Footer copyrights="&copy 2015 Copyright Text"
 				moreLinks={
 					<a className="grey-text text-lighten-4 right" href="#!">More Links</a>

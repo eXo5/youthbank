@@ -1,0 +1,135 @@
+var path = require("path");
+var axios = require("axios");
+var moment = require("moment");//bringing in the moment package JD
+// moment.format()// from the documentation JD
+var Parent = require("../db/models/parent-model.js");
+var Child = require("../db/models/kid-model.js");
+var Chore = require("../db/models/chore-model.js"); //JD 
+
+module.exports = function(app) {
+
+app.get("/", function(req, res){
+  res.sendFile(__dirname + "./public/index.html");
+});
+
+//Routes for new Parents and Children found in /auth/index.js
+
+//route for viewing chores
+
+////////////////////////////////////////  James /////////////////////////////////////////////////////
+
+app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a dueDate for when the chores should be complete
+	//we'll use the id it returns after they login, but for testing I used parentFirstName and specified a value to find.
+	//We'll also probably end up having /api/:username/:chores?
+// if (req.params.chores === "chores"){ 
+	//changing this route just a little bit
+	var choreName = req.params.choreName;
+	Chore.find({choreName}).exec(function(err, doc) {if(err){console.log(err)}
+		
+		if(err){
+			console.log(err)
+		}else{
+			console.log("Document Response: " + doc);
+		     // console.log(doc);
+		     console.log(doc[0].dueDate); //getting stored dueDate //
+		     const dueDate = new Date(doc[0].dueDate).getTime()/1000; //converting to unix time
+		     
+		     console.log(dueDate); //unix format of the due date
+		    
+		     var complete = doc[0].complete //getting boolean value of the complete
+		     console.log(complete);
+		//JD ///////////////////////////////////////////////////////////////
+		var currentDate = Date.now()/1000; //converting to unix time
+
+
+		console.log(currentDate); //unix time of the current date
+			
+			if(currentDate < dueDate){
+				console.log("time is up!");
+				if(complete == false){
+					//console.log('your in big trouble mister')
+					//add function to decrease the value of the chore for every day that goes by
+				}else{
+					//just in time
+					//send money to the child or something
+				}
+			}else{
+				console.log("you still have time!");
+			}
+
+		// var dueDate = moment(doc.chores.createdAt).add(7, 'days'); //getting the time that the chore was created and adding a week to it
+		// console.log(dueDate)
+
+		// if(currentDate > dueDate ){
+			// Child.findOne({choreName: findAll({})})
+		// }
+		//JD ///////////////////////////////////////////////////////////////
+		// res.send("Ok");
+		res.json(doc);
+		}
+		
+	})
+	// }
+
+
+})//END get Chores
+
+
+////////////////////////////  James ////////////////////////////////////////////////////////
+
+
+
+//route for inserting chores
+app.post("/api/post/chores", function(req, res){
+	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
+	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
+	var parentFirstName = req.body.parentFirstName;
+	var parentLastName = req.body.parentLastName;
+	var choreName = req.body.choreName;
+	var choreDesc = req.body.choreDesc;
+	var choreValue = req.body.choreValue;
+	var choreRegExp = choreName.replace(/ /g, "_");
+	
+	var chore = new Chore({ //JD
+		choreName: choreRegExp,
+		choreDesc: req.body.choreDesc,
+		choreValue: req.body.choreValue,
+		dueDate: moment(req.body.createdAt).add(1, 'minute').format("YYYY-MM-DD") ///create a due for when the child
+		                      // is to complete the task JD
+	})
+
+	chore.save(function(err){ //save the the chores model, this time with a due date
+		if(err){
+			console.log(err);
+		}else{
+			console.log(chore);
+			console.log("new chore added");
+		}
+	})
+	
+	Parent.findOneAndUpdate({parentFirstName: parentFirstName, parentLastName: parentLastName}, {$push: {chores: chore}}).exec(function(err, doc){
+		if(err) {console.log(err)}
+		console.log(doc);
+	})
+	res.send("Ok");
+})//END new Chores
+
+app.delete("/api/drop/:collection",function(req, res){
+	var collection = req.params.collection;
+	console.log(collection);
+	collection.drop();
+})
+
+app.post("/api/post/:chorecomplete", function(req, res){
+	//if (req.params.chorecomplete === 'chorecomplete'){
+	parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
+		if (err){ console.log(err); res.send("not ok");}
+			else{
+				console.log(doc);
+				res.send("ok");
+			}
+		})
+	//}//end if req.params.chorecomplete test condition
+})
+
+}
