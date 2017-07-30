@@ -53,7 +53,7 @@ ParentSchema.methods = {
 	checkPassword: function(inputPassword){
 		return bcrypt.compareSync(inputPasword, this.password)
 	},
-	hashPassword: plainTextPassword => {
+	hashPassword: function(plainTextPassword){
 		return bcrypt.hashSync(plainTextPassword, 10)
 	}
 }
