@@ -1,6 +1,11 @@
 //Chore Schema
 var mongoose = require("mongoose"); //JD
+
+require('mongoose-moment')(mongoose);
 var Schema = mongoose.Schema;
+var moment = require("moment");
+
+
 
 var ChoreSchema = new Schema({
 	choreName: {
@@ -18,13 +23,13 @@ var ChoreSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
-	createdAt: {
-		type: Date,
-		default: Date.now,
-		required: true
+	createdAt:{
+		type: String, ///////must be given datatype of string in order to to be formatted by the moment function
+		default: moment().format("MMM Do YY")
 	},
 	dueDate:{
-		type:Date
+		type:String,
+	
 	},
 	pastDue:{
 		type:Boolean,

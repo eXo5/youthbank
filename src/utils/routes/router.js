@@ -1,6 +1,7 @@
 var path = require("path");
 var axios = require("axios");
-var moment = require("moment");//bringing in the moment package
+var moment = require("moment");//bringing in the moment package JD
+// moment.format()// from the documentation JD
 var Parent = require("../db/models/parent-model.js");
 var Child = require("../db/models/kid-model.js");
 var Chore = require("../db/models/chore-model.js"); //JD 
@@ -38,11 +39,13 @@ console.log(req.body);
 //THIS IS MISSING THE PARENT REFERENCE AND ADDING THE CHILD TO THE PARENT's CHILDREN ARRAY.
 else if (req.params.person === "kid") {
 	//define new child by req.body inputs
+	var parentFirstName = req.body.parentFirstName; //testing link between parent and child
+	var parentLastName = req.body.parentLastName;
 	var child = new Child({
 		childFirstName: req.body.childFirstName,
 		childLastName: req.body.childLastName,
 		email: req.body.email,
-		password: req.body.childPassword
+		password: req.body.password
 	})
 	//save new child to the children collection
 	child.save(function(err){
@@ -54,7 +57,14 @@ else if (req.params.person === "kid") {
 				console.log("New Kid on the Block!");//lol
 			}
 	})
+	///Linking the parent and the child
+	Parent.findOneAndUpdate({parentFirstName: parentFirstName, parentLastName: parentLastName}, {$push: {children: child}}).exec(function(err, doc){
+		if(err) {console.log(err)}
+		console.log(doc);
+	})
 	res.send("New Kid on the Block")
+
+
 }//THESE 2 ROUTES NEED TO BE IN THE AUTH ROUTER
 
 	});//end New Person
@@ -105,12 +115,11 @@ app.post("/api/post/chores", function(req, res){
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
-		dueDate: moment(req.body.createdAt
-			).add(7, 'days') ///create a due for when the child
-		                      //is to complete the task
+		dueDate: moment(req.body.createdAt).add(3, 'days').format("MMM Do YY") ///create a due for when the child
+		                      // is to complete the task JD
 	})
 
-	chore.save(function(err){
+	chore.save(function(err){ //save the the chores model, this time with a due date
 		if(err){
 			console.log(err);
 		}else{
