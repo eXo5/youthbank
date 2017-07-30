@@ -1,0 +1,42 @@
+body {
+	background-color: #EFEFEF;
+	align: center;
+}
+
+.childCard {
+
+	height: 30%;
+	width: 40%;
+	float: right;
+
+}
+
+div.collapsible-body {
+
+	background-color: white;
+}
+
+.menuBtn, .mainBtn {
+
+	float: right;
+}
+
+.bannerParent {
+
+	width: 75%;
+	display: block;
+	margin: auto;
+
+
+}
+
+ .page-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  }
+

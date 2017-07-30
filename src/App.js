@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import {Navbar, NavItem, Row, Col, Form, Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
-
 import './index.css';
 import logo from './logo.svg';
 
@@ -31,8 +29,6 @@ class App extends Component {
 				</Navbar>
 
 		</header>
-
-
 
 			{/* SLIDESHOW FRONT PAGE */}
 	      <main>
