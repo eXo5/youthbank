@@ -16,6 +16,7 @@ var helper = {
 			console.log(results);
 		});
 	},
+
 	postChore: function(parentId, choreName, choreDesc, choreValue){
 			//when new chore is posted, drop spaces and input underscores.
 			var choreRegExp = choreName.replace(/ /g, "_");
@@ -24,6 +25,7 @@ var helper = {
 			console.log(results);
 		});
 	},
+
 	getChores: function(){
 		return axios.get("/api/get/chores");
 	},
@@ -31,6 +33,7 @@ var helper = {
 	choreComplete: function(parentId, choreName,  ){ 
 
 	},
+	
 //NOt 100% sure about returning axios verbs other than get.
 	deleteChore: function(event, choreName) {
 		console.log(choreName);
