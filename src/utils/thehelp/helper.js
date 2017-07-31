@@ -3,11 +3,12 @@ import axios from 'axios';
 
 var helper = {
 
-	postParent: function(parentFirstName, parentLastName, parentEmail, password) {
-		axios.post("/api/new/parent", {parentFirstName: print_headline, parentLastName: date, parentEmail: web_url, password: password})
-		.then(function(results){
-			console.log(results);
-		});
+	postParent: function(parentInfo) {
+
+		console.log(JSON.stringify(parentInfo));
+
+		return axios.post("/api/new/parent", parentInfo);
+
 	},
 
 	postChild: function(childFirstName, childLastName, childEmail, age, password ) {

@@ -60,7 +60,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 // Express app ROUTING??
-app.use("/auth", require("./src/utils/auth"))
+app.use("/", require("./src/utils/auth"))
 
 
 //set the static build.
@@ -87,7 +87,7 @@ db.once("open", function() {
 });
 //-------------------------------------------------
 //routes:
-require("./src/utils/routes/router.js")(app);
+// require("./src/utils/routes/router.js")(app);
 
 
 	

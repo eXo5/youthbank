@@ -4,6 +4,7 @@ const Parent = require("../db/models/parent-model")
 const Child = require("../db/models/kid-model");
 const passport = require("../passport");
 
+
 router.get("/user", (req, res, next) => {
 	console.log(req.user)
 	if (req.user) {
@@ -15,6 +16,16 @@ router.get("/user", (req, res, next) => {
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
 	res.json({user: {email: req.user.email, _id: req.user._id} })
+})
+
+router.post("/api/new/parent", (req, res) => {
+    const {email, password, parentFirstName, parentLastName } = req.body
+    //ADD VALIDATION
+    const newParent= new Parent({ email, password, parentFirstName, parentLastName })
+    newParent.save((err, savedUser) => {
+        if (err) return res.json(err)
+            return res.json(savedUser)
+    })
 })
 
 router.post("/logout", (req, res) => {
