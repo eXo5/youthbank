@@ -1,6 +1,8 @@
 var path = require("path");
-var Parent = require("../models/parent-model.js");
-var Child = require("../models/kid-model.js");
+var axios = require("axios");
+var Parent = require("../db/models/parent-model.js");
+var Child = require("../db/models/kid-model.js");
+var Chore = require("../db/models/chore-model.js"); //JD 
 
 module.exports = function(app) {
 
@@ -52,7 +54,7 @@ else if (req.params.person === "kid") {
 			}
 	})
 	res.send("New Kid on the Block")
-}
+}//THESE 2 ROUTES NEED TO BE IN THE AUTH ROUTER
 
 	});//end New Person
 //route for viewing chores
@@ -78,12 +80,35 @@ app.post("/api/post/chores", function(req, res){
 	var choreDesc = req.body.choreDesc;
 	var choreValue = req.body.choreValue;
 	var choreRegExp = choreName.replace(/ /g, "_");
-	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName}, {$push: {chores: {choreName: choreRegExp, choreDesc: choreDesc, choreValue: choreValue, complete: false}}}).exec(function(err, doc){
+	
+	var chore = new Chore({ //JD
+		choreName: choreRegExp,
+		choreDesc: req.body.choreDesc,
+		choreValue: req.body.choreValues,
+		complete: false
+	})
+
+	chore.save(function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(chore);
+			console.log("new chore added");
+		}
+	})
+	
+	Parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName}, {$push: {chores: {chore}}}).exec(function(err, doc){
 		if(err) {console.log(err)}
 		console.log(doc);
 	})
 	res.send("Ok");
 })//END new Chores
+
+app.delete("/api/drop/:collection",function(req, res){
+	var collection = req.params.collection;
+	console.log(collection);
+	collection.drop();
+})
 
 app.post("/api/post/:chorecomplete", function(req, res){
 	//if (req.params.chorecomplete === 'chorecomplete'){

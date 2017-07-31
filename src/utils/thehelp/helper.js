@@ -3,11 +3,12 @@ import axios from 'axios';
 
 var helper = {
 
-	postParent: function(parentFirstName, parentLastName, parentEmail, password) {
-		axios.post("/api/new/parent", {parentFirstName: print_headline, parentLastName: date, parentEmail: web_url, password: password})
-		.then(function(results){
-			console.log(results);
-		});
+	postParent: function(parentInfo) {
+
+		console.log(JSON.stringify(parentInfo));
+
+		return axios.post("/api/new/parent", parentInfo);
+
 	},
 
 	postChild: function(childFirstName, childLastName, childEmail, age, password ) {
@@ -16,6 +17,7 @@ var helper = {
 			console.log(results);
 		});
 	},
+
 	postChore: function(parentId, choreName, choreDesc, choreValue){
 			//when new chore is posted, drop spaces and input underscores.
 			var choreRegExp = choreName.replace(/ /g, "_");
@@ -24,6 +26,7 @@ var helper = {
 			console.log(results);
 		});
 	},
+
 	getChores: function(){
 		return axios.get("/api/get/chores");
 	},
@@ -31,6 +34,7 @@ var helper = {
 	choreComplete: function(parentId, choreName,  ){ 
 
 	},
+	
 //NOt 100% sure about returning axios verbs other than get.
 	deleteChore: function(event, choreName) {
 		console.log(choreName);
