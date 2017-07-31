@@ -12,67 +12,7 @@ app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
 //post route for new users, parents AND children
-app.post("/api/new/:person", function(req, res) {
-//if person is newparent, then add a new parent to the db: 
-console.log(req.body);
-	if (req.params.person === "parent") {
-	//define new Parent by req.body inputs
-	var parent = new Parent({
-		parentFirstName: req.body.parentFirstName,
-		parentLastName: req.body.parentLastName,
-		email: req.body.email,
-		password: req.body.password
-	})
-	//save a parent to the parents collection
-	parent.save(function(err) {
-		if (err) {
-			console.log(err)
-		}
-			else {
-				console.log(parent);
-				console.log("New Parent Added");
-			}
-		})
-	res.send("Parent Added");
-}
-//if person is newkid then add a new kid to the db
-//THIS IS MISSING THE PARENT REFERENCE AND ADDING THE CHILD TO THE PARENT's CHILDREN ARRAY.
-else if (req.params.person === "kid") {
-	//define new child by req.body inputs
-	var parentFirstName = req.body.parentFirstName; //testing link between parent and child
-	var parentLastName = req.body.parentLastName;
-	var child = new Child({
-		childFirstName: req.body.childFirstName,
-		childLastName: req.body.childLastName,
-		email: req.body.email,
-		password: req.body.password
-	})
-	//save new child to the children collection
-	child.save(function(err){
-		if (err) {
-			console.log(err);
-		}
-			else{
-				console.log(child);
-				console.log("New Kid on the Block!");//lol
-			}
-	})
-	///Linking the parent and the child
-	Parent.findOneAndUpdate({parentFirstName: parentFirstName, parentLastName: parentLastName}, {$push: {children: child}}).exec(function(err, doc){
-		if(err) {console.log(err)}
-		console.log(doc);
-	})
-	res.send("New Kid on the Block")
-
-
-}//THESE 2 ROUTES NEED TO BE IN THE AUTH ROUTER
-
-	});//end New Person
 //route for viewing chores
-
-
-
-
 
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
@@ -82,11 +22,12 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 // if (req.params.chores === "chores"){ 
 	//changing this route just a little bit
 	var choreName = req.params.choreName;
-	Chore.find({choreName}).exec(function(err, doc) {if(err){console.log(err)}
+	Chore.find({choreName}).exec(function(err, doc){
 		
 		if(err){
 			console.log(err)
 		}else{
+			if(doc[0].dueDate != null){ //if a due date was created
 			console.log("Document Response: " + doc);
 		     // console.log(doc);
 		     console.log(doc[0].dueDate); //getting stored dueDate //
@@ -128,18 +69,15 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 		}else{
 				console.log("you still have time!");
 			}
-
-
-		// if(currentDate > dueDate ){
-			// Child.findOne({choreName: findAll({})})
-		// }
 		//JD ///////////////////////////////////////////////////////////////
 		// res.send("Ok");
 		res.json(doc);
+		}else{ ///////////////if the dueDate was never specified in the first place
+			console.log("you have all the time in the world!");
+			res.json(doc)
 		}
-		
+	   }
 	})
-	// }
 
 
 })//END get Chores
@@ -159,13 +97,15 @@ app.post("/api/post/chores", function(req, res){
 	var choreDesc = req.body.choreDesc;
 	var choreValue = req.body.choreValue;
 	var choreRegExp = choreName.replace(/ /g, "_");
-	var due = parseInt(req.body.due); //parameter that sets when a chore is due by
+	// moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD")
+	var dueDate = req.body.dueDate; //parameter that sets when a chore is due by
 	
 	var chore = new Chore({ //JD
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
-		dueDate: moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD") ///create a due for when the child
+		dueDate: req.body.dueDate
+		 ///create a due for when the child
 		                      // is to complete the task JD
 	})
 
@@ -177,7 +117,7 @@ app.post("/api/post/chores", function(req, res){
 			console.log("new chore added");
 		}
 	})
-	
+
 	Parent.findOneAndUpdate({parentFirstName: parentFirstName, parentLastName: parentLastName}, {$push: {chores: chore}}).exec(function(err, doc){
 		if(err) {console.log(err)}
 		console.log(doc);

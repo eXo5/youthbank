@@ -50,6 +50,10 @@ var ChildSchema = new Schema({
 	parents: [{
 		type: Schema.Types.ObjectId,
 		ref: "Parent"
+	}],
+	chore: [{
+		type: Schema.Types.ObjectId,
+		ref: "Chore"
 	}]
 })
 
