@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import {Navbar, NavItem, Row, Col,  Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
 import './index.css';
 import helper from './utils/thehelp/helper.js'
 const newState = {};
+
 
 
 class App extends Component {
@@ -137,6 +139,7 @@ class App extends Component {
 					<p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
 			</Footer>;
 	</Row>
+
 
     );
   }

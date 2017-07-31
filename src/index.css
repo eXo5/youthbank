@@ -23,9 +23,9 @@
     text-align: center;
   }
 
-  .carouselImage {
+/*.carouselImage {
 	max-width: 100%;
-  }
+  }*/
 
 .titleWelcome {
 font-family: 'Ubuntu Condensed', sans-serif;
@@ -39,4 +39,24 @@ font-family: 'Roboto', sans-serif;
 .signUpModal {
   bottom: -50px;
   position: fixed;
+}
+
+.carouselOpts{
+  width: 100%;
+  height: auto;
+}
+
+.panelOne {
+background: url("https://fthmb.tqn.com/Dibi4iv901vO3Ryjjl6NqBv9Cfs=/2122x1415/filters:fill(auto,1)/about/142019017-56afadd85f9b58b7d01bc351.jpg") no-repeat;
+width: 100%;
+height: auto;
+}
+.panelTwo {
+
+}
+.panelThree {
+
+}
+.panelFour {
+
 }
