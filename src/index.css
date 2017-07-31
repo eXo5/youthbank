@@ -8,19 +8,24 @@
     flex: 1 0 auto;
   }
 
-  .page-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
+  .signIn {
+    text-align: center;
+    position: center;
   }
 
-  .carouselImage {
-	max-width: 100%;
+  .page-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
   }
+
+/*.carouselImage {
+	max-width: 100%;
+  }*/
 
 .titleWelcome {
 font-family: 'Ubuntu Condensed', sans-serif;
@@ -34,4 +39,24 @@ font-family: 'Roboto', sans-serif;
 .signUpModal {
   bottom: -50px;
   position: fixed;
+}
+
+.carouselOpts{
+  width: 100%;
+  height: auto;
+}
+
+.panelOne {
+background: url("https://fthmb.tqn.com/Dibi4iv901vO3Ryjjl6NqBv9Cfs=/2122x1415/filters:fill(auto,1)/about/142019017-56afadd85f9b58b7d01bc351.jpg") no-repeat;
+width: 100%;
+height: auto;
+}
+.panelTwo {
+
+}
+.panelThree {
+
+}
+.panelFour {
+
 }
