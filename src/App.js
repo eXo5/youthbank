@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 import {Navbar, NavItem, Row, Col,  Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
+
 import './index.css';
 
 import helper from './utils/thehelp/helper.js'
+
 const newState = {};
 
 
@@ -38,8 +40,8 @@ class App extends Component {
 		event.preventDefault();
 		
 		var newUser = {
-			parentFirstName: firstName,
-			parentLastName: lastName,
+			firstName: firstName,
+			lastName: lastName,
 			email: email,
 			password: password
 		}

@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
 	Parent.findOne({_id: id }, "email", (err, user) => {
-	done(null, user)
+	done(null, false)
 	})
 })
 
@@ -34,5 +34,28 @@ passport.use(
 		}
 	)
 )
+
+// passport.use(
+// 	new LocalStrategy(
+// 	{
+// 		usernameField: "email"
+// 	},
+// 	function(username, password, done) {
+// 		Child.findOne({email: username}, (err, userMatch) => {
+// 			if (err) {
+// 				return done(err)
+// 			}
+// 			if(!userMatch) {
+// 				return done(null, false, {message: "Incorrect Username"})
+// 			}
+// 			if(!userMatch.checkPassword(password)) {
+// 				return done(null, false, {message: "Incorrect password"})
+// 			}
+// 			return done(null, userMatch)
+			
+// 			})
+// 		}
+// 	)
+// )
 
 module.exports = passport

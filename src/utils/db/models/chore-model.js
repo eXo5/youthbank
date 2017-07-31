@@ -19,6 +19,10 @@ var ChoreSchema = new Schema({
 		type: Number,
 
 	},
+	childSaysComplete: {
+		type: Boolean,
+		default: false
+	},
 	complete: {
 		type: Boolean,
 		default: false

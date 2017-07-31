@@ -11,15 +11,15 @@ var helper = {
 
 	},
 
-	postChild: function(childFirstName, childLastName, childEmail, age, password ) {
-		axios.post("/api/new/kid", {childFirstName: childFirstName, childLastName: childLastName, childEmail: childEmail, age: age, password: password})
+	postChild: function(firstName, lastName, email, age, password ) {
+		axios.post("/api/new/kid", {firstName: firstName, lastName: lastName, email: email, age: age, password: password})
 		.then(function(results){
 			console.log(results);
 		});
 	},
 
 	postChore: function(parentId, choreName, choreDesc, choreValue){
-			//when new chore is posted, drop spaces and input underscores.
+			//when new chore is posted, drop spaces and input underscores in choreName.
 			var choreRegExp = choreName.replace(/ /g, "_");
 		axios.post("/api/post/chores", {parentId: parentId, choreName: choreRegExp, choreDesc: choreDesc, chorValue: choreValue})
 		.then(function(results){
