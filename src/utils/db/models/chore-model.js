@@ -16,7 +16,7 @@ var ChoreSchema = new Schema({
 		type: String,
 	},
 	choreValue: {
-		type: String,
+		type: Number,
 
 	},
 	complete: {

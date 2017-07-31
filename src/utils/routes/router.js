@@ -90,33 +90,45 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 			console.log("Document Response: " + doc);
 		     // console.log(doc);
 		     console.log(doc[0].dueDate); //getting stored dueDate //
-		     const dueDate = new Date(doc[0].dueDate).getTime()/1000; //converting to unix time
-		     
-		     console.log(dueDate); //unix format of the due date
+		     const dueDate = new Date(moment(doc[0].dueDate).utcOffset(240)).getTime(); //converting to unix time
+		     //utcOffset used to allign our timezone(EDT) with UTC time which is four hours ahead
+
+
+
+		     console.log("due date:     " + dueDate); //unix format of the due date
 		    
 		     var complete = doc[0].complete //getting boolean value of the complete
-		     console.log(complete);
+		     // console.log(complete);
 		//JD ///////////////////////////////////////////////////////////////
-		var currentDate = Date.now()/1000; //converting to unix time
+		var currentDate = moment(Date.now()); //converting to unix time
 
+	
 
-		console.log(currentDate); //unix time of the current date
+		console.log("current date: " + currentDate); //unix time of the current date
 			
-			if(currentDate < dueDate){
+			if(currentDate > dueDate){
 				console.log("time is up!");
 				if(complete == false){
-					//console.log('your in big trouble mister')
-					//add function to decrease the value of the chore for every day that goes by
+					console.log(doc[0].choreValue)
+					Chore.findOneAndUpdate({ choreName:req.body.choreName},{$set: {choreValue: doc[0].choreValue*(.8)}}).exec(function(err,doc){
+							if(err){
+								console.log(err);
+							}else{
+								console.log(doc);
+								console.log("20 percent has been deducted from choreValue");
+							}
+						})
+						//if the task is not complete on time then the value of the chore decreases by 20 percent
+					
 				}else{
-					//just in time
-					//send money to the child or something
-				}
-			}else{
+					// just in time
+					// send money to the child or something
+				// }
+			}
+		}else{
 				console.log("you still have time!");
 			}
 
-		// var dueDate = moment(doc.chores.createdAt).add(7, 'days'); //getting the time that the chore was created and adding a week to it
-		// console.log(dueDate)
 
 		// if(currentDate > dueDate ){
 			// Child.findOne({choreName: findAll({})})
@@ -138,7 +150,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 
 
 //route for inserting chores
-app.post("/api/post/chores", function(req, res){
+app.post("/api/post/chores/due", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
 	var parentFirstName = req.body.parentFirstName;
@@ -147,12 +159,13 @@ app.post("/api/post/chores", function(req, res){
 	var choreDesc = req.body.choreDesc;
 	var choreValue = req.body.choreValue;
 	var choreRegExp = choreName.replace(/ /g, "_");
+	var due = parseInt(req.body.due); //parameter that sets when a chore is due by
 	
 	var chore = new Chore({ //JD
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
-		dueDate: moment(req.body.createdAt).add(1, 'minute').format("YYYY-MM-DD") ///create a due for when the child
+		dueDate: moment(req.body.createdAt).add(due, 'second').format("YYYY-MM-DD") ///create a due for when the child
 		                      // is to complete the task JD
 	})
 
@@ -160,7 +173,7 @@ app.post("/api/post/chores", function(req, res){
 		if(err){
 			console.log(err);
 		}else{
-			console.log(chore);
+			// console.log(chore);
 			console.log("new chore added");
 		}
 	})
