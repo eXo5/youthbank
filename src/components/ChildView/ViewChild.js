@@ -6,6 +6,7 @@ import Goal from './Goal';
 import MoneyEarned from './MoneyEarned';
 import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
+import PgFooter from './Footer'
 import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
 import icon from '../../img/ChildView/vectorChild.png';
@@ -85,6 +86,8 @@ class ViewChild extends React.Component {
           </Col>
           
         </Row>
+
+          <PgFooter />
         
       </div>
     )

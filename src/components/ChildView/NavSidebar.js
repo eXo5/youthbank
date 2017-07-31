@@ -40,7 +40,7 @@ class NavSidebar extends React.Component {
 	render(){
 		return (
  	<div> 
-       <Navbar brand='KidsBank' right>
+       <Navbar brand='YoungMoney' right>
    
         <SideNav
           trigger={<Button className="menuBtn">MENU</Button>}
