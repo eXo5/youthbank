@@ -3,14 +3,14 @@ import { Row, Col, Button, Form, Input, Icon, Modal, Header } from 'react-materi
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 
-class NewParent extends React.Component {
+class NewParent extends Component {
 	constructor(){
 		super()
 
 		this.state = {
-			parentFirstName: "",
-			parentLastName: "",
-			parentEmail: "",
+			firstName: "",
+			lastName: "",
+			email: "",
 			password: "",
 			confirmPassword: "",
 			redirectTo: null
@@ -30,8 +30,8 @@ class NewParent extends React.Component {
 				event.preventDefault()
 				axios
 				.post("/auth/newparent", {
-					parentFirstName: this.state.parentFirstName,
-					parentLastName: this.state.parentLastName,
+					parentFirstName: this.state.firstName,
+					parentLastName: this.state.lastName,
 					email: this.state.email,
 					password: this.state.password,
 				})
@@ -48,17 +48,30 @@ class NewParent extends React.Component {
 
 		
 		render() {
-			return(
+			if (this.state.redirectTo) {
+					return <Redirect to={{pathname:this.state.redirectTo}} />
+			} else {
+					return(
 
-				<div className="whatthefuck">
+					<div className="container">
 
-					<p>LOOK</p>
+					<h3>LOGIN</h3>
+						<Form>						
+							<Input label="First Name" value={this.state.firstName} onChange={this.handleChange} />
+							<Input label="First Name" value={this.state.lastName} onChange={this.handleChange} />
+							<Input label="First Name" value={this.state.email} onChange={this.handleChange} />
+							<Input label="First Name" value={this.state.password} onChange={this.handleChange} />
+							<Input label="First Name" value={this.state.confirmPassword} onChange={this.handleChange} />
+							<Button type="submit" waves="light" className="mainBtn">Submit</Button>
+						</Form>	
+							
+					</div>
 
-				</div>
 
 
-
-				)
+				)		
+			}
+		
 		}
 }
 

@@ -50,11 +50,11 @@ var ParentSchema = new Schema({
 })
 
 ParentSchema.methods = {
-	checkPassword: function(inputPassword){
-		return bcrypt.compareSync(inputPasword, this.password)
+	checkPassword: function(password){
+		return bcrypt.compareSync(password, this.password)
 	},
-	hashPassword: function(plainTextPassword){
-		return bcrypt.hashSync(plainTextPassword, 10)
+	hashPassword: function(password){
+		return bcrypt.hashSync(password, 10)
 	}
 }
 

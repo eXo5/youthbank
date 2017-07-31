@@ -44,8 +44,6 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 		//JD ///////////////////////////////////////////////////////////////
 		var currentDate = moment(Date.now()); //converting to unix time
 
-	
-
 		console.log("current date: " + currentDate); //unix time of the current date
 			
 			if(currentDate > dueDate){ //comparing the current date vs the due date
@@ -83,18 +81,16 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 	})
 	// }
 
-
 })//END get Chores
 
-
 ////////////////////////////  James ////////////////////////////////////////////////////////
-
-
 
 //route for inserting chores
 app.post("/api/post/chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
+	console.log(req.body);
+	console.log("^^^req.body^^^")
 	var firstName = req.body.firstName;
 	var lastName = req.body.lastName;
 	var choreName = req.body.choreName;
@@ -107,7 +103,7 @@ app.post("/api/post/chores", function(req, res){
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
-		dueDate: moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD") ///create a due for when the child
+		dueDate: moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD") ///create a due for when the childhold
 		                      // is to complete the task JD
 	})
 
@@ -120,7 +116,7 @@ app.post("/api/post/chores", function(req, res){
 		}
 	})
 	
-	Parent.findOneAndUpdate({parentFirstName: parentFirstName, parentLastName: parentLastName}, {$push: {chores: chore}}).exec(function(err, doc){
+	Parent.findOneAndUpdate({firstName: firstName, lastName: lastName}, {$push: {chores: chore}}).exec(function(err, doc){
 		if(err) {console.log(err)}
 		console.log(doc);
 	})
@@ -135,7 +131,7 @@ app.delete("/api/drop/:collection",function(req, res){
 
 app.post("/api/post/:chorecomplete", function(req, res){
 	//if (req.params.chorecomplete === 'chorecomplete'){
-	parent.findOneAndUpdate({parentFirstName: req.body.parentFirstName, parentLastName: req.body.parentLastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
+	parent.findOneAndUpdate({firstName: req.body.firstName, lastName: req.body.lastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
 		if (err){ console.log(err); res.send("not ok");}
 			else{
 				console.log(doc);
@@ -143,6 +139,9 @@ app.post("/api/post/:chorecomplete", function(req, res){
 			}
 		})
 	//}//end if req.params.chorecomplete test condition
-})
+})//END CHORE COMPLETE
+
+
+
 
 }
