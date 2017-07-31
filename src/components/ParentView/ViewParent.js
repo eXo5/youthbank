@@ -3,9 +3,9 @@ import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, NavItem, Modal, Row
 import './viewParent.css';
 // import List from './List';
 import ChildCards from './ChildCards';
-import banner from '../img/banner-parent.png';
-import navBg from '../img/nav-background.jpg';
-import icon from '../img/vectorParent.png';
+import banner from '../../img/ParentView/banner-parent.png';
+import navBg from '../../img/ParentView/nav-background.jpg';
+import icon from '../../img/ParentView/vectorParent.png';
 const newState = {};
 
 class ViewParent extends React.Component {
