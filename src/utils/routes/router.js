@@ -110,12 +110,12 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 				console.log("time is up!");
 				if(complete == false){
 					console.log(doc[0].choreValue)
-					Chore.findOneAndUpdate({ choreName:req.body.choreName},{$set: {choreValue: doc[0].choreValue*(.8)}}).exec(function(err,doc){
+					Chore.findOneAndUpdate({ choreName:req.body.choreName},{$set: {"chores.$.pastDue": true}}).exec(function(err,doc){
 							if(err){
 								console.log(err);
 							}else{
 								console.log(doc);
-								console.log("20 percent has been deducted from choreValue");
+								console.log("This Chore is Late");
 							}
 						})
 						//if the task is not complete on time then the value of the chore decreases by 20 percent
@@ -150,7 +150,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 
 
 //route for inserting chores
-app.post("/api/post/chores/due", function(req, res){
+app.post("/api/post/chores/", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
 	var parentFirstName = req.body.parentFirstName;
