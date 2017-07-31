@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+
 // Run session for reasons
 app.use(
 	session({
@@ -61,7 +62,6 @@ if(process.env.NODE_ENV === 'production') {
 
 // Express app ROUTING??
 app.use("/", require("./src/utils/auth"))
-
 
 //set the static build.
 app.use(express.static("build"));

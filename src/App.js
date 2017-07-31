@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import {Navbar, NavItem, Row, Col,  Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
 import './index.css';
+
 import helper from './utils/thehelp/helper.js'
 const newState = {};
-
 
 
 class App extends Component {
@@ -58,6 +58,7 @@ class App extends Component {
 		})
 	};//end of saveSearch function
 
+
   render() {
     return (
    <Row>
@@ -68,7 +69,18 @@ class App extends Component {
 					<NavItem href='components.html'>Components</NavItem>
 					
 							<Button waves='light'>Sign In</Button>
-						
+
+						}>
+						<Row>
+							<form>
+								<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
+								<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
+								<Button type="submit" waves='light' className="mainBtn">Submit</Button>
+							</form>
+						</Row>
+					</Modal>
+				</Navbar>
+
 
 						
 				</Navbar>

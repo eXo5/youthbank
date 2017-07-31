@@ -4,8 +4,10 @@ const Parent = require("../db/models/parent-model")
 const Child = require("../db/models/kid-model");
 const passport = require("../passport");
 
+//ALL THESE ROUTES ARE PREFACED WITH /AUTH
 
 router.get("/user", (req, res, next) => {
+	//router.get("/auth/user")
 	console.log(req.user)
 	if (req.user) {
 		return res.json({ user: req.user})
@@ -15,6 +17,7 @@ router.get("/user", (req, res, next) => {
 })
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
+	//router.post("/auth/login")
 	res.json({user: {email: req.user.email, _id: req.user._id} })
 })
 
@@ -29,6 +32,7 @@ router.post("/api/new/parent", (req, res) => {
 })
 
 router.post("/logout", (req, res) => {
+	//router.post("/auth/logout")
 	if (req.user) {
 		req.session.destroy()
 		res.clearCookie("connect.sid") //clean up!
@@ -38,11 +42,23 @@ router.post("/logout", (req, res) => {
 	}
 })
 
-router.post("/signup", (req, res) => {
-	const {email, password } = req.body
+router.post("/api/new/parent", (req, res) => {
+	//router.post("/auth/api/new/parent")
+	const {email, password, parentFirstName, parentLastName } = req.body
 	//ADD VALIDATION
-	const newParent= new Parent({ email, password })
+	const newParent = new Parent({ email, password, parentFirstName, parentLastName })
 	newParent.save((err, savedUser) => {
+		if (err) return res.json(err)
+			return res.json(savedUser)
+	})
+})
+
+router.post("/api/new/child", (req, res) => {
+		//router.post("/auth/api/new/parent")
+		const {email, password, childFirstName, childLastName } = req.body
+	//ADD VALIDATION
+	const newChild = new Child({ email, password, childFirstName, childLastName })
+	newChild.save((err, savedUser) => {
 		if (err) return res.json(err)
 			return res.json(savedUser)
 	})
