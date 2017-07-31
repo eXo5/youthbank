@@ -106,11 +106,10 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 
 		console.log("current date: " + currentDate); //unix time of the current date
 			
-			if(currentDate > dueDate){
+			if(currentDate > dueDate){ //comparing the current date vs the due date
 				console.log("time is up!");
 				if(complete == false){
-					console.log(doc[0].choreValue)
-					Chore.findOneAndUpdate({ choreName:req.body.choreName},{$set: {"chores.$.pastDue": true}}).exec(function(err,doc){
+					Chore.findOneAndUpdate({ choreName:choreName},{$set: {"pastDue": true}}, {upsert: true}).exec(function(err,doc){
 							if(err){
 								console.log(err);
 							}else{
@@ -121,6 +120,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 						//if the task is not complete on time then the value of the chore decreases by 20 percent
 					
 				}else{
+					console.log("The chore has been completed");
 					// just in time
 					// send money to the child or something
 				// }
@@ -150,7 +150,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 
 
 //route for inserting chores
-app.post("/api/post/chores/", function(req, res){
+app.post("/api/post/chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
 	var parentFirstName = req.body.parentFirstName;
@@ -165,7 +165,7 @@ app.post("/api/post/chores/", function(req, res){
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
-		dueDate: moment(req.body.createdAt).add(due, 'second').format("YYYY-MM-DD") ///create a due for when the child
+		dueDate: moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD") ///create a due for when the child
 		                      // is to complete the task JD
 	})
 
