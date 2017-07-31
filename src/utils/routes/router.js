@@ -12,7 +12,7 @@ app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
 
-//Routes for new Parents and Children found in /auth/index.js
+//Routes for new Parents/Children and login/logout found in /auth/index.js
 
 //route for viewing chores
 
@@ -95,8 +95,8 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 app.post("/api/post/chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
-	var parentFirstName = req.body.parentFirstName;
-	var parentLastName = req.body.parentLastName;
+	var firstName = req.body.firstName;
+	var lastName = req.body.lastName;
 	var choreName = req.body.choreName;
 	var choreDesc = req.body.choreDesc;
 	var choreValue = req.body.choreValue;

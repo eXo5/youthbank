@@ -5,19 +5,19 @@ mongoose.promise = Promise;
 var Schema = mongoose.Schema;
 
 var ParentSchema = new Schema({
-	parentFirstName: {
+	firstName: {
 		type: String,
-		required: true
+		//required: true
 	},
 
-	parentLastName: {
+	lastName: {
 		type: String,
-		required: true
+		//required: true
 	},
 
 	email: {
 		type: String,
-		required: true,
+		//required: true,
 		unique: true,
 		validate: [
 		function(input){

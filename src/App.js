@@ -70,20 +70,11 @@ class App extends Component {
 					
 							<Button waves='light'>Sign In</Button>
 
-						}>
-						<Row>
-							<form>
-								<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
-								<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
-								<Button type="submit" waves='light' className="mainBtn">Submit</Button>
-							</form>
-						</Row>
-					</Modal>
-				</Navbar>
-
-
 						
+					
 				</Navbar>
+
+
 		</header>
 
 			{/* SLIDESHOW FRONT PAGE */}

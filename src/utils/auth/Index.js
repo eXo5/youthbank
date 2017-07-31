@@ -21,16 +21,6 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 	res.json({user: {email: req.user.email, _id: req.user._id} })
 })
 
-router.post("/api/new/parent", (req, res) => {
-    const {email, password, parentFirstName, parentLastName } = req.body
-    //ADD VALIDATION
-    const newParent= new Parent({ email, password, parentFirstName, parentLastName })
-    newParent.save((err, savedUser) => {
-        if (err) return res.json(err)
-            return res.json(savedUser)
-    })
-})
-
 router.post("/logout", (req, res) => {
 	//router.post("/auth/logout")
 	if (req.user) {
@@ -44,9 +34,9 @@ router.post("/logout", (req, res) => {
 
 router.post("/api/new/parent", (req, res) => {
 	//router.post("/auth/api/new/parent")
-	const {email, password, parentFirstName, parentLastName } = req.body
+	const {email, password, firstName, lastName } = req.body
 	//ADD VALIDATION
-	const newParent = new Parent({ email, password, parentFirstName, parentLastName })
+	const newParent = new Parent({ email, password, firstName, lastName })
 	newParent.save((err, savedUser) => {
 		if (err) return res.json(err)
 			return res.json(savedUser)
@@ -55,9 +45,9 @@ router.post("/api/new/parent", (req, res) => {
 
 router.post("/api/new/child", (req, res) => {
 		//router.post("/auth/api/new/parent")
-		const {email, password, childFirstName, childLastName } = req.body
+		const {email, password, firstName, lastName } = req.body
 	//ADD VALIDATION
-	const newChild = new Child({ email, password, childFirstName, childLastName })
+	const newChild = new Child({ email, password, firstName, lastName })
 	newChild.save((err, savedUser) => {
 		if (err) return res.json(err)
 			return res.json(savedUser)
