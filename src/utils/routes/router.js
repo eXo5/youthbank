@@ -11,9 +11,9 @@ module.exports = function(app) {
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
-
+  
+//post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js
-
 //route for viewing chores
 
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
@@ -24,11 +24,12 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 // if (req.params.chores === "chores"){ 
 	//changing this route just a little bit
 	var choreName = req.params.choreName;
-	Chore.find({choreName}).exec(function(err, doc) {if(err){console.log(err)}
+	Chore.find({choreName}).exec(function(err, doc){
 		
 		if(err){
 			console.log(err)
 		}else{
+			if(doc[0].dueDate != null){ //if a due date was created
 			console.log("Document Response: " + doc);
 		     // console.log(doc);
 		     console.log(doc[0].dueDate); //getting stored dueDate //
@@ -68,18 +69,15 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 		}else{
 				console.log("you still have time!");
 			}
-
-
-		// if(currentDate > dueDate ){
-			// Child.findOne({choreName: findAll({})})
-		// }
 		//JD ///////////////////////////////////////////////////////////////
 		// res.send("Ok");
 		res.json(doc);
+		}else{ ///////////////if the dueDate was never specified in the first place
+			console.log("you have all the time in the world!");
+			res.json(doc)
 		}
-		
+	   }
 	})
-	// }
 
 })//END get Chores
 
@@ -97,13 +95,16 @@ app.post("/api/post/chores", function(req, res){
 	var choreDesc = req.body.choreDesc;
 	var choreValue = req.body.choreValue;
 	var choreRegExp = choreName.replace(/ /g, "_");
-	var due = parseInt(req.body.due); //parameter that sets when a chore is due by
+	// moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD")
+	var dueDate = req.body.dueDate; //parameter that sets when a chore is due by
 	
 	var chore = new Chore({ //JD
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
-		dueDate: moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD") ///create a due for when the childhold
+		dueDate: req.body.dueDate
+		 ///create a due for when the child
+
 		                      // is to complete the task JD
 	})
 
@@ -115,8 +116,9 @@ app.post("/api/post/chores", function(req, res){
 			console.log("new chore added");
 		}
 	})
-	
+
 	Parent.findOneAndUpdate({firstName: firstName, lastName: lastName}, {$push: {chores: chore}}).exec(function(err, doc){
+
 		if(err) {console.log(err)}
 		console.log(doc);
 	})

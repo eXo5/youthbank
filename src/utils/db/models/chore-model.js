@@ -33,7 +33,7 @@ var ChoreSchema = new Schema({
 	},
 	dueDate:{
 		type:String,
-	
+		
 	},
 	pastDue:{
 		type:Boolean,
