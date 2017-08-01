@@ -1,12 +1,19 @@
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family:'Open Sans', sans-serif;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+main {
+  flex: 1 0 auto;
+}
+
+
+.landingPhoto {
+  padding: 100px;
+  margin-bottom: 0px;
+}
 
   .signIn {
     text-align: center;
@@ -23,9 +30,53 @@
     text-align: center;
   }
 
-/*.carouselImage {
-	max-width: 100%;
-  }*/
+
+.NavbarCSS {
+background-color: #CDCDCD;
+color: #602014;
+padding-left: 20px;
+padding-right:20px;
+
+}
+/*.navItems {
+}*/
+
+.landPtext {
+color: white;
+font-size: 25px;
+}
+nav ul a{
+color: #ff8c00;
+font-family:'Open Sans', sans-serif;
+font-size: 18px;
+
+;
+}
+nav .brand-logo {
+font-family: 'Pacifico', cursive;
+color: #ff8c00;
+font-size: 40px;
+;
+
+}
+
+.page-footer {
+position: absolute;
+right: 0;
+bottom: 0;
+left: 0;
+padding: 1rem;
+background-color: #efefef;
+text-align: center;
+}
+
+.carouselImage {
+  max-width: 100%;
+  }
+.landingPage {
+  background-size: cover;
+  background-position: center;
+}
 
 .titleWelcome {
 font-family: 'Ubuntu Condensed', sans-serif;
@@ -41,15 +92,49 @@ font-family: 'Roboto', sans-serif;
   position: fixed;
 }
 
+.landingPage1 {
+  background-image: url("./img/WelcomeView/teens.jpg");
+  background-size: cover;
+  margin-bottom: 0;
+  padding-bottom: 100px;
+  padding-top: 100px;
+}
+
+.signUpComponent {
+  border: 1px  black;
+  padding: 20px;
+  margin: 20px;
+  background: orange linear-gradient(orange,#ff8c00);
+
+}
 .carouselOpts{
   width: 100%;
   height: auto;
 }
 
+.WhyComp{
+  border-top: solid black;
+  border-bottom: solid black;
+  background-color: #A5A5AF;
+  padding: 80px;
+}
+
+
+html,body
+{height:100%;};
+.carousel,.item,.active{height:100%;}
+.carousel-inner{height:100%;}
+.fill{width:100%;height:100%;background-position:center;background-size:cover;}
+
+
 .panelOne {
 background: url("https://fthmb.tqn.com/Dibi4iv901vO3Ryjjl6NqBv9Cfs=/2122x1415/filters:fill(auto,1)/about/142019017-56afadd85f9b58b7d01bc351.jpg") no-repeat;
-width: 100%;
-height: auto;
+background-size: cover;
+/*width: 100%;*/
+/*height: 800px;*/
+}
+.p1Font{
+  font-size: 40px;
 }
 .panelTwo {
 
