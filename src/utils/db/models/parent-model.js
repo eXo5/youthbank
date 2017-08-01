@@ -5,19 +5,19 @@ mongoose.promise = Promise;
 var Schema = mongoose.Schema;
 
 var ParentSchema = new Schema({
-	parentFirstName: {
+	firstName: {
 		type: String,
-		required: true
+		//required: true
 	},
 
-	parentLastName: {
+	lastName: {
 		type: String,
-		required: true
+		//required: true
 	},
 
 	email: {
 		type: String,
-		required: true,
+		//required: true,
 		unique: true,
 		validate: [
 		function(input){
@@ -50,11 +50,11 @@ var ParentSchema = new Schema({
 })
 
 ParentSchema.methods = {
-	checkPassword: function(inputPassword){
-		return bcrypt.compareSync(inputPasword, this.password)
+	checkPassword: function(password){
+		return bcrypt.compareSync(password, this.password)
 	},
-	hashPassword: plainTextPassword => {
-		return bcrypt.hashSync(plainTextPassword, 10)
+	hashPassword: function(password){
+		return bcrypt.hashSync(password, 10)
 	}
 }
 
