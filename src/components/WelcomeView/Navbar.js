@@ -1,29 +1,17 @@
 import React from 'react';
 import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
+import '../../index.css'
+class PgNavbar extends React.Component {
 
-class ThisNavbar extends React.Component {
-	constructor(){
-		super()
-		this.state = {
-			email: "",
-			password: ""
-		}
-
-    this.handleChange = (event) => {
-      var newState = {};
-      newState[event.target.id] = event.target.value;
-      this.setState(newState);
-    }
-		
-	}
 	render(){
 		return(
 
 		<header>
-	    		<Navbar brand='Young Money' right>
+			<div className="navbar-fixed">
+	    		<Navbar brand='Young Money' right className="NavbarCSS ">
 	    	{/*we have to import react-router */}
-						<NavItem href='get-started.html'>Getting started</NavItem>
-						<NavItem href='components.html'>Components</NavItem>
+						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
+						<NavItem href='components.html' className="navItems">Components</NavItem>
 						<Modal
 
 							header='Sign In'
@@ -37,6 +25,7 @@ class ThisNavbar extends React.Component {
 							</Row>
 						</Modal>
 					</Navbar>
+				</div>	
 
 			</header>
 			)
