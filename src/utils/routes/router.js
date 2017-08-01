@@ -85,6 +85,11 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 
 //route for inserting chores
 app.post("/api/post/chores", function(req, res){
+
+    //importing a user session
+    var auth = require("../passport/index.js")(app,user);
+
+
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
 	console.log(req.body);
@@ -99,6 +104,7 @@ app.post("/api/post/chores", function(req, res){
 	var dueDate = req.body.dueDate; //parameter that sets when a chore is due by
 	
 	var chore = new Chore({ //JD
+
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
 		choreValue: req.body.choreValue,
@@ -117,7 +123,7 @@ app.post("/api/post/chores", function(req, res){
 		}
 	})
 
-	Parent.findOneAndUpdate({firstName: firstName, lastName: lastName}, {$push: {chores: chore}}).exec(function(err, doc){
+	Parent.findOneAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){
 
 		if(err) {console.log(err)}
 		console.log(doc);

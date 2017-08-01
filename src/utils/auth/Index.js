@@ -16,10 +16,18 @@ router.get("/user", (req, res, next) => {
 	}
 })
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
+router.post("/login", passport.authenticate("local-parent"), (req, res) => {
 	//router.post("/auth/login")
 	res.json({user: {email: req.user.email, _id: req.user._id} })
 })
+
+router.post("/login/child", passport.authenticate("local-child"), (req, res) => {
+	//router.post("/auth/login")
+	res.json({user: {email: req.user.email, _id: req.user._id} })
+})
+
+
+
 
 router.post("/logout", (req, res) => {
 	//router.post("/auth/logout")
