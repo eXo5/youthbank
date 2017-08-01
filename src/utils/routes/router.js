@@ -114,10 +114,10 @@ app.post("/api/post/chores", function(req, res){
 		}else{
 			// console.log(chore);
 			console.log("new chore added");
-		}
+		}x
 	})
 
-	Parent.findOneAndUpdate({firstName: firstName, lastName: lastName}, {$push: {chores: chore}}).exec(function(err, doc){
+	Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){
 
 		if(err) {console.log(err)}
 		console.log(doc);
@@ -143,7 +143,16 @@ app.post("/api/post/:chorecomplete", function(req, res){
 	//}//end if req.params.chorecomplete test condition
 })//END CHORE COMPLETE
 
-
+app.post("api/get/editkid", function(req, res) {
+	Child.findOne({firstName: req.body.firstName, lastName: req.body.lastName})
+	.exec(function(err, doc) {
+		if(err) {
+			console.log(err)
+		}else{
+			console.log(doc)
+		}
+	})
+})
 
 
 }

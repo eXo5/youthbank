@@ -17,6 +17,7 @@ class SignIn extends Component {
       password: ""
 
     }
+
   }
 
     //sets state of data put in input fields
@@ -27,11 +28,16 @@ class SignIn extends Component {
       newState
     );
 
-    console.log("This State: " + JSON.stringify(this.state));
+    //console.log("This State: " + JSON.stringify(this.state));
 
   }//end of handleChange
 
-
+  handleSubmit = (event, email, password) => {
+    event.preventDefault()
+    console.log("handleSubmit")
+    this.props._login(this.state.email, this.state.password)
+    this.setState({redirectTo: "/"})
+  }
   // saveUser = (event, firstName, lastName, email, password) => {
   //   event.preventDefault();
     
@@ -87,7 +93,7 @@ class SignIn extends Component {
                   
                   <Row className="signIn">
                   
-                    <Button s={12} type="submit" waves='light' className="mainBtn">Submit
+                    <Button onClick={this.handleSubmit} s={12} type="submit" waves='light' className="mainBtn">Submit
                     </Button>
                   
                   
@@ -101,7 +107,7 @@ class SignIn extends Component {
                   <Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
                   <Input type="password" label="Password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
                   <Row className="signIn">
-                    <Button s={12} type="submit" waves='light' className="mainBtn">Submit
+                    <Button onClick={this.handleClick} s={12} type="submit" waves='light' className="mainBtn">Submit
                     </Button>
                   </Row>
                 </form>

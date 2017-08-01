@@ -3,11 +3,20 @@ import axios from 'axios';
 
 var helper = {
 
-	postParent: function(parentInfo) {
+	logOneIn: function(email, password) {
+		console.log(email)
+		console.log(password)
+		axios.post("/auth/login", {email: email, password: password})
+		.then(function(results) {
+			return console.log(results)
+		})
+	},
 
-		console.log(JSON.stringify(parentInfo));
-
-		return axios.post("/api/new/parent", parentInfo);
+	postParent: function(firstName, lastName, email, password) {
+	 axios.post("/auth/api/new/parent", {firstName: firstName, lastName: lastName, email: email, password: password})
+	 		.then(function(results){
+	 			return console.log(results)
+	 		})
 
 	},
 
