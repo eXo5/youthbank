@@ -1,20 +1,23 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
+mongoose.promise = Promise;
 
 var ChildSchema = new Schema({
-	childFirstName: {
+	firstName: {
 		type: String,
 		required: true
 	},
 
-	childLastName: {
+	lastName: {
 		type: String,
 		required: true
 	},
 
-	childEmail: {
+	email: {
 		type: String,
 		required:true,
+		unique: true,
 		validate: [
 		function(input){
 			input.length >= 3;
@@ -38,17 +41,34 @@ var ChildSchema = new Schema({
 		type: Number,
 	},
 
-	goal: {
-		name: {type: String}, 
-		value: {type: Number},
-		goalAttained: {type: Boolean}
-	},
+	goals: [{
+		type: Schema.Types.ObjectId,
+		ref: "Goal"
+	}],
 
 	parents: [{
 		type: Schema.Types.ObjectId,
 		ref: "Parent"
+	}],
+	chore: [{
+		type: Schema.Types.ObjectId,
+		ref: "Chore"
 	}]
-});
+})
+
+ChildSchema.methods = {
+	checkPassword: function(password){
+		return bcrypt.compareSync(password, this.password)
+	},
+	hashPassword: function(password){
+		return bcrypt.hashSync(password, 10)
+	}
+}
+
+ChildSchema.pre("save", function(next) {
+		this.password = this.hashPassword(this.password);
+		next();
+})
 
 var Child = mongoose.model("Child", ChildSchema);
 
