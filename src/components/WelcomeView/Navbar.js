@@ -1,7 +1,21 @@
 import React from 'react';
 import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
 
-class PgNavbar extends React.Component {
+class ThisNavbar extends React.Component {
+	constructor(){
+		super()
+		this.state = {
+			email: "",
+			password: ""
+		}
+
+    this.handleChange = (event) => {
+      var newState = {};
+      newState[event.target.id] = event.target.value;
+      this.setState(newState);
+    }
+		
+	}
 	render(){
 		return(
 
@@ -17,10 +31,9 @@ class PgNavbar extends React.Component {
 								<Button waves='light'>Sign In</Button>
 							}>
 							<Row>
-								<Input s={6} label="First Name" />
-								<Input s={6} label="Last Name" />
-								<Input type="email" label="Email"s={12} />
-								<Input type="password" label="password" s={12} />
+								<Input id="email" onChange={this.handleChange} value={this.state.email}type="email" label="Email"  s={12} />
+								<Input id="password" onChange={this.handleChange}  value={this.state.password} type="password" label="Password" s={12} />
+								<Button type="submit" onClick={(event) => {this.props.handleSubmit(event, this.email, this.password)}}>Submit</Button>
 							</Row>
 						</Modal>
 					</Navbar>
@@ -30,4 +43,4 @@ class PgNavbar extends React.Component {
 	}
 }
 
-export default PgNavbar;
+export default ThisNavbar;
