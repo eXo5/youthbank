@@ -1,15 +1,16 @@
 import React from 'react';
 import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
-
+import '../../index.css'
 class PgNavbar extends React.Component {
 	render(){
 		return(
 
 		<header>
-	    		<Navbar brand='Young Money' right>
+			<div className="navbar-fixed">
+	    		<Navbar brand='Young Money' right className="NavbarCSS ">
 	    	{/*we have to import react-router */}
-						<NavItem href='get-started.html'>Getting started</NavItem>
-						<NavItem href='components.html'>Components</NavItem>
+						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
+						<NavItem href='components.html' className="navItems">Components</NavItem>
 						<Modal
 
 							header='Sign In'
@@ -24,6 +25,7 @@ class PgNavbar extends React.Component {
 							</Row>
 						</Modal>
 					</Navbar>
+				</div>	
 
 			</header>
 			)
