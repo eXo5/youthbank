@@ -1,4 +1,4 @@
-ponent } from 'react';
+import React, {Component} from 'react';
 
 import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
 import Navbar from './components/WelcomeView/Navbar'
