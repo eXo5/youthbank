@@ -15,7 +15,11 @@ app.get("/", function(req, res){
 //post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js
 //route for viewing chores
-
+app.get("/api/get/chores/", function(req, res) {
+	console.log(req.user)
+	console.log("^^^req.user^^^")
+	Parent.find({}).exec(function(err,doc){ err ? console.log(err) : console.log(doc) })
+})
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
 app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a dueDate for when the chores should be complete
@@ -131,7 +135,7 @@ app.delete("/api/drop/:collection",function(req, res){
 	collection.drop();
 })
 
-app.post("/api/post/:chorecomplete", function(req, res){
+app.post("/api/post/chorecomplete", function(req, res){
 	//if (req.params.chorecomplete === 'chorecomplete'){
 	parent.findOneAndUpdate({firstName: req.body.firstName, lastName: req.body.lastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
 		if (err){ console.log(err); res.send("not ok");}
@@ -153,6 +157,5 @@ app.post("api/get/editkid", function(req, res) {
 		}
 	})
 })
-
 
 }
