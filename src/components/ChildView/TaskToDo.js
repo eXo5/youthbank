@@ -1,7 +1,7 @@
 import {Row, Col, CardPanel, Input} from 'react-materialize';
 import React from 'react';
 // import List from './List';
-import './viewChild.css';
+import '../../index.css';
 
 class TaskToDo extends React.Component {
 
