@@ -19,7 +19,7 @@ class App extends Component {
 			  <Home />
 			 <Why />
 			  <Features1 />
-			{/*<PgFooter /> */}
+			<PgFooter />
 
 	</div>
 
