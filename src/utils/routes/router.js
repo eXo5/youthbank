@@ -15,7 +15,10 @@ app.get("/", function(req, res){
 //post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js
 //route for viewing chores
-
+app.get("/api/get/chores/", function(req, res){
+  Parent.find({}).exec(function(err,doc){err ? console.log(err) : console.log(doc)})
+});
+  
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
 app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a dueDate for when the chores should be complete

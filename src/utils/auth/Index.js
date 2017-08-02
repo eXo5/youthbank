@@ -16,7 +16,7 @@ router.get("/user", (req, res, next) => {
 	}
 })
 
-router.post("/login", passport.authenticate("local-parent"), (req, res) => {
+router.post("/login/parent", passport.authenticate("local-parent"), (req, res) => {
 	//router.post("/auth/login")
 	res.json({user: {email: req.user.email, _id: req.user._id} })
 })

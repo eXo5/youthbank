@@ -4,12 +4,12 @@ const bcrypt = require("bcryptjs");
 mongoose.promise = Promise;
 
 var ChildSchema = new Schema({
-	firstName: {
+	childFirstName: {
 		type: String,
 		required: true
 	},
 
-	lastName: {
+	childLastName: {
 		type: String,
 		required: true
 	},
@@ -41,10 +41,11 @@ var ChildSchema = new Schema({
 		type: Number,
 	},
 
-	goals: [{
-		type: Schema.Types.ObjectId,
-		ref: "Goal"
-	}],
+	goal: {
+		name: {type: String}, 
+		value: {type: Number},
+		goalAttained: {type: Boolean}
+	},
 
 	parents: [{
 		type: Schema.Types.ObjectId,
@@ -57,11 +58,11 @@ var ChildSchema = new Schema({
 })
 
 ChildSchema.methods = {
-	checkPassword: function(password){
-		return bcrypt.compareSync(password, this.password)
+	checkPassword: function(inputPassword){
+		return bcrypt.compareSync(inputPassword, this.password)
 	},
-	hashPassword: function(password){
-		return bcrypt.hashSync(password, 10)
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
 	}
 }
 

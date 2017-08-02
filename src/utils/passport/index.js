@@ -6,7 +6,7 @@ const Child = require("../db/models/kid-model");
 ///exporting a session attempt
 
 passport.serializeUser((user, done) => {
-	done(null, {_id: this._id, email: this.email }) //take out email in production?
+	done(null, {_id: user._id, email: user.email }) //take out email in production?
 })
 
 passport.deserializeUser((id, done) => {
@@ -25,7 +25,8 @@ passport.deserializeUser((id, done) => {
 passport.use("local-parent",
 	new LocalStrategy(
 	{
-		usernameField: "email"
+		usernameField: "email",
+		passwordField: "password"
 	},
 	function(username, password, done) {
 		Parent.findOne({email: username}, (err, userMatch) => {
@@ -47,7 +48,8 @@ passport.use("local-parent",
 passport.use("local-child",
 	new LocalStrategy(
 	{
-		usernameField: "email"
+		usernameField: "email",
+		passwordField: "password"
 	},
 	function(username, password, done) {
 		Child.findOne({email: username}, (err, userMatch) => {
