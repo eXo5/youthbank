@@ -84,7 +84,7 @@ return(
 				  </Col>
 		          <Col s={6}>
 			          <div className="signUpComponent">
-				          <h4 className="title">Sign Up</h4>
+				          <h4>Sign Up</h4>
 									<form>
 										<Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
 										<Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>

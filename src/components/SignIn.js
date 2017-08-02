@@ -40,7 +40,7 @@ class SignIn extends Component {
     event.preventDefault()
     console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
     helper.logOneIn(this.state.email, this.state.password)
-    this.setState({redirectTo: "/"})
+    this.setState({redirectTo: "/parent"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {
   //   event.preventDefault();

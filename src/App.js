@@ -7,6 +7,7 @@ import './index.css';
 // import PgFooter from './components/WelcomeView/PgFooter';
 // import Why from './components/WelcomeView/WhyWeMadeIt';
 // import Features1 from './components/WelcomeView/Features1';
+import ViewParent from './components/ParentView/ViewParent';
 import SignIn from './components/SignIn';
 import { Route, Switch } from 'react-router-dom';
 
@@ -101,7 +102,8 @@ class App extends React.Component {
 			  
 		<Switch>
 			<Route exact path="/" render={() => <Home/> } />
-			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />      
+			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+      <Route exact path="/parent" render={() => <ViewParent />}  />    
 		</Switch>
 
 			

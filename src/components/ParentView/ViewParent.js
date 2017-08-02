@@ -1,11 +1,12 @@
 import React from 'react';
 import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
-import './viewParent.css';
+import '../../index.css';
 // import List from './List';
 import ChildCards from './ChildCards';
 import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
+import helper from '../../utils/thehelp/helper.js';
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -47,9 +48,20 @@ class ViewParent extends React.Component {
   handleNewChild = (event, firstName, lastName, email, password) => {
   event.preventDefault()
   
-  helper.postChild(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.age).then =>
+  helper.postChild(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.age).then(response =>  {
 
       return alert("New Child Added!");
+    }
+      )
+
+    this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        age: ""
+    })
+    
 
     }//end of handleNewChild
 
@@ -115,7 +127,7 @@ class ViewParent extends React.Component {
                 <form>
                   <Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
                   <Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
-                  <Input s={12} label="Age" id="age" value={this.state.lastName} onChange={this.handleChange}/>
+                  <Input s={12} label="Age" id="age" value={this.state.age} onChange={this.handleChange}/>
                   <Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
                   <Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
 
