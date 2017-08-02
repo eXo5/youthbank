@@ -42,6 +42,10 @@ handleSubmit = (event, firstName, lastName, email, password) => {
 	helper.postParent(this.state.firstName, this.state.lastName, this.state.email, this.state.password)
 	// debugger
 	this.setState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		password: "",
 		redirectTo: '/signin'
 	})
 }
