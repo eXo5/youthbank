@@ -1,7 +1,7 @@
-import React from 'react';
+ import React from 'react';
 import {Row, Col,  Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
 import '../../index.css';
-// import helper from './utils/thehelp/helper.js';
+import helper from '../../utils/thehelp/helper.js';
 // import { Route, Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 const newState = {};
@@ -13,15 +13,15 @@ class Home extends React.Component {
 
     this.state = {
       //state for signup
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
+      firstName: "",
+      lastName: "",
       redirectTo: null
     }
   }
 
-    //sets state of data put in input fields
+    //sets state of data put in inp   ut fields
   handleChange = (event) => {
     
     newState[event.target.id] = event.target.value;
@@ -33,38 +33,28 @@ class Home extends React.Component {
 
   }//end of handleChange
 
-handleSubmit = (event) => {
+
+	// saveUser = (event, email, password, firstName, lastName) => {
+	// 	event.preventDefault();
+
+	// 	helper.postParent(email, password, firstName, lastName)
+		
+	// };//end of saveUser function
+
+	handleSubmit = (event) => {
 	event.preventDefault()
-	// alert('handle submit fired@!')
-	this.props.saveUser(event, this.state.firstName, this.state.lastName, this.state.email, this.state.password)
-	// debugger
+
+	helper.postParent(this.state.email, this.state.password, this.state.firstName, this.state.lastName)
+
 	this.setState({
-		redirectTo: '/signin'
+				email: "",
+				password: "",
+				firstName: "",
+				lastName: "",
+				redirectTo: '/signin'
+		
 	})
 }
-	// saveUser = (event, firstName, lastName, email, password) => {
-	// 	event.preventDefault();
-		
-	// 	var newUser = {
-	// 		parentFirstName: firstName,
-	// 		parentLastName: lastName,
-	// 		email: email,
-	// 		password: password
-	// 	}
-	// 	// console.log(chosenArticle);
-
-	// 	helper.postParent(newUser)
-	// 	.then(results => {
-	// 		this.setState({
-	// 			firstName: "",
-	// 			lastName: "",
-	// 			email: "",
-	// 			password: ""
-	// 		})
-
-
-	// 	})
-	// };//end of saveSearch function
 
 render(){
 	  if (this.state.redirectTo){

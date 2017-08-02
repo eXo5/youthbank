@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-
+import helper from './utils/thehelp/helper.js';
 import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
 import Navbar from './components/WelcomeView/Navbar'
 import Home from './components/WelcomeView/SignUp';
@@ -9,7 +9,11 @@ import logo from './logo.svg';
 import PgFooter from './components/WelcomeView/PgFooter';
 import Why from './components/WelcomeView/WhyWeMadeIt';
 import Features1 from './components/WelcomeView/Features1';
+import SignIn from './components/SignIn';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
+import axios from 'axios';
+const newState = {};
 
 const DisplayLinks = props => {
 	if(props.loggedIn) {
@@ -90,27 +94,18 @@ class App extends React.Component {
 
 
   render() {
-  	// if (this.state.redirectTo){
-  	// 	return <Redirect to={{pathname: this.state.redirectTo}} />
-  	// }
-
-
-
-
     return (
       <div>
-		<Switch>
-			<Route exact path="/" render={() => <SignUp saveUser={this.saveUser}/>} />
-			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
-		</Switch>
-
-
 
     <div> 
 	    	<header>
 	    		<Navbar />
 			</header>
-			  <Home />
+			  
+		<Switch>
+			<Route exact path="/" render={() => <Home saveUser={this.saveUser}/>} />
+			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+		</Switch>
 			 <Why />
 			  <Features1 />
 			{/*<PgFooter /> */}
