@@ -44,6 +44,9 @@ padding-right:20px;
 .landPtext {
 color: white;
 font-size: 25px;
+font-weight: bold;
+text-align: right;
+
 }
 nav ul a{
 color: #ff8c00;
@@ -61,27 +64,29 @@ font-size: 40px;
 }
 
 .page-footer {
-position: absolute;
+/*position: absolute;
 right: 0;
 bottom: 0;
-left: 0;
+left: 0;*/
 padding: 1rem;
-background-color: #efefef;
+/*background-color: #CDCDCD;*/
 text-align: center;
 }
 
-.carouselImage {
-  max-width: 100%;
-  }
+footer.page-footer {
+  padding-top: 20px;
+  background-color: #ff8c00;
+}
+
 .landingPage {
   background-size: cover;
   background-position: center;
 }
 
-.titleWelcome {
-font-family: 'Ubuntu Condensed', sans-serif;
-/*text-align: center;
-*/}
+.title {
+color: white;
+text-align: left;
+}
 
 .slideComp {
 font-family: 'Roboto', sans-serif;
@@ -93,7 +98,7 @@ font-family: 'Roboto', sans-serif;
 }
 
 .landingPage1 {
-  background-image: url("./img/WelcomeView/teens.jpg");
+  background-image: url("./img/WelcomeView/teens-2.jpg");
   background-size: cover;
   margin-bottom: 0;
   padding-bottom: 100px;
@@ -101,16 +106,44 @@ font-family: 'Roboto', sans-serif;
 }
 
 .signUpComponent {
-  border: 1px  black;
+  /*border: 1px  black;*/
   padding: 20px;
   margin: 20px;
   background: orange linear-gradient(orange,#ff8c00);
+  -webkit-box-shadow: 0 0 10px rgb(0,0,0);
+-moz-box-shadow: 0 0 10px rgb(0,0,0);
 
 }
-.carouselOpts{
-  width: 100%;
-  height: auto;
+
+/*SIGN UP COMPONENT INPUT COLOR*/
+/* label color */
+.input-field label {
+ color: white;
 }
+/* label focus color */
+/*.input-field input[type=text]:focus + label {
+ color: white;
+}*/
+/* label underline focus color */
+/*.input-field input[type=text]:focus {
+ border-bottom: 1px solid white;
+ box-shadow: 0 1px 0 0 white;
+}*/
+/* valid color */
+.input-field input[type=text].valid {
+ border-bottom: 1px solid white;
+ box-shadow: 0 1px 0 0 white;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+ border-bottom: 1px solid white;
+ box-shadow: 0 1px 0 0 white;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+ color: white;
+}
+        
 
 .WhyComp{
   border-top: solid black;
@@ -137,6 +170,7 @@ background-size: cover;
 .p1Font{
   font-size: 40px;
 }
+
 .panelTwo {
 
 }

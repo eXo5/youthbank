@@ -10,14 +10,13 @@ var moment = require("moment");
 var ChoreSchema = new Schema({
 	choreName: {
 		type: String,
-		required: true
+		//required: true
 	},
 	choreDesc: {
 		type: String,
 	},
 	choreValue: {
 		type: Number,
-
 	},
 	childSaysComplete: {
 		type: Boolean,

@@ -53,20 +53,24 @@ var helper = {
 		});
 	},
 
-	postChore: function(parentId, choreName, choreDesc, choreValue){
+	postChore: function(choreName, choreDesc, choreValue){
+		console.log(choreName)
+		console.log(choreDesc)
+		console.log(choreValue)
 			//when new chore is posted, drop spaces and input underscores in choreName.
 			var choreRegExp = choreName.replace(/ /g, "_");
-		axios.post("/api/post/chores", {parentId: parentId, choreName: choreRegExp, choreDesc: choreDesc, chorValue: choreValue})
+		axios.post("/api/post/chores", {choreName: choreRegExp, choreDesc: choreDesc, choreValue: parseFloat(choreValue)})
 		.then(function(results){
-			console.log(results);
+			return results;
 		});
 	},
 
 	getChores: function(){
-		return axios.get("/api/get/chores");
+		 return axios.get("/api/get/pchores")
+		 	
 	},
 
-	choreComplete: function(parentId, choreName,  ){ 
+	choreComplete: function(parentId, choreName ){ 
 
 	},
 	

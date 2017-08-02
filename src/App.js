@@ -1,3 +1,4 @@
+
 import React from 'react';
 // import helper from './utils/thehelp/helper.js';
 // import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
@@ -11,7 +12,7 @@ import ViewParent from './components/ParentView/ViewParent';
 import ViewChild from './components/ChildView/ViewChild';
 import SignIn from './components/SignIn';
 import { Route, Switch } from 'react-router-dom';
-
+import AddChore from './components/newusers/AddChore'
 import axios from 'axios';
 // const newState = {};
 
@@ -28,6 +29,9 @@ import axios from 'axios';
 // 	}
 // }
 
+
+
+
 class App extends React.Component {
 
 	constructor() {
@@ -42,15 +46,19 @@ class App extends React.Component {
    //this._logout = this._logout.bind(this)
   }
 
+
   componentDidMount(){
   	axios.get("/auth/user/").then(response => {
   		console.log(response.data)
+      console.log("&^RESPONSE.DATA&^")
   		if(!!response.data.user) {
+        console.log(response.data.user)
   			console.log("USER PRESENT")
   			this.setState({
   				loggedIn: true,
   				user: response.data.user
-  			})
+  			});
+        console.log(this.state.user)
   		}else{
   			this.setState({
   				loggedIn: false,
@@ -60,7 +68,8 @@ class App extends React.Component {
   	})
   }
 
-  _loginParent = (email, password) => {
+  _loginParent = (event, email, password) => {
+    event.preventDefault()
   	axios
   		.post("/auth/login/parent", {
   			email,
@@ -92,26 +101,29 @@ class App extends React.Component {
   		})
   }
 
+  // w00t = (event) => {
+  //   event.preventDefault()
+  //   helper.getChores().then(response => {console.log(response)})
+  // }
 
   render() {
  
     return (
-      <div>
 
-  
-	    	
+   	
 			  
 		<Switch>
+
 			<Route exact path="/" render={() => <Home/> } />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
       <Route exact path="/parent" render={() => <ViewParent />}  />
-      <Route exact path="/child" render={() => <ViewChild />}  />     
+      <Route exact path="/child" render={() => <ViewChild />}  />  
+       <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />   
 		</Switch>
 
 			
-			{/*<PgFooter /> */}
 
-	</div>
+
 
     );
   }

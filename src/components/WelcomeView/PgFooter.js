@@ -1,5 +1,6 @@
 import React from 'react'; 
 import {Footer} from 'react-materialize';
+import '../../index.css'
 
 class PgFooter extends React.Component {
 	render() {
