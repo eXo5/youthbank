@@ -49,15 +49,26 @@ var ParentSchema = new Schema({
 	}]
 })
 
+// ParentSchema.methods = {
+// 	checkPassword: function(password){
+// 		return bcrypt.compareSync(password, this.password)
+// 	},
+// 	hashPassword: function(password){
+// 		console.log(password)
+// 		return bcrypt.hashSync(password, 10)
+// 	}
+// }
+
+/////////TEST//////////////////
 ParentSchema.methods = {
-	checkPassword: function(password){
-		return bcrypt.compareSync(password, this.password)
+	checkPassword: function(inputPassword){
+		return bcrypt.compareSync(inputPasword, this.password)
 	},
-	hashPassword: function(password){
-		console.log(password)
-		return bcrypt.hashSync(password, 10)
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
 	}
 }
+///////////////////
 
 ParentSchema.pre("save", function(next) {
 	this.password = this.hashPassword(this.password)

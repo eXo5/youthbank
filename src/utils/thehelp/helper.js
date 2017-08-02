@@ -12,11 +12,16 @@ var helper = {
 		})
 	},
 
-	postParent: function(firstName, lastName, email, password) {
-	 axios.post("/auth/api/new/parent", {firstName: firstName, lastName: lastName, email: email, password: password})
-	 		.then(function(results){
-	 			return console.log(results)
-	 		})
+	postParent: function(email, password, firstName, lastName) {
+	 return axios.post("/auth/api/new/parent", {
+		 	email: email, 
+		 	password: password,
+		 	firstName: firstName, 
+		 	lastName: lastName 
+		 	})
+	 		// .then(function(results){
+	 		// 	return console.log(results)
+	 		// })
 
 	},
 

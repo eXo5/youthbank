@@ -65,13 +65,7 @@ class SignIn extends Component {
   render() {
     return (
    <Row>
-      <header>
-        <Navbar brand='KidsBank' right>
-      {/*we have to import react-router */}
-          <NavItem href='get-started.html'>Getting started</NavItem>
-          <NavItem href='components.html'>Components</NavItem>
-        </Navbar>
-    </header>
+      
 
       <Row></Row>
       <Row>
@@ -118,23 +112,7 @@ class SignIn extends Component {
         <Col s={3}></Col>
       </Row>
         
-      {/* FOOTER */}
-        <Footer copyrights="&copy 2017 Copyright "
-        moreLinks={
-          <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-        }
-        links={
-          <ul>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 3</a></li>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
-          </ul>
-        }
-        className='example page-footer'>
-          <h5 className="white-text"> Kids Bank</h5>
-          <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-      </Footer>
+    
   </Row>
 
     );
