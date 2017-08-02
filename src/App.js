@@ -1,82 +1,117 @@
-import React, { Component } from 'react';
-
-import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
-import Navbar from './components/WelcomeView/Navbar'
+import React from 'react';
+// import helper from './utils/thehelp/helper.js';
+// import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
+// import Navbar from './components/WelcomeView/Navbar'
 import Home from './components/WelcomeView/SignUp';
 import './index.css';
-import logo from './logo.svg';
-import PgFooter from './components/WelcomeView/PgFooter';
-import Why from './components/WelcomeView/WhyWeMadeIt';
-import Features1 from './components/WelcomeView/Features1';
+// import PgFooter from './components/WelcomeView/PgFooter';
+// import Why from './components/WelcomeView/WhyWeMadeIt';
+// import Features1 from './components/WelcomeView/Features1';
+import ViewParent from './components/ParentView/ViewParent';
+import ViewChild from './components/ChildView/ViewChild';
+import SignIn from './components/SignIn';
+import { Route, Switch } from 'react-router-dom';
+
+import axios from 'axios';
+// const newState = {};
 
 
+// const DisplayLinks = props => {
+// 	if(props.loggedIn) {
+// 		return(
+// 			<h2>Logged In</h2>
+// 			)
+// 	}else{
+// 		return(
+// 			<h2>Not Logged In</h2>
+// 			)
+// 	}
+// }
 
-class App extends Component {
+class App extends React.Component {
 
 	constructor() {
     super()
 
     this.state = {
-      //state for signup
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: ""
+      //state
+      loggedIn: false,
+      user: null
     }
+   // this._login = this._loginParent.bind(this)
+   //this._logout = this._logout.bind(this)
   }
 
-    //sets state of data put in input fields
-  handleChange = (event) => {
-    
-    newState[event.target.id] = event.target.value;
-    this.setState(
-      newState
-    );
+  componentDidMount(){
+  	axios.get("/auth/user/").then(response => {
+  		console.log(response.data)
+  		if(!!response.data.user) {
+  			console.log("USER PRESENT")
+  			this.setState({
+  				loggedIn: true,
+  				user: response.data.user
+  			})
+  		}else{
+  			this.setState({
+  				loggedIn: false,
+  				user: null
+  			})
+  		}
+  	})
+  }
 
-    console.log("This State: " + JSON.stringify(this.state));
-
-  }//end of handleChange
-
-
-	saveUser = (event, firstName, lastName, email, password) => {
-		event.preventDefault();
-		
-		var newUser = {
-			firstName: firstName,
-			lastName: lastName,
-			email: email,
-			password: password
-		}
-		// console.log(chosenArticle);
-
-		helper.postParent(newUser)
-		.then(results => {
-			this.setState({
-				firstName: "",
-				lastName: "",
-				email: "",
-				password: ""
-			})
+  _loginParent = (email, password) => {
+  	axios
+  		.post("/auth/login/parent", {
+  			email,
+  			password
+  		})
+  		.then(response => {
+  			console.log(response)
+  			if(response.status === 200) {
+  				this.setState({
+  					loggedIn: true,
+  					user: response.data.user
+  				})
+  			}
+  		})
+  }
 
 
-		})
-	};//end of saveSearch function
+  _logout = (event) => {
+  	event.preventDefault()
+  	console.log("Logged Out")
+  	axios.post("/auth/logout")
+  		.then(response => {
+  			if (response.status === 200) {
+  				this.setState({
+  					loggedIn: false,
+  					user: null
+  				})
+  			}
+  		})
+  }
 
 
   render() {
+ 
     return (
+      <div>
 
-    <div> 
-	    	<header>
-	    		<Navbar />
-			</header>
-			  <Home />
-			 <Why />
-			  <Features1 />
+  
+	    	
+			  
+		<Switch>
+			<Route exact path="/" render={() => <Home/> } />
+			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+      <Route exact path="/parent" render={() => <ViewParent />}  />
+      <Route exact path="/child" render={() => <ViewChild />}  />     
+		</Switch>
+
+			
 			{/*<PgFooter /> */}
 
 	</div>
-
 
     );
   }

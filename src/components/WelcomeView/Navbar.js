@@ -1,7 +1,11 @@
 import React from 'react';
-import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
+import {Navbar, NavItem, Button} from 'react-materialize';
 import '../../index.css'
+// import SignIn from './components/SignIn';
+import { Link } from 'react-router-dom';
+
 class PgNavbar extends React.Component {
+
 	render(){
 		return(
 
@@ -11,19 +15,12 @@ class PgNavbar extends React.Component {
 	    	{/*we have to import react-router */}
 						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
 						<NavItem href='components.html' className="navItems">Components</NavItem>
-						<Modal
-
-							header='Sign In'
-							trigger={
+							
+							<li className="navItems">
+							<Link to="/signin">
 								<Button waves='light'>Sign In</Button>
-							}>
-							<Row>
-								<Input s={6} label="First Name" />
-								<Input s={6} label="Last Name" />
-								<Input type="email" label="Email"s={12} />
-								<Input type="password" label="password" s={12} />
-							</Row>
-						</Modal>
+							</Link>
+							</li>
 					</Navbar>
 				</div>	
 
@@ -31,5 +28,12 @@ class PgNavbar extends React.Component {
 			)
 	}
 }
+
+							// <li className="navItems">
+							// 	<Link to="/signin">Sign in</Link>
+							// </li>
+				// <Link to="/signin">
+				// 				<Button waves='light'>Sign In</Button>
+				// 			</Link>
 
 export default PgNavbar;

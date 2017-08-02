@@ -15,18 +15,14 @@ class NewParent extends Component {
 			confirmPassword: "",
 			redirectTo: null
 		}
-		//if you had to .bind(this) you would do it here, before the end of the constructor.
-}
 
-		
-//but b/c arrow func, no need for .bind(this)
-		handleChange = (event) => {
+		this.handleChange = (event) => {
 			this.setState({
 				[event.target.id]: event.target.value
 			})
 		}
 
-			handleSubmit = (event) => {
+			this.handleSubmit = (event) => {
 				event.preventDefault()
 				axios
 				.post("/auth/newparent", {
@@ -45,6 +41,11 @@ class NewParent extends Component {
 					}
 				})
 			}
+}
+
+		
+//but b/c arrow func, no need for .bind(this)
+		
 
 		
 		render() {
@@ -55,7 +56,6 @@ class NewParent extends Component {
 
 					<div className="container">
 
-					<h3>LOGIN</h3>
 						<Form>						
 							<Input label="First Name" value={this.state.firstName} onChange={this.handleChange} />
 							<Input label="First Name" value={this.state.lastName} onChange={this.handleChange} />
