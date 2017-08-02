@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Navbar, NavItem, Row, Col, Footer, Input, Button, Tabs, Tab} from 'react-materialize';
+import {Row, Col, Input, Button, Tabs, Tab} from 'react-materialize';
 import '../index.css';
-import { Route, Link } from 'react-router-dom';
-// import helper from './utils/thehelp/helper.js'
+import { Redirect } from 'react-router-dom';
+import helper from '../utils/thehelp/helper.js'
 const newState = {};
 
 
@@ -14,7 +14,8 @@ class SignIn extends Component {
     this.state = {
       //state for signIn
       email: "",
-      password: ""
+      password: "",
+      redirectTo: null
 
     }
 
@@ -28,14 +29,14 @@ class SignIn extends Component {
       newState
     );
 
-    //console.log("This State: " + JSON.stringify(this.state));
+    console.log("This State in SIGNIN: " + JSON.stringify(this.state));
 
   }//end of handleChange
 
   handleSubmit = (event, email, password) => {
     event.preventDefault()
-    console.log("handleSubmit")
-    this.props._login(this.state.email, this.state.password)
+    console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
+    helper.logOneIn(this.state.email, this.state.password)
     this.setState({redirectTo: "/"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {
@@ -63,16 +64,12 @@ class SignIn extends Component {
   // };//end of saveSearch function
 
   render() {
+    if (this.state.redirectTo) {
+      return(<Redirect to={this.state.redirectTo} />)
+    }
     return (
-   <Row>
-      <header>
-        <Navbar brand='KidsBank' right>
-      {/*we have to import react-router */}
-          <NavItem href='get-started.html'>Getting started</NavItem>
-          <NavItem href='components.html'>Components</NavItem>
-        </Navbar>
-    </header>
 
+   <Row>
       <Row></Row>
       <Row>
         <Col s={12}>
@@ -118,23 +115,7 @@ class SignIn extends Component {
         <Col s={3}></Col>
       </Row>
         
-      {/* FOOTER */}
-        <Footer copyrights="&copy 2017 Copyright "
-        moreLinks={
-          <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-        }
-        links={
-          <ul>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 3</a></li>
-            <li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
-          </ul>
-        }
-        className='example page-footer'>
-          <h5 className="white-text"> Kids Bank</h5>
-          <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-      </Footer>
+    
   </Row>
 
     );

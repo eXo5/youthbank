@@ -4,18 +4,24 @@ const Parent = require("../db/models/parent-model");
 const Child = require("../db/models/kid-model");
 
 passport.serializeUser((user, done) => {
-	done(null, {_id: this._id, email: this.email }) //take out email in production?
+	done(null, { _id: user._id, email: user.email }) // take out email in production
 })
+
+// passport.deserializeUser((id, done) => {
+// 	Parent.findOne({_id: id }, "email", (err, user) => {
+// 		if (!user){
+// 			Child.findOne({_id: id }, "email", (err, user) => {
+// 				done(null, id)
+// 			})
+// 		}else{
+// 			done(null, id)
+// 		}
+// 	})
+// })
 
 passport.deserializeUser((id, done) => {
 	Parent.findOne({_id: id }, "email", (err, user) => {
-		if (!user){
-			Child.findOne({_id: id }, "email", (err, user) => {
-				done(null, id)
-			})
-		}else{
-			done(null, id)
-		}
+	done(null, user)
 	})
 })
 
