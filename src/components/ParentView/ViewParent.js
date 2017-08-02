@@ -1,6 +1,6 @@
 import React from 'react';
 import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
-import './viewParent.css';
+import '../../index.css';
 // import List from './List';
 import ChildCards from './ChildCards';
 import banner from '../../img/ParentView/banner-parent.png';

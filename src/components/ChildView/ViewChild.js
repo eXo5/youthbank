@@ -1,6 +1,6 @@
 import React from 'react';
-import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
-import './viewChild.css';
+import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
+import '../../index.css';
 import NavSidebar from './NavSidebar';
 import Goal from './Goal';
 import MoneyEarned from './MoneyEarned';
@@ -82,13 +82,9 @@ class ViewChild extends React.Component {
                   </Row>
                 </Col> 
               </Row>
-
           </Col>
-          
         </Row>
-
           <PgFooter />
-        
       </div>
     )
   }

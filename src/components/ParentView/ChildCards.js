@@ -1,7 +1,7 @@
 import {Collapsible, CollapsibleItem, Col} from 'react-materialize';
 import React from 'react';
 import List from './List';
-import './viewParent.css';
+import '../../index.css';
 
 class ChildCards extends React.Component {
 
