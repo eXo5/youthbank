@@ -1,12 +1,15 @@
-import React from 'react';
-import {Navbar, NavItem, Row,  Button, Footer } from 'react-materialize';
+
+import React, {Component} from 'react';
+
+import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
+import Navbar from './components/WelcomeView/Navbar'
+import Home from './components/WelcomeView/SignUp';
 import './index.css';
-import helper from './utils/thehelp/helper.js';
-import SignIn from './components/SignIn';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
-import Home from './components/SignUp';
-import axios from 'axios'
-const newState = {};
+import logo from './logo.svg';
+import PgFooter from './components/WelcomeView/PgFooter';
+import Why from './components/WelcomeView/WhyWeMadeIt';
+import Features1 from './components/WelcomeView/Features1';
+
 
 const DisplayLinks = props => {
 	if(props.loggedIn) {
@@ -90,6 +93,27 @@ class App extends React.Component {
   	// 	return <Redirect to={{pathname: this.state.redirectTo}} />
   	// }
 
+
+  _logout = (event) => {
+  	event.preventDefault()
+  	console.log("Logged Out")
+  	axios.post("/auth/logout")
+  		.then(response => {
+  			if (response.status === 200) {
+  				this.setState({
+  					loggedIn: false,
+  					user: null
+  				})
+  			}
+  		})
+  }
+
+
+  render() {
+  	// if (this.state.redirectTo){
+  	// 	return <Redirect to={{pathname: this.state.redirectTo}} />
+  	// }
+
     return (
     	<Row>
     	<header>
@@ -131,6 +155,28 @@ class App extends React.Component {
 					<p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
 			</Footer>
 	</Row>
+
+
+    return (
+      <div>
+		<Switch>
+			<Route exact path="/" render={() => <SignUp saveUser={this.saveUser}/>} />
+			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+		</Switch>
+
+
+
+    <div> 
+	    	<header>
+	    		<Navbar />
+			</header>
+			  <Home />
+			 <Why />
+			  <Features1 />
+			{/*<PgFooter /> */}
+
+	</div>
+</div>
 
     );
   }

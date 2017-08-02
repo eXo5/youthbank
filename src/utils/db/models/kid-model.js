@@ -4,19 +4,21 @@ const bcrypt = require("bcryptjs");
 mongoose.promise = Promise;
 
 var ChildSchema = new Schema({
-	childFirstName: {
-		type: String,
-		required: true
+
+	firstName: {
+		type: String
+	//	required: true
 	},
 
-	childLastName: {
-		type: String,
-		required: true
+	lastName: {
+		type: String
+	//	required: true
+
 	},
 
 	email: {
 		type: String,
-		required:true,
+	//	required:true,
 		unique: true,
 		validate: [
 		function(input){
@@ -28,7 +30,7 @@ var ChildSchema = new Schema({
 
 	password: {
 		type: String,
-		required: true,
+	//	required: true,
 		validate: [
 		function(input){
 			input.length >= 6;
@@ -68,7 +70,7 @@ ChildSchema.methods = {
 
 ChildSchema.pre("save", function(next) {
 		this.password = this.hashPassword(this.password);
-		next();
+		next()
 })
 
 var Child = mongoose.model("Child", ChildSchema);

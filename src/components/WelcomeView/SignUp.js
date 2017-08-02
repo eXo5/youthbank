@@ -1,7 +1,6 @@
 import React from 'react';
 import {Row, Col,  Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
-import '../index.css';
-import helper from '../utils/thehelp/helper'
+import '../../index.css';
 // import helper from './utils/thehelp/helper.js';
 // import { Route, Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
@@ -34,18 +33,15 @@ class Home extends React.Component {
 
   }//end of handleChange
 
-handleSubmit = (event, firstName, lastName, email, password) => {
+handleSubmit = (event) => {
 	event.preventDefault()
-	console.log(firstName)
-	console.log("^^^^^^fN")
 	// alert('handle submit fired@!')
-	helper.postParent(this.state.firstName, this.state.lastName, this.state.email, this.state.password)
+	this.props.saveUser(event, this.state.firstName, this.state.lastName, this.state.email, this.state.password)
 	// debugger
 	this.setState({
 		redirectTo: '/signin'
 	})
 }
-
 	// saveUser = (event, firstName, lastName, email, password) => {
 	// 	event.preventDefault();
 		
@@ -76,28 +72,36 @@ render(){
   	} else {
 
 return(
+		<div className="landingPage1">
+			<Row className="landingPhoto">
+				  <Col s={4}>
+				  <div className="landPtext">
+					  <p> Teach your kids about money </p>
+					  <p> Motivate your kids to work </p>
+					  <p> USE YOUNG MONEY </p>
+				  </div>
+				  </Col>
 
-
-			<Row>
-			<Col s={3}></Col>
-          <Col s={6}>
-          <div className="signUpComponent">
-          <h4 className="title">Sign Up</h4>
-					<form>
-						<Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
-						<Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
-						<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
-						<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
-						{/*<Button type="submit" waves='light' className="mainBtn" onClick={(event) => this.props.saveUser(event, this.state.firstName, this.state.lastName, this.state.email, this.state.password)}>Submit</Button>*/}
-						<Button type="submit" waves='light' className="mainBtn" onClick={this.handleSubmit}>Submit</Button>
-					</form>
-					</div>
-					<Col s={3}></Col>
-          </Col>
-				</Row>
+				  <Col s={2}>
+				  </Col>
+		          <Col s={6}>
+			          <div className="signUpComponent">
+				          <h4 className="title">Sign Up</h4>
+									<form>
+										<Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
+										<Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
+										<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
+										<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
+										{/*<Button type="submit" waves='light' className="mainBtn" onClick={(event) => this.props.saveUser(event, this.state.firstName, this.state.lastName, this.state.email, this.state.password)}>Submit</Button>*/}
+										<Button type="submit" waves='light' className="mainBtn" onClick={this.handleSubmit}>Submit</Button>
+									</form>
+					   </div>
+		          </Col>
+		          
+			</Row>
+		</div>
 								
 								
-    		
 
 	)
 
@@ -107,4 +111,6 @@ return(
 }
 
 export default Home;
+
+
 

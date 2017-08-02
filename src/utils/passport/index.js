@@ -3,15 +3,16 @@ const LocalStrategy = require("passport-local").Strategy;
 const Parent = require("../db/models/parent-model");
 const Child = require("../db/models/kid-model");
 
-///exporting a session attempt
 
 passport.serializeUser((user, done) => {
-	done(null, {_id: user._id, email: user.email }) //take out email in production?
+	done(null, {_id: this._id, email: this.email }) //take out email in production?
 })
 
 passport.deserializeUser((id, done) => {
 	Parent.findOne({_id: id }, "email", (err, user) => {
-		if(!user){
+
+		if (!user){
+
 			Child.findOne({_id: id }, "email", (err, user) => {
 				done(null, id)
 			})
@@ -48,8 +49,8 @@ passport.use("local-parent",
 passport.use("local-child",
 	new LocalStrategy(
 	{
-		usernameField: "email",
-		passwordField: "password"
+		usernameField: "email"
+
 	},
 	function(username, password, done) {
 		Child.findOne({email: username}, (err, userMatch) => {
