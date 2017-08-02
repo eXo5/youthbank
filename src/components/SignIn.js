@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Navbar, NavItem, Row, Col, Footer, Input, Button, Tabs, Tab} from 'react-materialize';
+import {Row, Col, Input, Button, Tabs, Tab} from 'react-materialize';
 import '../index.css';
-import { Route, Link } from 'react-router-dom';
-// import helper from './utils/thehelp/helper.js'
+import { Redirect } from 'react-router-dom';
+import helper from '../utils/thehelp/helper.js'
 const newState = {};
 
 
@@ -14,7 +14,8 @@ class SignIn extends Component {
     this.state = {
       //state for signIn
       email: "",
-      password: ""
+      password: "",
+      redirectTo: null
 
     }
 
@@ -28,14 +29,14 @@ class SignIn extends Component {
       newState
     );
 
-    //console.log("This State: " + JSON.stringify(this.state));
+    console.log("This State in SIGNIN: " + JSON.stringify(this.state));
 
   }//end of handleChange
 
   handleSubmit = (event, email, password) => {
     event.preventDefault()
-    console.log("handleSubmit")
-    this.props._login(this.state.email, this.state.password)
+    console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
+    helper.logOneIn(this.state.email, this.state.password)
     this.setState({redirectTo: "/"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {
@@ -63,10 +64,12 @@ class SignIn extends Component {
   // };//end of saveSearch function
 
   render() {
+    if (this.state.redirectTo) {
+      return(<Redirect to={this.state.redirectTo} />)
+    }
     return (
-   <Row>
-      
 
+   <Row>
       <Row></Row>
       <Row>
         <Col s={12}>
