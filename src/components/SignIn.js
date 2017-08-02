@@ -3,6 +3,9 @@ import {Row, Col, Input, Button, Tabs, Tab} from 'react-materialize';
 import '../index.css';
 import { Redirect } from 'react-router-dom';
 import helper from '../utils/thehelp/helper.js'
+import Why from './WelcomeView/WhyWeMadeIt';
+import Features1 from './WelcomeView/Features1';
+import Navbar from './WelcomeView/Navbar'
 const newState = {};
 
 
@@ -69,6 +72,13 @@ class SignIn extends Component {
     }
     return (
 
+    <div>
+
+    <header>
+          <Navbar />
+      </header>
+
+
    <Row>
       <Row></Row>
       <Row>
@@ -117,6 +127,10 @@ class SignIn extends Component {
         
     
   </Row>
+
+      <Why />
+        <Features1 />
+  </div>
 
     );
   }

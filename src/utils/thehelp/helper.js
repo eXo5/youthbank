@@ -28,8 +28,14 @@ var helper = {
 
 	},
 
-	postChild: function(firstName, lastName, email, age, password ) {
-		axios.post("/api/new/kid", {firstName: firstName, lastName: lastName, email: email, age: age, password: password})
+	postChild: function(email, password, firstName, lastName, age) {
+		return axios.post("/auth/api/new/child", {
+			email: email, 
+			password: password,
+			firstName: firstName, 
+			lastName: lastName, 
+			age: age
+		})
 		.then(function(results){
 			console.log(results);
 		});

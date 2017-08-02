@@ -1,8 +1,11 @@
  import React from 'react';
-import {Row, Col,  Button, Slider, Slide, Modal, Footer, Input} from 'react-materialize';
+import {Row, Col,  Button, Input} from 'react-materialize';
 import '../../index.css';
 import helper from '../../utils/thehelp/helper.js';
+import Navbar from './Navbar'
 // import { Route, Link } from 'react-router-dom';
+import Why from './WhyWeMadeIt';
+import Features1 from './Features1';
 import { Redirect } from 'react-router-dom';
 const newState = {};
 
@@ -62,6 +65,11 @@ render(){
   	} else {
 
 return(
+	<div>
+			<header>
+	    		<Navbar />
+			</header>
+
 		<div className="landingPage1">
 			<Row className="landingPhoto">
 				  <Col s={4}>
@@ -89,6 +97,10 @@ return(
 		          </Col>
 		          
 			</Row>
+		</div>
+
+		 <Why />
+			  <Features1 />
 		</div>
 								
 								
