@@ -1,6 +1,5 @@
 
 import React, {Component} from 'react';
-import helper from './utils/thehelp/helper.js';
 import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
 import Navbar from './components/WelcomeView/Navbar'
 import Home from './components/WelcomeView/SignUp';
@@ -13,6 +12,11 @@ import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import axios from 'axios'
 import helper from './utils/thehelp/helper'
+import {Route, Link, Switch, Redirect } from 'react-router-dom'
+import AddChore from './components/newusers/AddChore'
+
+
+//===================//
 const newState = {};
 
 const DisplayLinks = props => {
@@ -40,6 +44,7 @@ class App extends React.Component {
    // this._login = this._loginParent.bind(this)
    //this._logout = this._logout.bind(this)
   }
+
 
   componentDidMount(){
   	axios.get("/auth/user/").then(response => {
@@ -95,22 +100,14 @@ class App extends React.Component {
   		})
   }
 
-  w00ts0n = (event) => {
-    event.preventDefault()
-    axios.post("/api/post/newroute", function(req, res){
-      console.log(req.user)
-    }).then(response => {console.log(response)})
-  }
+  // w00t = (event) => {
+  //   event.preventDefault()
+  //   helper.getChores().then(response => {console.log(response)})
+  // }
 
-  w00tDad = (event) => {
-    event.preventDefault()
-    helper.getChores().then(response => {console.log(response)})
-  }
-  
   render() {
  
     return (
-
 
     <div> 
 	    	<header>
@@ -120,6 +117,7 @@ class App extends React.Component {
 		<Switch>
 			<Route exact path="/" render={() => <Home />} />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+      <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />
 		</Switch>
 			 <Why />
 			  <Features1 />
