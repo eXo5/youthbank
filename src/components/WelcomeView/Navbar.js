@@ -16,7 +16,9 @@ class PgNavbar extends React.Component {
 						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
 						<NavItem href='components.html' className="navItems">Components</NavItem>
 
+
 						<li className="navItems">
+
 							<Link to="/signin">
 								<Button waves='light'>Sign In</Button>
 							</Link>
@@ -31,4 +33,6 @@ class PgNavbar extends React.Component {
 	}
 }
 
+
 export default PgNavbar;
+

@@ -6,6 +6,7 @@ import ChildCards from './ChildCards';
 import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
+import helper from '../../utils/thehelp/helper.js';
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -19,9 +20,15 @@ class ViewParent extends React.Component {
       amount: "",
 
       //state for new kid
-      kidName: "",
-      kidUN: "",
-      kidPW: ""
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      age: "",
+      
+
+      //redirect route
+      redirectTo: null
 
     }
   }
@@ -37,6 +44,26 @@ class ViewParent extends React.Component {
     console.log("This State: " + JSON.stringify(this.state));
 
   }//end of handleChange
+
+  handleNewChild = (event, firstName, lastName, email, password) => {
+  event.preventDefault()
+  
+  helper.postChild(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.age).then(response =>  {
+
+      return alert("New Child Added!");
+    }
+      )
+
+    this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        age: ""
+    })
+    
+
+    }//end of handleNewChild
 
 
 
@@ -98,10 +125,13 @@ class ViewParent extends React.Component {
               }>
               <Row>
                 <form>
-                  <Input s={12} label="Child Name" id="kidName" value={this.state.kidName} onChange={this.handleChange}><Icon>face</Icon></Input>
-                  <Input s={12} label="User Name" id="kidUN" value={this.state.kidUN} onChange={this.handleChange}><Icon></Icon></Input>
-                  <Input s={12} label="Password" id="kidPW" value={this.state.kidPW} onChange={this.handleChange}><Icon></Icon></Input>
-                  <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
+                  <Input s={6} label="First Name" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
+                  <Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
+                  <Input s={12} label="Age" id="age" value={this.state.age} onChange={this.handleChange}/>
+                  <Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
+                  <Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
+
+                  <Button waves='light'  className="mainBtn" type="submit" onClick={this.handleNewChild}>Submit</Button>
                 </form>
               </Row>
             </Modal>

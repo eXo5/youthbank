@@ -52,9 +52,9 @@ router.post("/api/new/parent", (req, res) => {
 
 router.post("/api/new/child", (req, res) => {
 		//router.post("/auth/api/new/parent")
-		const { email, password, firstName, lastName } = req.body
+		const { email, password, firstName, lastName, age } = req.body
 	//ADD VALIDATION
-	const newChild = new Child({ email, password, firstName, lastName })
+	const newChild = new Child({ email, password, firstName, lastName, age })
 	newChild.save((err, savedUser) => {
 		if (err) return res.json(err)
 			return res.json(savedUser)

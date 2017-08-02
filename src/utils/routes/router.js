@@ -134,7 +134,7 @@ app.post("/api/post/chores", function(req, res){
 		}else{
 			Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: doc}})
 			.exec(function(err, doc){
-				if (!!err) {console.log(err)}
+				if (err) {console.log(err)}
 					else{res.send(doc)}
 			})
 			console.log("new chore added");
