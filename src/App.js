@@ -121,7 +121,7 @@ class App extends React.Component {
 		</Switch>
 			 <Why />
 			  <Features1 />
-			{/*<PgFooter /> */}
+			<PgFooter />
 
 	</div>
 

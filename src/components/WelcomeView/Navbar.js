@@ -1,8 +1,8 @@
 import React from 'react';
-import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
+import {Navbar, NavItem, Button} from 'react-materialize';
 import '../../index.css'
-// import SignIn from './components/SignIn';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
 
 class PgNavbar extends React.Component {
 
@@ -15,11 +15,13 @@ class PgNavbar extends React.Component {
 	    	{/*we have to import react-router */}
 						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
 						<NavItem href='components.html' className="navItems">Components</NavItem>
-	
-							<NavItem><Link to="/signin">
+
+						<li className="navItems">
+							<Link to="/signin">
 								<Button waves='light'>Sign In</Button>
 							</Link>
-							</NavItem>
+							</li>
+
 					</Navbar>
 
 				</div>	
@@ -29,4 +31,4 @@ class PgNavbar extends React.Component {
 	}
 }
 
-export default PgNavbar
+export default PgNavbar;
