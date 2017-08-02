@@ -16,6 +16,18 @@ var helper = {
 		})
 	},
 
+	logInChild: function(email, password) {
+		console.log(email)
+		console.log(password)
+		  axios.post("/auth/login/child", {
+		 	email: email, 
+		 	password: password
+		 })
+		.then(function(results) {
+			return console.log(results)
+		})
+	},
+
 	postParent: function(email, password, firstName, lastName) {
 	 return axios.post("/auth/api/new/parent", {
 		 	email: email, 
@@ -29,27 +41,37 @@ var helper = {
 
 	},
 
-	postChild: function(firstName, lastName, email, age, password ) {
-		axios.post("/api/new/kid", {firstName: firstName, lastName: lastName, email: email, age: age, password: password})
+	postChild: function(email, password, firstName, lastName, age) {
+		return axios.post("/auth/api/new/child", {
+			email: email, 
+			password: password,
+			firstName: firstName, 
+			lastName: lastName, 
+			age: age
+		})
 		.then(function(results){
 			console.log(results);
 		});
 	},
 
-	postChore: function(parentId, choreName, choreDesc, choreValue){
+	postChore: function(choreName, choreDesc, choreValue){
+		console.log(choreName)
+		console.log(choreDesc)
+		console.log(choreValue)
 			//when new chore is posted, drop spaces and input underscores in choreName.
 			var choreRegExp = choreName.replace(/ /g, "_");
-		axios.post("/api/post/chores", {parentId: parentId, choreName: choreRegExp, choreDesc: choreDesc, chorValue: choreValue})
+		axios.post("/api/post/chores", {choreName: choreRegExp, choreDesc: choreDesc, choreValue: parseFloat(choreValue)})
 		.then(function(results){
-			console.log(results);
+			return results;
 		});
 	},
 
 	getChores: function(){
-		return axios.get("/api/get/chores");
+		 return axios.get("/api/get/pchores")
+		 	
 	},
 
-	choreComplete: function(parentId, choreName,  ){ 
+	choreComplete: function(parentId, choreName ){ 
 
 	},
 	

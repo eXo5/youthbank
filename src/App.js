@@ -1,31 +1,38 @@
 
-import React, {Component} from 'react';
-import helper from './utils/thehelp/helper.js';
-import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
-import Navbar from './components/WelcomeView/Navbar'
+import React from 'react';
+// import helper from './utils/thehelp/helper.js';
+// import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
+// import Navbar from './components/WelcomeView/Navbar'
+
 import Home from './components/WelcomeView/SignUp';
 import './index.css';
-import logo from './logo.svg';
-import PgFooter from './components/WelcomeView/PgFooter';
-import Why from './components/WelcomeView/WhyWeMadeIt';
-import Features1 from './components/WelcomeView/Features1';
+// import PgFooter from './components/WelcomeView/PgFooter';
+// import Why from './components/WelcomeView/WhyWeMadeIt';
+// import Features1 from './components/WelcomeView/Features1';
+import ViewParent from './components/ParentView/ViewParent';
+import ViewChild from './components/ChildView/ViewChild';
 import SignIn from './components/SignIn';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
-
+import { Route, Switch } from 'react-router-dom';
+import AddChore from './components/newusers/AddChore'
 import axios from 'axios';
-const newState = {};
 
-const DisplayLinks = props => {
-	if(props.loggedIn) {
-		return(
-			<h2>Logged In</h2>
-			)
-	}else{
-		return(
-			<h2>Not Logged In</h2>
-			)
-	}
-}
+// const newState = {};
+
+
+// const DisplayLinks = props => {
+// 	if(props.loggedIn) {
+// 		return(
+// 			<h2>Logged In</h2>
+// 			)
+// 	}else{
+// 		return(
+// 			<h2>Not Logged In</h2>
+// 			)
+// 	}
+// }
+
+
+
 
 class App extends React.Component {
 
@@ -41,15 +48,19 @@ class App extends React.Component {
    //this._logout = this._logout.bind(this)
   }
 
+
   componentDidMount(){
   	axios.get("/auth/user/").then(response => {
   		console.log(response.data)
+      console.log("&^RESPONSE.DATA&^")
   		if(!!response.data.user) {
+        console.log(response.data.user)
   			console.log("USER PRESENT")
   			this.setState({
   				loggedIn: true,
   				user: response.data.user
-  			})
+  			});
+        console.log(this.state.user)
   		}else{
   			this.setState({
   				loggedIn: false,
@@ -59,7 +70,8 @@ class App extends React.Component {
   	})
   }
 
-  _loginParent = (email, password) => {
+  _loginParent = (event, email, password) => {
+    event.preventDefault()
   	axios
   		.post("/auth/login/parent", {
   			email,
@@ -91,27 +103,30 @@ class App extends React.Component {
   		})
   }
 
+  // w00t = (event) => {
+  //   event.preventDefault()
+  //   helper.getChores().then(response => {console.log(response)})
+  // }
 
 
   render() {
     return (
-      <div>
 
-    <div> 
-	    	<header>
-	    		<Navbar />
-			</header>
+   	
 			  
 		<Switch>
-			<Route exact path="/" render={() => <Home saveUser={this.saveUser}/>} />
-			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
-		</Switch>
-			 <Why />
-			  <Features1 />
-			{/*<PgFooter /> */}
 
-	</div>
-</div>
+			<Route exact path="/" render={() => <Home/> } />
+			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+      <Route exact path="/parent" render={() => <ViewParent />}  />
+      <Route exact path="/child" render={() => <ViewChild />}  />  
+       <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />   
+		</Switch>
+
+			
+
+
+
     );
   }
 }

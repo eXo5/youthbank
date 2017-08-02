@@ -92,7 +92,6 @@ return(
 						<Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
 						<Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
 						<Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
-						{/*<Button type="submit" waves='light' className="mainBtn" onClick={(event) => this.props.saveUser(event, this.state.firstName, this.state.lastName, this.state.email, this.state.password)}>Submit</Button>*/}
 						<Button type="submit" waves='light' className="mainBtn" onClick={this.handleSubmit}>Submit</Button>
 					</form>
 					</div>
