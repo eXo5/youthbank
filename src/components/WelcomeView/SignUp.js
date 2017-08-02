@@ -76,9 +76,9 @@ return(
 			<Row className="landingPhoto">
 				  <Col s={4}>
 				  <div className="landPtext">
-					  <p> Teach your kids about money </p>
-					  <p> Motivate your kids to work </p>
-					  <p> USE YOUNG MONEY </p>
+					  <p> Teach kids the value of money. </p>
+					  <p> Motivate them to work around the house.</p>
+					  <p> Track their earnings and financial goals safely. </p>
 				  </div>
 				  </Col>
 
