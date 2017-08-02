@@ -59,7 +59,8 @@ class App extends React.Component {
   	})
   }
 
-  _loginParent = (email, password) => {
+  _loginParent = (event, email, password) => {
+    event.preventDefault()
   	axios
   		.post("/auth/login/parent", {
   			email,

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import {Navbar, NavItem, Row, Col, Footer, Input, Button, Tabs, Tab} from 'react-materialize';
 import '../index.css';
 import { Route, Link } from 'react-router-dom';
-// import helper from './utils/thehelp/helper.js'
+import helper from '../utils/thehelp/helper.js'
 const newState = {};
 
 
 class SignIn extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       //state for signIn
@@ -35,7 +35,8 @@ class SignIn extends Component {
   handleSubmit = (event, email, password) => {
     event.preventDefault()
     console.log("handleSubmit")
-    this.props._login(this.state.email, this.state.password)
+    helper.logOneIn(this.state.email, this.state.password)
+    //this.props._login(this.state.email, this.state.password)
     this.setState({redirectTo: "/"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {
