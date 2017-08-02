@@ -111,10 +111,10 @@ app.post("/api/post/chores", function(req, res){
 	chore.save(function(err){ //save the the chores model, this time with a due date
 		if(err){
 			console.log(err);
-		}else{
+		} else {
 			// console.log(chore);
 			console.log("new chore added");
-		}x
+		}
 	})
 
 	Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){

@@ -53,7 +53,7 @@ class SignIn extends Component {
     this.setState({
       email: "",
       password: "",
-      redirectTo: "/"})
+      redirectTo: "/child"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {
   //   event.preventDefault();
