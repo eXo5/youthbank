@@ -15,7 +15,29 @@ app.get("/", function(req, res){
 //post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js
 //route for viewing chores
+app.get("/api/get/chores/", function(req, res) {
+	console.log(req.user)
+	console.log("^^^req.user^^^")
+	Chore.findById("5982101a182f3c30343c3cd9").exec(function(err,doc){ err ? console.log(err) : console.log(doc) })
+})
 
+app.get("/api/get/pchores", function(req, res){
+	Parent.findById(req.user.id)
+	.populate("Chore")
+		.exec(function(err, doc) {
+			if (err) {console.log(err)}
+			else {
+				console.log(doc)
+				console.log("^^^DOC")
+				console.log(doc.chores[16].choreName)
+				console.log("^^^CHORENAME?")
+				return doc;
+			}
+			return doc
+					res.json(doc)
+		})
+
+})
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
 app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a dueDate for when the chores should be complete
@@ -87,17 +109,15 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 app.post("/api/post/chores", function(req, res){
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
 	//if chores === chores then findAll else if {var theChoreToFind === req.params.chores} and we'll run that chore to update a chore?
-	console.log(req.body);
-	console.log("^^^req.body^^^")
-	var firstName = req.body.firstName;
-	var lastName = req.body.lastName;
+	console.log(req.user);
+	console.log("^^^req.user^^^")
+	console.log(req.body)
 	var choreName = req.body.choreName;
 	var choreDesc = req.body.choreDesc;
 	var choreValue = req.body.choreValue;
 	var choreRegExp = choreName.replace(/ /g, "_");
 	// moment(req.body.createdAt).add(due, 'day').format("YYYY-MM-DD")
 	var dueDate = req.body.dueDate; //parameter that sets when a chore is due by
-	
 	var chore = new Chore({ //JD
 		choreName: choreRegExp,
 		choreDesc: req.body.choreDesc,
@@ -107,22 +127,26 @@ app.post("/api/post/chores", function(req, res){
 
 		                      // is to complete the task JD
 	})
-
-	chore.save(function(err){ //save the the chores model, this time with a due date
+	chore.save(function(err, doc){ //save the the chores model, this time with a due date
 		if(err){
 			console.log(err);
+			console.log("ERR^^^")
 		}else{
-			// console.log(chore);
+			Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: doc}})
+			.exec(function(err, doc){
+				if (!!err) {console.log(err)}
+					else{res.send(doc)}
+			})
 			console.log("new chore added");
-		}x
+		}
 	})
 
-	Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){
+	// Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){
 
-		if(err) {console.log(err)}
-		console.log(doc);
-	})
-	res.send("Ok");
+	// 	if(err) {console.log(err)}
+	// 	console.log(doc);
+	// })
+	// res.send("Ok");
 })//END new Chores
 
 app.delete("/api/drop/:collection",function(req, res){
@@ -131,9 +155,9 @@ app.delete("/api/drop/:collection",function(req, res){
 	collection.drop();
 })
 
-app.post("/api/post/:chorecomplete", function(req, res){
-	//if (req.params.chorecomplete === 'chorecomplete'){
-	parent.findOneAndUpdate({firstName: req.body.firstName, lastName: req.body.lastName, "chores.choreName": req.params.chorecomplete}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
+app.put("/api/put/chorecomplete", function(req, res){
+	var choreId;
+	Chore.findByIdAndUpdate(choreId, {$elemMatch: {"chores.choreName": req.params.chorecomplete}}, {$set: {"chores.$.complete": true}}).exec(function(err, doc){
 		if (err){ console.log(err); res.send("not ok");}
 			else{
 				console.log(doc);
@@ -153,6 +177,5 @@ app.post("api/get/editkid", function(req, res) {
 		}
 	})
 })
-
 
 }

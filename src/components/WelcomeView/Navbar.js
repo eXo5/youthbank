@@ -15,12 +15,13 @@ class PgNavbar extends React.Component {
 	    	{/*we have to import react-router */}
 						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
 						<NavItem href='components.html' className="navItems">Components</NavItem>
-							
+	
 							<NavItem><Link to="/signin">
 								<Button waves='light'>Sign In</Button>
 							</Link>
 							</NavItem>
 					</Navbar>
+
 				</div>	
 
 			</header>
@@ -28,4 +29,4 @@ class PgNavbar extends React.Component {
 	}
 }
 
-export default PgNavbar;
+export default PgNavbar

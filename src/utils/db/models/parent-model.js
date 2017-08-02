@@ -42,6 +42,10 @@ var ParentSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "Chore"
 	}],
+	completedChores: [{
+		type: Schema.Types.ObjectId,
+		ref: "Chore"
+	}],
 
 	children: [{
 		type: Schema.Types.ObjectId,

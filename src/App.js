@@ -1,5 +1,5 @@
+
 import React, {Component} from 'react';
-import helper from './utils/thehelp/helper.js';
 import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
 import Navbar from './components/WelcomeView/Navbar'
 import Home from './components/WelcomeView/SignUp';
@@ -8,12 +8,16 @@ import logo from './logo.svg';
 import PgFooter from './components/WelcomeView/PgFooter';
 import Why from './components/WelcomeView/WhyWeMadeIt';
 import Features1 from './components/WelcomeView/Features1';
-import SignIn from './components/SignIn';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
+import axios from 'axios'
+import helper from './utils/thehelp/helper'
+import {Route, Link, Switch, Redirect } from 'react-router-dom'
+import AddChore from './components/newusers/AddChore'
 
-import axios from 'axios';
+
+//===================//
 const newState = {};
-
 
 const DisplayLinks = props => {
 	if(props.loggedIn) {
@@ -41,15 +45,19 @@ class App extends React.Component {
    //this._logout = this._logout.bind(this)
   }
 
+
   componentDidMount(){
   	axios.get("/auth/user/").then(response => {
   		console.log(response.data)
+      console.log("&^RESPONSE.DATA&^")
   		if(!!response.data.user) {
+        console.log(response.data.user)
   			console.log("USER PRESENT")
   			this.setState({
   				loggedIn: true,
   				user: response.data.user
-  			})
+  			});
+        console.log(this.state.user)
   		}else{
   			this.setState({
   				loggedIn: false,
@@ -59,7 +67,8 @@ class App extends React.Component {
   	})
   }
 
-  _loginParent = (email, password) => {
+  _loginParent = (event, email, password) => {
+    event.preventDefault()
   	axios
   		.post("/auth/login/parent", {
   			email,
@@ -91,11 +100,14 @@ class App extends React.Component {
   		})
   }
 
+  // w00t = (event) => {
+  //   event.preventDefault()
+  //   helper.getChores().then(response => {console.log(response)})
+  // }
 
   render() {
  
     return (
-      <div>
 
     <div> 
 	    	<header>
@@ -103,15 +115,16 @@ class App extends React.Component {
 			</header>
 			  
 		<Switch>
-			<Route exact path="/" render={() => <Home saveUser={this.saveUser}/>} />
+			<Route exact path="/" render={() => <Home />} />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+      <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />
 		</Switch>
 			 <Why />
 			  <Features1 />
 			{/*<PgFooter /> */}
 
 	</div>
-</div>
+
     );
   }
 }

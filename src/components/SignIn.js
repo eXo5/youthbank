@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {Row, Col, Input, Button, Tabs, Tab} from 'react-materialize';
 import '../index.css';
-import { Redirect } from 'react-router-dom';
+import { Route, Link, Redirect } from 'react-router-dom';
 import helper from '../utils/thehelp/helper.js'
 const newState = {};
 
 
 class SignIn extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       //state for signIn
@@ -35,8 +35,9 @@ class SignIn extends Component {
 
   handleSubmit = (event, email, password) => {
     event.preventDefault()
-    console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
+    console.log("handleSubmit")
     helper.logOneIn(this.state.email, this.state.password)
+    console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
     this.setState({redirectTo: "/"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {

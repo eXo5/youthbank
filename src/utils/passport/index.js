@@ -4,6 +4,10 @@ const Parent = require("../db/models/parent-model");
 const Child = require("../db/models/kid-model");
 
 passport.serializeUser((user, done) => {
+	console.log(user.id)
+	console.log(user.email)
+	console.log("^^^SERIALIZATION^^^")
+	done(null, {_id: user._id, email: user.email }) //take out email in production?
 	done(null, { _id: user._id, email: user.email }) // take out email in production
 })
 
@@ -29,7 +33,8 @@ passport.deserializeUser((id, done) => {
 passport.use("local-parent",
 	new LocalStrategy(
 	{
-		usernameField: "email"
+		usernameField: "email",
+		passwordField: "password"
 	},
 	function(username, password, done) {
 		Parent.findOne({email: username}, (err, userMatch) => {
@@ -51,7 +56,8 @@ passport.use("local-parent",
 passport.use("local-child",
 	new LocalStrategy(
 	{
-		usernameField: "email"
+		usernameField: "email",
+		passwordField: "password"
 	},
 	function(username, password, done) {
 		Child.findOne({email: username}, (err, userMatch) => {
