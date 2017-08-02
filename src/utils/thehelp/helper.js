@@ -15,6 +15,18 @@ var helper = {
 		})
 	},
 
+	logInChild: function(email, password) {
+		console.log(email)
+		console.log(password)
+		  axios.post("/auth/login/child", {
+		 	email: email, 
+		 	password: password
+		 })
+		.then(function(results) {
+			return console.log(results)
+		})
+	},
+
 	postParent: function(email, password, firstName, lastName) {
 	 return axios.post("/auth/api/new/parent", {
 		 	email: email, 
