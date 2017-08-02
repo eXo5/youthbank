@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import {Route, Link, Switch} from 'react-router-dom'
+
+import React, {Component} from 'react';
+import helper from './utils/thehelp/helper.js';
 import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
 import Navbar from './components/WelcomeView/Navbar'
 import Home from './components/WelcomeView/SignUp';
@@ -12,6 +13,8 @@ import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import axios from 'axios'
 import helper from './utils/thehelp/helper'
+const newState = {};
+
 const DisplayLinks = props => {
 	if(props.loggedIn) {
 		return(
@@ -103,33 +106,27 @@ class App extends React.Component {
     event.preventDefault()
     helper.getChores().then(response => {console.log(response)})
   }
+  
   render() {
-  	// if (this.state.redirectTo){
-  	// 	return <Redirect to={{pathname: this.state.redirectTo}} />
-  	// }
-
+ 
     return (
-      <div>
-      <Button class="mainBtn" onClick={this.w00ts0n}>Button</Button>
-      <Button class="mainBtn" onClick={this.w00tDad}>Button</Button>
-		<Switch>
-			<Route exact path="/" render={() => <SignUp saveUser={this.saveUser}/>} />
-			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
-		</Switch>
-
 
 
     <div> 
 	    	<header>
 	    		<Navbar />
 			</header>
-			  <Home />
+			  
+		<Switch>
+			<Route exact path="/" render={() => <Home />} />
+			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+		</Switch>
 			 <Why />
 			  <Features1 />
 			{/*<PgFooter /> */}
 
 	</div>
-</div>
+
     );
   }
 }

@@ -1,6 +1,9 @@
 import React from 'react';
 import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
 import '../../index.css'
+// import SignIn from './components/SignIn';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
+
 class PgNavbar extends React.Component {
 
 	render(){
@@ -12,8 +15,13 @@ class PgNavbar extends React.Component {
 	    	{/*we have to import react-router */}
 						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
 						<NavItem href='components.html' className="navItems">Components</NavItem>
-								<Button type="submit" onClick={(event) => {this.props.handleSubmit(event, this.email, this.password)}}>Submit</Button>
-				</Navbar>
+	
+							<NavItem><Link to="/signin">
+								<Button waves='light'>Sign In</Button>
+							</Link>
+							</NavItem>
+					</Navbar>
+
 				</div>	
 
 			</header>
@@ -21,4 +29,4 @@ class PgNavbar extends React.Component {
 	}
 }
 
-export default Navbar;
+export default PgNavbar

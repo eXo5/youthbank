@@ -8,17 +8,24 @@ passport.serializeUser((user, done) => {
 	console.log(user.email)
 	console.log("^^^SERIALIZATION^^^")
 	done(null, {_id: user._id, email: user.email }) //take out email in production?
+	done(null, { _id: user._id, email: user.email }) // take out email in production
 })
+
+// passport.deserializeUser((id, done) => {
+// 	Parent.findOne({_id: id }, "email", (err, user) => {
+// 		if (!user){
+// 			Child.findOne({_id: id }, "email", (err, user) => {
+// 				done(null, id)
+// 			})
+// 		}else{
+// 			done(null, id)
+// 		}
+// 	})
+// })
 
 passport.deserializeUser((id, done) => {
 	Parent.findOne({_id: id }, "email", (err, user) => {
-		if (!user){
-			Child.findOne({_id: id }, "email", (err, user) => {
-				done(null, id)
-			})
-		}else{
-			done(null, id)
-		}
+	done(null, user)
 	})
 })
 
