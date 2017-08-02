@@ -3,6 +3,9 @@ import {Row, Col, Input, Button, Tabs, Tab} from 'react-materialize';
 import '../index.css';
 import { Redirect } from 'react-router-dom';
 import helper from '../utils/thehelp/helper.js'
+import Why from './WelcomeView/WhyWeMadeIt';
+import Features1 from './WelcomeView/Features1';
+import Navbar from './WelcomeView/Navbar'
 const newState = {};
 
 
@@ -37,7 +40,20 @@ class SignIn extends Component {
     event.preventDefault()
     console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
     helper.logOneIn(this.state.email, this.state.password)
-    this.setState({redirectTo: "/"})
+    this.setState({
+      email: "",
+      password: "",
+      redirectTo: "/parent"})
+  }
+
+    handleSubmitKid = (event, email, password) => {
+    event.preventDefault()
+    console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
+    helper.logInChild(this.state.email, this.state.password)
+    this.setState({
+      email: "",
+      password: "",
+      redirectTo: "/"})
   }
   // saveUser = (event, firstName, lastName, email, password) => {
   //   event.preventDefault();
@@ -69,6 +85,13 @@ class SignIn extends Component {
     }
     return (
 
+    <div>
+
+    <header>
+          <Navbar />
+      </header>
+
+
    <Row>
       <Row></Row>
       <Row>
@@ -90,7 +113,7 @@ class SignIn extends Component {
                   
                   <Row className="signIn">
                   
-                    <Button onClick={this.handleSubmit} s={12} type="submit" waves='light' className="mainBtn">Submit
+                    <Button onClick={this.handleSubmit}  type="submit" waves='light' className="mainBtn">Submit
                     </Button>
                   
                   
@@ -101,10 +124,10 @@ class SignIn extends Component {
               <Tab title="Child">
 
                 <form>
-                  <Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
+                  <Input type="email" label="Email" s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
                   <Input type="password" label="Password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
                   <Row className="signIn">
-                    <Button onClick={this.handleClick} s={12} type="submit" waves='light' className="mainBtn">Submit
+                    <Button onClick={this.handleSubmitKid} type="submit" waves='light' className="mainBtn">Submit
                     </Button>
                   </Row>
                 </form>
@@ -117,6 +140,10 @@ class SignIn extends Component {
         
     
   </Row>
+
+      <Why />
+        <Features1 />
+  </div>
 
     );
   }
