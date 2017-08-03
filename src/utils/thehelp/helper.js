@@ -3,6 +3,10 @@ import axios from 'axios';
 
 var helper = {
 
+	// authUser: function() {
+	// 	return axios.get('/auth/user');
+	// },
+
 	logOneIn: function(email, password) {
 		console.log(email)
 		console.log(password)

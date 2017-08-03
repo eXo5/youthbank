@@ -7,6 +7,7 @@ import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
 import helper from '../../utils/thehelp/helper.js';
+import { Redirect } from 'react-router-dom';
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -67,7 +68,10 @@ class ViewParent extends React.Component {
 
 
 
+
   render() {
+    console.log("TEST " + this.props.loggedIn);
+    if (this.props.loggedIn) {
 
     return(
       <div className="container">
@@ -160,6 +164,12 @@ class ViewParent extends React.Component {
         </div>
       </div>
     )
+    }
+    else{
+      return(
+      <Redirect to={{pathname: "/"}} />
+      )
+    }
   }
 }
 
