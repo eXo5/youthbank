@@ -1,12 +1,18 @@
 import React from 'react';
-import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
+import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input, Card, CardTitle} from 'react-materialize';
 import '../../index.css';
 // import List from './List';
 import ChildCards from './ChildCards';
 import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
+import background from '../../img/ParentView/family.jpg';
 import helper from '../../utils/thehelp/helper.js';
+import UnclaimedTasks from './UnclaimedTasks';
+import AmountOwed from './AmountOwed';
+import PgFooter from './PgFooter';
+
+
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -70,11 +76,11 @@ class ViewParent extends React.Component {
   render() {
 
     return(
-      <div className="container">
+      <div>
 
         {/* START OF SIDE NAVBAR */}
         <SideNav
-          trigger={<Button className="menuBtn">MENU</Button>}
+          trigger={<Button className="menuBtn right">MENU</Button>}
           options={{ closeOnClick: false }}
         >
           <SideNavItem userView
@@ -147,21 +153,38 @@ class ViewParent extends React.Component {
         </SideNav>
       {/* END OF SIDE NAVBAR */}
 
-        {/* BANNER FOR PARENT VIEW */}
-        <div className="row bannerDiv">
-          <Col s={12}>
-          <img src={banner} className="bannerParent" alt="banner" />
-          </Col>
-        </div>
+
+      {/* BEGIN PAGE CONTENT */}
+
+    <Row> 
+      <Col s={3} className='grid-example'>
+        <UnclaimedTasks />
+      </Col>
+      <Col s={9} className='grid-example'>
+        <Card className='small'
+              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
+              actions={[<a href='#'></a>]}>
+              Keep working on your goal for Concert Tickets!
+        </Card>
 
         {/* CHILD DISPLAY */}
-        <div className="row">
-          <ChildCards />
+        <div>
+          <Row>
+            <Col s={8}>
+                <ChildCards />
+            </Col>
+            <Col s={4}>
+                <AmountOwed />
+            </Col>
+           </Row>
         </div>
+      </Col>
+    </Row>
+
+        <PgFooter />
       </div>
     )
   }
 }
 
 export default ViewParent;
-
