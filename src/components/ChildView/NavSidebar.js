@@ -3,6 +3,9 @@ import {Navbar, SideNav, SideNavItem,Button, Col, Footer, Dropdown, NavItem, Mod
 import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
 import icon from '../../img/ChildView/vectorChild.png';
+import helper from '../../utils/thehelp/helper.js'
+
+
 const newState = {};
 
 
@@ -17,16 +20,19 @@ class NavSidebar extends React.Component {
       amount: "",
 
       //state for new kid
+      kidName: "",
+      kidUN: "",
+      kidPW: "",
+
       goalItem: "",
       goalValue: ""
-      
 
     }
   }
 
   //sets state of data put in input fields
   handleChange = (event) => {
-    
+    var newState = {};
     newState[event.target.id] = event.target.value;
     this.setState(
       newState
@@ -36,10 +42,26 @@ class NavSidebar extends React.Component {
 
   }//end of handleChange
 
+   handleSubmit = (event, goalItem, goalValue) => {
+    event.preventDefault()
+    console.log("handleSubmit")
+    helper.postGoal(this.state.goalItem, this.state.goalValue)
 
-	render(){
-		return (
- 	<div> 
+    this.setState({
+      goalItem: "",
+      goalValue: ""
+      })
+  }
+
+
+
+
+
+
+
+  render(){
+    return (
+  <div> 
        <Navbar brand='YoungMoney' right>
    
         <SideNav
@@ -84,25 +106,10 @@ class NavSidebar extends React.Component {
           <Dropdown trigger={
               <SideNavItem href='#!second' icon='face'>Manage Goal</SideNavItem>
             }>
-             {/* MODAL FOR NEW GOAL */}
-            <Modal
-              header='Add A New Task'
-              fixedFooter
-              trigger={
-                <NavItem>Add A New Goal</NavItem>
-              }>
-              <Row>
-                <form>
-                  <Input s={12} label="What is your goal? (eg: concert, video game system)" id="goalItem" value={this.state.goalItem} onChange={this.handleChange}><Icon>build</Icon></Input>
-                  <Input s={12} label="How much does it cost?" id="goalValue" value={this.state.goalValue} onChange={this.handleChange}><Icon></Icon></Input>  
-                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
-                </form>
-              </Row>
-            </Modal>
 
           {/* MODAL FOR NEW CHILD */}
             <Modal
-              header='Set Up a New Account for Child'
+              header='Add A Goal'
               fixedFooter
               trigger={
                 <NavItem>Modify Existing Goal</NavItem>
@@ -120,6 +127,29 @@ class NavSidebar extends React.Component {
             <NavItem>Edit </NavItem>
           </Dropdown>
 
+          <Dropdown trigger={
+              <SideNavItem href='#!second' icon='face'>Add A Goal</SideNavItem>
+            }>
+
+          {/* MODAL FOR NEW CHILD */}
+            <Modal
+              header='Add A Goal '
+              fixedFooter
+              trigger={
+                <NavItem>Add A Goal</NavItem>
+              }>
+              <Row>
+                <form>
+                  <Input s={12} label="goalItem" id="goalItem" value={this.state.goalItem} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="goalValue" id="goalValue" value={this.state.goalValue} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Button onClick={this.handleSubmit} waves='light' node='a' className="mainBtn">Submit</Button>
+                </form>
+              </Row>
+            </Modal>
+            
+            <NavItem>Edit </NavItem>
+          </Dropdown>
+
            {/* MENU FOOTER */}
           <Footer className="page-footer">
               <Button waves='light' className="mainBtn">LogOut</Button>
@@ -129,8 +159,8 @@ class NavSidebar extends React.Component {
       </Navbar>
       </div>
 
-		)
-	}
+    )
+  }
 }
 
 export default NavSidebar
