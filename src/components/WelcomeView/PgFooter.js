@@ -5,7 +5,7 @@ import '../../index.css'
 class PgFooter extends React.Component {
 	render() {
 		return(
-<Footer copyrights="&copy 2015 Copyright Text" className="page-footer"
+<Footer copyrights="Copyright Young Money Records" className="page-footer"
 	moreLinks={
 		<a className="grey-text text-lighten-4 right" href="#!">More Links</a>
 	}
@@ -19,7 +19,7 @@ class PgFooter extends React.Component {
 	}
 	className='example'
 >
-		<h5 className="white-text">Footer Content</h5>
+		<h5 className="orange-text">Young Money</h5>
 		<p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
 </Footer>
 		)
