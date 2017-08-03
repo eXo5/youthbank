@@ -70,9 +70,9 @@ class ViewParent extends React.Component {
 
 
   render() {
-    console.log("TEST " + this.props.loggedIn);
+    console.log("VIEW PARENT this.props.loggedin: " + this.props.loggedIn);
+    // debugger
     if (this.props.loggedIn) {
-
     return(
       <div className="container">
 
@@ -164,6 +164,10 @@ class ViewParent extends React.Component {
         </div>
       </div>
     )
+    } else if (this.props.loggedIn === null) {
+        return (<div>
+          
+        </div>)
     }
     else{
       return(

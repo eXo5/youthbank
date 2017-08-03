@@ -7,7 +7,8 @@ import Goal from './Goal';
 import MoneyEarned from './MoneyEarned';
 import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
-import PgFooter from './Footer'
+import PgFooter from './Footer';
+import { Redirect } from 'react-router-dom';
 // import banner from '../../img/ChildView/banner-child.png';
 // import navBg from '../../img/ChildView/nav-background.jpg';
 // import icon from '../../img/ChildView/vectorChild.png';
@@ -47,6 +48,8 @@ class ViewChild extends React.Component {
 
 
   render() {
+    console.log("VIEW CHILD this.props.loggedIn: " + this.props.loggedIn);
+    if (this.props.loggedIn) {
 
     return(
       <div>
@@ -88,6 +91,17 @@ class ViewChild extends React.Component {
           <PgFooter />
       </div>
     )
+  }
+  else if (this.props.loggedIn === null) {
+        return (<div>
+          
+        </div>)
+    }
+  else{
+      return(
+      <Redirect to={{pathname: "/"}} />
+      )
+    }
   }
 }
 

@@ -13,8 +13,7 @@ class PgNavbar extends React.Component {
 			<div className="navbar-fixed">
 	    		<Navbar brand='Young Money' right className="NavbarCSS ">
 	    	{/*we have to import react-router */}
-						<NavItem href='get-started.html' className="navItems">Getting started</NavItem>
-						<NavItem href='components.html' className="navItems">Components</NavItem>
+						
 
 
 						<li className="navItems">

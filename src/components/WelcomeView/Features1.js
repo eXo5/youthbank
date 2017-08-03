@@ -6,10 +6,10 @@ class Features1 extends React.Component {
 	return(
 
 		<Tabs className='tab-demo z-depth-1 tabs-fixed-width'>
-			<Tab title="OnPageLoad" active>
+			<Tab title="About" active>
 				<Card header={<CardTitle reveal image={"https://s-media-cache-ak0.pinimg.com/600x315/44/ed/9e/44ed9e0b8672efcdb67831a04699927f.jpg"} waves='light'/>}
-						title="OnPageLoad Info"
-						reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
+						title="Welcome to Young Money"
+						reveal={<p>Young Money is a unique application that enables parents to help children valuable lessons in: money management, attaining goals, </p>}>
 						<p></p>
 				</Card>
 			</Tab>
