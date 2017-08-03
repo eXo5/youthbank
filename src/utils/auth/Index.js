@@ -56,9 +56,17 @@ router.post("/api/new/child", (req, res) => {
 	//ADD VALIDATION
 	const newChild = new Child({ email, password, firstName, lastName, age })
 	newChild.save((err, savedUser) => {
-		if (err) return res.json(err)
+		if (err) console.log(err);
+				Parent.findByIdAndUpdate(req.user.id, {$push: {children: savedUser}})
+				.exec(function(err, doc){
+					if (err) console.log(err);
+					console.log(doc)
+				})
 			return res.json(savedUser)
+	
 	})
+
+	
 })
 
 module.exports = router
