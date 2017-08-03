@@ -29,7 +29,7 @@ app.get("/api/get/pchores", function(req, res){
 			else {
 				console.log(doc)
 				console.log("^^^DOC")
-				console.log(docs)
+				console.log(doc.chores)
 				console.log("^^^CHORENAME?")
 				return doc;
 			}
