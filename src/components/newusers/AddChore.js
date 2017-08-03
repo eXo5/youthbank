@@ -44,7 +44,7 @@ constructor(props){
   componentDidMount(){
   helper.getChores()
   		.then(results => {
-
+		console.log(results)
   				var newChores = [];
   				for (let i = 0; i < results.data[0].chores.length; i++){
   					var id = results.data[0].chores[i]._id;
