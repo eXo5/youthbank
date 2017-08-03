@@ -43,11 +43,10 @@ var ChildSchema = new Schema({
 		type: Number,
 	},
 
-	goal: {
-		name: {type: String}, 
-		value: {type: Number},
-		goalAttained: {type: Boolean}
-	},
+	goal: [{
+		type: Schema.Types.ObjectId,
+		ref: "Goal"
+	}],
 
 	parents: [{
 		type: Schema.Types.ObjectId,

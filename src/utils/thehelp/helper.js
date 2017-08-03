@@ -81,7 +81,20 @@ var helper = {
 		axios.delete("/api/delete/" + choreName, function(results){
 			console.log(results);
 		});
+	},
+
+	postGoal: function(event,goalItem, goalValue){ //helper function for kids to post goals
+		console.log(goalItem);
+		console.log(goalValue);
+		axios.post("/api/post/goals", {goalItem:goalItem, goalValue:goalValue}).then(function(results){
+			return results
+		})
 	}
+
+
+
+
+
 };
 
 export default helper;

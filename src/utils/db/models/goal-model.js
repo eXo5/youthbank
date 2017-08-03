@@ -3,14 +3,22 @@ var Schema = mongoose.Schema;
 mongoose.promise = Promise;
 
 var GoalSchema = new Schema({
-	goal: {
+	goalItem: {
 		type: String,
-		value: Number,
-		GoalAttained: Boolean,
-		createdAt: {
+		},
+	goalValue: {
+		type: Number,
+		},
+	GoalAttained: {
+			type:Boolean,
+			default:false
+		},
+	createdAt: {
 			type: Date,
 			default: Date.now()
 		}
-	}
+
 })
-var Goal = new mongoose.model("Goal", GoalSchema)
+var Goal = mongoose.model("Goal", GoalSchema)
+
+module.exports = Goal;

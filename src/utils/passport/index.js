@@ -12,25 +12,25 @@ passport.serializeUser((user, done) => {
 	done(null, { _id: user._id, email: user.email }) // take out email in production
 })
 
-// passport.deserializeUser((id, done) => {
-// 	Parent.findOne({_id: id }, "email", (err, user) => {
-// 		if (!user){
-// 			Child.findOne({_id: id }, "email", (err, user) => {
-// 				done(null, id)
-// 			})
-// 		}else{
-// 			done(null, id)
-// 		}
-// 	})
-// })
-
 passport.deserializeUser((id, done) => {
 	Parent.findOne({_id: id }, "email", (err, user) => {
-
-	done(null, user)
-
+		if (!user){
+			Child.findOne({_id: id }, "email", (err, user) => {
+				done(null, id)
+			})
+		}else{
+			done(null, id)
+		}
 	})
 })
+
+// passport.deserializeUser((id, done) => {
+	// Parent.findOne({_id: id }, "email", (err, user) => {
+
+	// done(null, user)
+
+	// })
+// })
 
 // === REGISTER LOCAL STRAT ===
 passport.use("local-parent",

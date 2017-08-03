@@ -31,7 +31,7 @@ router.post("/login/child", passport.authenticate("local-child"), (req, res) => 
 
 
 
-router.post("/logout", (req, res) => {
+router.post("/logout/parent", (req, res) => {
 	//router.post("/auth/logout")
 	if (req.user) {
 		req.session.destroy()
@@ -41,6 +41,18 @@ router.post("/logout", (req, res) => {
 		return res.json({ msg: "No user to log out" })
 	}
 })
+
+router.post("/logout/child", (req, res) => {
+	//router.post("/auth/logout")
+	if (req.user) {
+		req.session.destroy()
+		res.clearCookie("connect.sid") //clean up!
+		return res.json({ msg: "Logging Out" })
+	} else {
+		return res.json({ msg: "No user to log out" })
+	}
+})
+
 
 router.post("/api/new/parent", (req, res) => {
 	//router.post("/auth/api/new/parent")

@@ -5,6 +5,10 @@ var moment = require("moment");//bringing in the moment package JD
 var Parent = require("../db/models/parent-model.js");
 var Child = require("../db/models/kid-model.js");
 var Chore = require("../db/models/chore-model.js"); //JD 
+var Goal = require("../db/models/goal-model.js"); //JD
+
+
+
 
 module.exports = function(app) {
 
@@ -110,7 +114,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 app.post("/api/post/chores", function(req, res){
 
     //importing a user session
-    var auth = require("../passport/index.js")(app,user);
+   
 
 
 	//When we have someone logged in we will take one of the values we get from their presence, (either _id or email) and replace my name. It's only my name b/c it was the name I initially inserted into the db.
@@ -156,6 +160,50 @@ app.post("/api/post/chores", function(req, res){
 	// res.send("Ok");
 
 })//END new Chores
+
+////////////////////////////////////////////////////////////////////
+///children posting goals 
+//goal item
+//goal value
+//make route that takes in goal info,
+//post it to database, find the child the goal was made from
+//update the childs goal array
+//first test through postman
+//make arbitrary form after child login
+//add to specific child array from there
+
+app.post("/api/new/goals", function(req, res){
+	// console.log(req.user);
+	// c onsole.log(req.body);
+
+	var goalItem = req.body.goalItem;
+	console.log(item);
+	var goalValue = req.body.goalValue;
+	console.log(value);
+
+	var goal = new Goal({
+		goalItem: req.body.item,
+		goalValue: req.body.value
+	})
+
+	goal.save(function(err, doc){
+		if(err){
+			console.log(err);
+			console.log("ERR^^^")
+		}else{
+			Child.findByIdAndUpdate({_id: req.user._id}, {$push: {goal: doc}})
+			.exec(function(err, doc){
+				if (err) {console.log(err)}
+					else{res.send(doc)}
+			})
+			console.log("new goal added");
+		}
+	})
+
+
+});
+
+//////////////////////////////////////////////////////////////////////
 
 app.delete("/api/drop/:collection",function(req, res){
 	var collection = req.params.collection;
