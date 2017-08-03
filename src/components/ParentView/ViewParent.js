@@ -7,7 +7,8 @@ import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
 import helper from '../../utils/thehelp/helper.js';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
+import AddChore from '../newusers/AddChore.js'
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -68,16 +69,21 @@ class ViewParent extends React.Component {
 
     handleNewChore = (event, choreName, choreDesc, choreValue) => { 
       event.preventDefault()
-      helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue).then(response =>{
-        return alert("New Chore Added")
+      helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue)
+      this.setState({
+        choreName: "",
+        choreDesc: "",
+        choreValue: ""
       })
-    }
-
+        return alert("New Chore Added");
+      }
+      
 
   render() {
-    console.log("VIEW PARENT this.props.loggedin: " + this.props.loggedIn);
-    // debugger
-    if (this.props.loggedIn) {
+    console.log("VIEW PARENT this.props.loggedin" + this.props.loggedIn)
+    if( this.props.loggedIn) {
+
+    
     return(
       <div className="container">
 
@@ -145,7 +151,7 @@ class ViewParent extends React.Component {
               </Row>
             </Modal>
             
-            <NavItem onClick={this.getKidInfo}>Edit An Exisiting Child</NavItem>
+            <NavItem>Edit An Exisiting Child</NavItem>
           </Dropdown>
 
            {/* MENU FOOTER */}
@@ -162,23 +168,31 @@ class ViewParent extends React.Component {
           <img src={banner} className="bannerParent" alt="banner" />
           </Col>
         </div>
-
+ 
         {/* CHILD DISPLAY */}
         <div className="row">
           <ChildCards />
         </div>
+
+      <div className="row">
+    <AddChore />
       </div>
-    )
-    } else if (this.props.loggedIn === null) {
-        return (<div>
-          
-        </div>)
+
+
+      </div>
+   )
+   } else if (this.props.loggedIn === null) {   
+      return (<div>    
+             <h1>...</h1>
+        </div>)    
+    
+   }else{    
+      return(    
+      <Redirect to={{pathname: "/"}} />    
+      )    
     }
-    else{
-      return(
-      <Redirect to={{pathname: "/"}} />
-      )
-    }
+
+    
   }
 }
 
