@@ -12,8 +12,11 @@ import ViewParent from './components/ParentView/ViewParent';
 import ViewChild from './components/ChildView/ViewChild';
 import SignIn from './components/SignIn';
 import { Route, Switch } from 'react-router-dom';
-import AddChore from './components/newusers/AddChore'
+import AddChore from './components/newusers/AddChore';
+import helper from "./utils/thehelp/helper";
 import axios from 'axios';
+
+// import axios from 'axios';
 // const newState = {};
 
 
@@ -39,34 +42,36 @@ class App extends React.Component {
 
     this.state = {
       //state
-      loggedIn: false,
+      loggedIn: null,
       user: null
+      
     }
    // this._login = this._loginParent.bind(this)
    //this._logout = this._logout.bind(this)
   }
 
+componentDidMount(){
 
-  componentDidMount(){
-  	axios.get("/auth/user/").then(response => {
-  		console.log(response.data)
-      console.log("&^RESPONSE.DATA&^")
-  		if(!!response.data.user) {
-        console.log(response.data.user)
-  			console.log("USER PRESENT")
-  			this.setState({
-  				loggedIn: true,
-  				user: response.data.user
-  			});
-        console.log(this.state.user)
-  		}else{
-  			this.setState({
-  				loggedIn: false,
-  				user: null
-  			})
-  		}
-  	})
-  }
+  axios.get('/auth/user').then(response => {
+      console.log(response.data.user);
+     
+      if (!!response.data.user) {
+        console.log('THERE IS A USER')
+        this.setState({
+          loggedIn: true,
+          user: response.data.user
+        })
+         console.log("This State: " + JSON.stringify(this.state));
+      } else {
+        this.setState({
+          loggedIn: false,
+          user: null
+          
+        })
+      }
+    });
+}
+
 
   _loginParent = (event, email, password) => {
     event.preventDefault()
@@ -113,11 +118,11 @@ class App extends React.Component {
    	
 			  
 		<Switch>
-
 			<Route exact path="/" render={() => <Home/> } />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
-      <Route exact path="/parent" render={() => <ViewParent />}  />
-      <Route exact path="/child" render={() => <ViewChild />}  />  
+      <Route exact path="/parent" render={() => 
+        <ViewParent loggedIn={this.state.loggedIn} />}  />
+      <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} />}  />  
        <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />   
 		</Switch>
 

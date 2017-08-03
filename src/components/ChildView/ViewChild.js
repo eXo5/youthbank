@@ -1,15 +1,17 @@
 import React from 'react';
-import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
+// import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
+import {Col, Row, Card, CardTitle} from 'react-materialize';
 import '../../index.css';
 import NavSidebar from './NavSidebar';
 import Goal from './Goal';
 import MoneyEarned from './MoneyEarned';
 import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
-import PgFooter from './Footer'
-import banner from '../../img/ChildView/banner-child.png';
-import navBg from '../../img/ChildView/nav-background.jpg';
-import icon from '../../img/ChildView/vectorChild.png';
+import PgFooter from './Footer';
+import { Redirect } from 'react-router-dom';
+// import banner from '../../img/ChildView/banner-child.png';
+// import navBg from '../../img/ChildView/nav-background.jpg';
+// import icon from '../../img/ChildView/vectorChild.png';
 import background from '../../img/ChildView/background.jpg';
 const newState = {};
 
@@ -46,6 +48,8 @@ class ViewChild extends React.Component {
 
 
   render() {
+    console.log("VIEW CHILD this.props.loggedIn: " + this.props.loggedIn);
+    if (this.props.loggedIn) {
 
     return(
       <div>
@@ -61,7 +65,7 @@ class ViewChild extends React.Component {
           <Col s={9} className='grid-example'>
             <Card className='small'
               header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
-              actions={[<a href='#'></a>]}>
+              actions={[<a href='google.com'> </a>]}>
               Keep working on your goal for Concert Tickets!
             </Card>
 
@@ -87,6 +91,17 @@ class ViewChild extends React.Component {
           <PgFooter />
       </div>
     )
+  }
+  else if (this.props.loggedIn === null) {
+        return (<div>
+          
+        </div>)
+    }
+  else{
+      return(
+      <Redirect to={{pathname: "/"}} />
+      )
+    }
   }
 }
 

@@ -17,9 +17,9 @@ class NavSidebar extends React.Component {
       amount: "",
 
       //state for new kid
-      kidName: "",
-      kidUN: "",
-      kidPW: ""
+      goalItem: "",
+      goalValue: ""
+      
 
     }
   }
@@ -84,6 +84,21 @@ class NavSidebar extends React.Component {
           <Dropdown trigger={
               <SideNavItem href='#!second' icon='face'>Manage Goal</SideNavItem>
             }>
+             {/* MODAL FOR NEW GOAL */}
+            <Modal
+              header='Add A New Task'
+              fixedFooter
+              trigger={
+                <NavItem>Add A New Goal</NavItem>
+              }>
+              <Row>
+                <form>
+                  <Input s={12} label="What is your goal? (eg: concert, video game system)" id="goalItem" value={this.state.goalItem} onChange={this.handleChange}><Icon>build</Icon></Input>
+                  <Input s={12} label="How much does it cost?" id="goalValue" value={this.state.goalValue} onChange={this.handleChange}><Icon></Icon></Input>  
+                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
+                </form>
+              </Row>
+            </Modal>
 
           {/* MODAL FOR NEW CHILD */}
             <Modal
