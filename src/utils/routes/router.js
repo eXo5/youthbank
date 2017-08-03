@@ -22,19 +22,18 @@ app.get("/api/get/chores/", function(req, res) {
 })
 
 app.get("/api/get/pchores", function(req, res){
-	Parent.chores.find({_id: req.user.id})
-	.populate("Chore")
+	Parent.find({_id: req.user.id})
+	.populate("children")
+	.populate("chores")
 		.exec(function(err, doc) {
 			if (err) {console.log(err)}
 			else {
 				console.log(doc)
 				console.log("^^^DOC")
-				console.log(doc.chores)
+				console.log(doc[0].chores)
 				console.log("^^^CHORENAME?")
-				return doc;
+				res.send(doc)
 			}
-			return doc
-					res.json(doc)
 		})
 
 })
