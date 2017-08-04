@@ -51,14 +51,22 @@ router.post("/api/new/parent", (req, res) => {
 })
 
 router.post("/api/new/child", (req, res) => {
-		//router.post("/auth/api/new/parent")
-		const { email, password, firstName, lastName, age } = req.body
-	//ADD VALIDATION
-	const newChild = new Child({ email, password, firstName, lastName, age })
-	newChild.save((err, savedUser) => {
-		if (err) return res.json(err)
-			return res.json(savedUser)
-	})
-})
+
+        //router.post("/auth/api/new/parent")
+        const { email, password, firstName, lastName, age } = req.body
+    //ADD VALIDATION
+    const newChild = new Child({ email, password, firstName, lastName, age })
+    newChild.save((err, savedUser) => {
+        if (err) console.log(err);
+                Parent.findByIdAndUpdate({_id: req.user.id}, {$push: {children: savedUser}})
+                .exec(function(err, doc){
+                    if (err) console.log(err);
+                    console.log(doc)
+                })
+            return res.json(savedUser)
+    
+    })
+  })
+
 
 module.exports = router

@@ -8,22 +8,24 @@ import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
 import background from '../../img/ParentView/family.jpg';
 import helper from '../../utils/thehelp/helper.js';
+
 import UnclaimedTasks from './UnclaimedTasks';
 import AmountOwed from './AmountOwed';
 import PgFooter from './PgFooter';
 
+import { Redirect } from 'react-router-dom';
 
 const newState = {};
 
 class ViewParent extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       //state for new task
-      task: "",
-      descript: "",
-      amount: "",
+      choreName: "",
+      choreDesc: "",
+      choreValue: "",
 
       //state for new kid
       email: "",
@@ -47,7 +49,7 @@ class ViewParent extends React.Component {
       newState
     );
 
-    console.log("This State: " + JSON.stringify(this.state));
+    //console.log("This State: " + JSON.stringify(this.state));
 
   }//end of handleChange
 
@@ -71,10 +73,18 @@ class ViewParent extends React.Component {
 
     }//end of handleNewChild
 
+    handleNewChore = (event, choreName, choreDesc, choreValue) => { 
+      event.preventDefault()
+      helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue).then(response =>{
+        return alert("New Chore Added")
+      })
+    }
 
 
   render() {
-
+    console.log("VIEW PARENT this.props.loggedin: " + this.props.loggedIn);
+    // debugger
+    if (this.props.loggedIn) {
     return(
       <div>
 
@@ -105,11 +115,11 @@ class ViewParent extends React.Component {
               }>
               <Row>
                 <form>
-                  <Input s={12} label="Task" id="task" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
-                  <Input s={12} label="Description of Task" id="descript" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
-                  <Input s={12} label="Amount" id="amount" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Task" id="choreName" value={this.state.choreName} onChange={this.handleChange}><Icon>build</Icon></Input>
+                  <Input s={12} label="Description of Task" id="choreDesc" value={this.state.choreDesc} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Amount" id="choreValue" value={this.state.choreValue} onChange={this.handleChange}><Icon></Icon></Input>
                   
-                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
+                  <Button onClick={this.handleNewChore} type="submit" waves='light' className="mainBtn">Submit</Button>
                 </form>
               </Row>
             </Modal>
@@ -142,7 +152,7 @@ class ViewParent extends React.Component {
               </Row>
             </Modal>
             
-            <NavItem>Edit An Exisiting Child</NavItem>
+            <NavItem onClick={this.getKidInfo}>Edit An Exisiting Child</NavItem>
           </Dropdown>
 
            {/* MENU FOOTER */}
@@ -184,6 +194,16 @@ class ViewParent extends React.Component {
         <PgFooter />
       </div>
     )
+    } else if (this.props.loggedIn === null) {
+        return (<div>
+          
+        </div>)
+    }
+    else{
+      return(
+      <Redirect to={{pathname: "/"}} />
+      )
+    }
   }
 }
 

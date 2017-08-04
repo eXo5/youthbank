@@ -1,10 +1,10 @@
     
 import React from 'react';
-import {Navbar, NavItem, Button, Modal, Row, Input} from 'react-materialize';
+import {Button, Input} from 'react-materialize';
 import '../../index.css'
 import helper from "../../utils/thehelp/helper"
 // import SignIn from './components/SignIn';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+// import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 class AddChore extends React.Component {
 constructor(props){

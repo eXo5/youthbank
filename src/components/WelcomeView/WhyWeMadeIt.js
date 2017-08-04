@@ -10,24 +10,20 @@ class Why extends React.Component {
 			    		<Col s={3} className="">
 			    		</Col>
 			    		<Col s={2} className="">
-			    			<h5> Content One </h5>
-			    			<p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-			    			sed do eiusmod tempor incididunt ut labore et dolore magna 
-			    			aliqua. </p>
+			    			<h5>Simple</h5>
+			    			<p>Easy-to-use application, helps you and your child keep track of the many chores that come up when trying to organize a busy household.</p>
 			    		
 			    		</Col>
 			    		<Col s={2} className="">
-			    			<h5> Content Two </h5>
-			    			<p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-			    			sed do eiusmod tempor incididunt ut labore et dolore magna 
-			    			aliqua.  </p>
+			    		<h5>Time-saving</h5>
+			    			<p>By incentivizing your children to do chores, save yourself time from having to do tasks.</p>
+			    			
 			    			 
 			    		</Col>
 			    		<Col s={2} className="">
-			    			<h5> Content Three </h5>
-			    			<p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-			    			sed do eiusmod tempor incididunt ut labore et dolore magna 
-			    			aliqua. </p>
+			    		<h5>Effective</h5>
+			    			<p>Help your children learn the value of their earning potential by letting them set their own goals and work toward them. </p>
+			    			
 			    			
 			    		</Col>
 			    		<Col s={3} className="">
