@@ -6,7 +6,7 @@ import ChildCards from './ChildCards';
 import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
-import background from '../../img/ParentView/family.jpg';
+// import background from '../../img/ParentView/family.jpg';
 import helper from '../../utils/thehelp/helper.js';
 
 import UnclaimedTasks from './UnclaimedTasks';
@@ -37,8 +37,14 @@ class ViewParent extends React.Component {
 
       //redirect route
       redirectTo: null
-
     }
+  }
+
+  componentDidMount(){
+    helper.getChildren()
+    .then(function(response){
+
+    })
   }
 
   //sets state of data put in input fields
@@ -172,7 +178,7 @@ class ViewParent extends React.Component {
       </Col>
       <Col s={9} className='grid-example'>
         <Card className='small'
-              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
+              header={<CardTitle reveal image={banner} waves="light"> Good Evening Alex </CardTitle>}
               actions={[<a href='#'></a>]}>
               Keep working on your goal for Concert Tickets!
         </Card>

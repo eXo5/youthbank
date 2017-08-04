@@ -42,7 +42,7 @@ class App extends React.Component {
 
     this.state = {
       //state
-      loggedIn: false,
+      loggedIn: null,
       user: null
       
     }

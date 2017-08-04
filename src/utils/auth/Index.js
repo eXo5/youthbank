@@ -68,5 +68,21 @@ router.post("/api/new/child", (req, res) => {
     })
   })
 
+//route to retrieve saved articles and display it
+router.get("/childList", function(req,res){
+
+	Parent.findOne({_id: req.user.id})
+	.populate("children")
+	.exec(function(err,doc){
+
+		if (err){
+			console.log(err);
+		}
+		else {
+			res.send(doc);
+		}
+	})
+});
+
 
 module.exports = router

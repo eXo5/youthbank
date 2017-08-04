@@ -11,6 +11,8 @@ module.exports = function(app) {
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
+
+
   
 //post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js

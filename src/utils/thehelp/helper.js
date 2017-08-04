@@ -73,6 +73,10 @@ var helper = {
 	choreComplete: function(parentId, choreName ){ 
 
 	},
+
+	getChildren: function() {
+		return axios.get("auth/childList");
+	},
 	
 //NOt 100% sure about returning axios verbs other than get.
 	deleteChore: function(event, choreName) {
