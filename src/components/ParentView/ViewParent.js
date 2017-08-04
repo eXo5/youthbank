@@ -11,8 +11,8 @@ import { Redirect } from 'react-router-dom';
 const newState = {};
 
 class ViewParent extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       //state for new task

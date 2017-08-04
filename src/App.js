@@ -42,7 +42,7 @@ class App extends React.Component {
 
     this.state = {
       //state
-      loggedIn: null,
+      loggedIn: false,
       user: null
       
     }
@@ -64,13 +64,15 @@ componentDidMount(){
          console.log("This State: " + JSON.stringify(this.state));
       } else {
         this.setState({
-          loggedIn: false,
+          loggedIn: null,
           user: null
           
         })
       }
     });
 }
+
+
 
 
   _loginParent = (event, email, password) => {
@@ -118,12 +120,12 @@ componentDidMount(){
    	
 			  
 		<Switch>
+
 			<Route exact path="/" render={() => <Home/> } />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
-      <Route exact path="/parent" render={() => 
-        <ViewParent loggedIn={this.state.loggedIn} />}  />
+      <Route exact path="/parent" render={() => <ViewParent loggedIn={this.state.loggedIn} />}  />
       <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} />}  />  
-       <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />   
+       
 		</Switch>
 
 			

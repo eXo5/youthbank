@@ -39,11 +39,11 @@ class SignIn extends Component {
   handleSubmit = (event, email, password) => {
     event.preventDefault()
     console.log("handleSubmit")
-    helper.logOneIn(this.state.email, this.state.password)
-
+    // helper.logOneIn(this.state.email, this.state.password)
+    this.props._login(event, this.state.email, this.state.password)
     this.setState({
-      email: "",
-      password: "",
+      // email: "",
+      // password: "",
       redirectTo: "/parent"})
   }
 

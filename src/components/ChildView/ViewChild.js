@@ -16,8 +16,8 @@ import background from '../../img/ChildView/background.jpg';
 const newState = {};
 
 class ViewChild extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       //state for new task
