@@ -36,15 +36,45 @@ class ViewParent extends React.Component {
       
 
       //redirect route
-      redirectTo: null
+      redirectTo: null,
+
+      //set children
+      children: []
     }
   }
 
-  componentDidMount(){
+ componentDidMount(){
+
     helper.getChildren()
     .then(function(response){
 
-    })
+
+      var results = [];
+      // console.log("CHILDREN: " + response.data.children[0].firstName)
+
+      //loops through array of objects from query from database and pushes it to newResults array with key/value pairs
+      for (let i = 0; i < response.data.children.length; i++){
+        var id = response.data.children[i]._id;
+        var firstName = response.data.children[i].firstName;
+        var age = response.data.children[i].age;
+    
+        results.push({
+          id: id, 
+          firstName: firstName, 
+          age: age
+        });
+        
+    }
+    // console.log("id: " + id);
+    // console.log(this)
+    // debugger
+
+    //sets state of saved articles with 'newResults' array
+    console.log("RESULTS" + results)
+    this.setState({ children: results});
+
+    
+    }.bind(this))
   }
 
   //sets state of data put in input fields
@@ -64,17 +94,43 @@ class ViewParent extends React.Component {
   
   helper.postChild(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.age).then(response =>  {
 
-      return alert("New Child Added!");
-    }
-      )
+     
 
-    this.setState({
+      var newChild = {
+          email: this.state.email,
+          password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          age: this.state.age
+      };
+
+      var newChildren = this.state.children;
+
+      newChildren.push(newChild);
+
+      console.log("New Children: ");
+      console.log(newChildren);
+
+      this.setState({ 
+        children: newChildren,
         email: "",
         password: "",
         firstName: "",
         lastName: "",
         age: ""
-    })
+      });
+
+      alert("New Child Added!");
+    });
+      
+
+    // this.setState({
+    //     email: "",
+    //     password: "",
+    //     firstName: "",
+    //     lastName: "",
+    //     age: ""
+    // })
     
 
     }//end of handleNewChild
@@ -187,7 +243,7 @@ class ViewParent extends React.Component {
         <div>
           <Row>
             <Col s={8}>
-                <ChildCards />
+                <ChildCards childList={this.state.children}/>
             </Col>
             <Col s={4}>
                 <AmountOwed />
