@@ -7,8 +7,9 @@ import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
 import helper from '../../utils/thehelp/helper.js';
-import { Redirect } from 'react-router-dom'
+import { Route, Switch, Link, Redirect } from 'react-router-dom'
 import AddChore from '../newusers/AddChore.js'
+import ModalEditChore from './ModalEditChore'
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -72,8 +73,8 @@ class ViewParent extends React.Component {
   }//end of handleModalBool
 
   handleNewChild = (event, firstName, lastName, email, password) => {
-  event.preventDefault()
-  
+
+  event.preventDefault();
   helper.postChild(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.age).then(response =>  {
 
       return alert("New Child Added!");
@@ -104,18 +105,18 @@ class ViewParent extends React.Component {
     editChore = (event, choreId) => {
       event.preventDefault();
       var choreId = event.target.id;
+
       console.log(choreId)
       this.setState({theChoreToShow: choreId})
-      var choreToChange = {_id: this.state.singleChore[this.state.theChoreToShow]._id, choreName:this.state.singleChore[this.state.theChoreToShow].choreName, choreDesc: this.state.singleChore[this.state.theChoreToShow].choreDesc, complete: this.state.singleChore[this.state.theChoreToShow].complete, childSaysComplete: this.state.singleChore[this.state.theChoreToShow].childSaysComplete, pastDue: this.state.singleChore[this.state.theChoreToShow].pastDue};
+      var choreToChange = {_id: this.state.chores[choreId]._id, choreName:this.state.chores[choreId].choreName, choreDesc: this.state.chores[choreId].choreDesc, complete: this.state.chores[choreId].complete, childSaysComplete: this.state.chores[choreId].childSaysComplete, pastDue: this.state.chores[choreId].pastDue};
+      
       this.setState({singleChore: choreToChange})
-      function waitOneSec(){ 
-        this.setState({showOneChore: true})
+
+      console.log(this.state.singleChore)
+          
+            
+            
       }
-
-     setTimeout(waitOneSec, 250)
-
-               
-      } 
       
 //BEGIN LIFECYCLE EVENTS
   componentDidMount(){
@@ -143,23 +144,30 @@ class ViewParent extends React.Component {
     console.log("VIEW PARENT this.props.loggedin" + this.props.loggedIn)
     if( this.props.loggedIn ) {
       //EDIT TASKS MODAL IS WRITTEN HERE
-      if (this.state.showOneChore === false) {var showChores = this.state.chores.map((element, i) => {
-          return(<div key={i}><p id={element._id}>{element.choreName}</p><p>{element.choreDesc}</p><p>{element.choreValue}</p><form><input type="hidden" name="id" value={element._id} /><Button id={i} onClick={this.editChore} key={i}>Edit Chore</Button></form><br/></div>)
+        var showChores = this.state.chores.map((element, i) => {
+          return(<div key={i}>
+                  <p id={element._id}>{element.choreName}</p>
+                  <p>{element.choreDesc}</p>
+                  <p>{element.choreValue}</p>
+                  <Row>
+                  <Modal header='Edit Task'
+                          fixedFooter
+                          trigger={
+                          <Button id={i} className="mainBtn" key={i}>Edit Chore</Button>}>
+                          <div className="row">
+                            <form>
+                            <Input value={element.choreName} />
+                            <Button>Button</Button>
+                              </form>
+                          </div>      
+                  </Modal>
+                   </Row>
+                  
+                  <br/>
+                  </div>
+            )
         })//END SHOW CHORES
-}else if (this.state.showOneChore === true){ var showChores = () => {
-  return (
-     <div>
-     <form>
-       <input type="text" id="choreName" value={this.state.singleChore.choreName} onChange={this.handleModalChange}/>
-       <input type="text" id="choreDesc" value={this.state.singleChore.choreDesc} onChange={this.handleModalChange}/>
-       <input type="text" id="choreValue" value={this.state.singleChore.choreValue} onChange={this.handleModalChange}/>
-       <Input type="checkbox" id="complete" checked={this.state.singleChore.complete} onChange={this.handleModalBool}/>
-       <Button>Submit</Button>
-     </form>
-     </div>
-    )
-  }//end var showChores
-}//end else if
+
     return(
       <div className="container">
 
@@ -203,10 +211,11 @@ class ViewParent extends React.Component {
               header='Edit Task'
               fixedFooter
               trigger={
-                <NavItem>Edit An Existing Task</NavItem>
+              <NavItem>Edit An Existing Task</NavItem>
                 }>
                 <Row>
-                    {showChores}
+                {showChores}
+
                 </Row>
               </Modal>
           </Dropdown>
