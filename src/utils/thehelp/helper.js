@@ -70,6 +70,12 @@ var helper = {
 		 	
 	},
 
+	getOneChore: function(choreId){
+	return	axios.post("/api/get/onechore/", {_id: choreId}).then(function(results){
+			return results;
+		})
+	},
+
 	choreComplete: function(parentId, choreName ){ 
 
 	},

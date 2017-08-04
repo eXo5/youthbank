@@ -28,14 +28,29 @@ app.get("/api/get/pchores", function(req, res){
 		.exec(function(err, doc) {
 			if (err) {console.log(err)}
 			else {
-				console.log(doc)
+				console.log(doc[0])
 				console.log("^^^DOC")
-				console.log(doc[0].chores)
+				//console.log(doc[0].chores)
 				console.log("^^^CHORENAME?")
 				res.send(doc)
 			}
 		})
 
+})
+
+app.post("/api/get/onechore", function(req, res){
+	console.log(req.body._id)
+	Chore.findById(req.body._id)
+		.populate("child")
+		.exec(function(err, doc){
+			if (err) {
+				console.log(err)
+			}else{
+				console.log(doc)
+				res.send(doc)
+			}
+
+		})
 })
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
@@ -100,7 +115,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 	   }
 	})
 
-})//END get Chores
+})
 
 ////////////////////////////  James ////////////////////////////////////////////////////////
 
@@ -140,13 +155,7 @@ app.post("/api/post/chores", function(req, res){
 		}
 	})
 
-	// Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){
-
-	// 	if(err) {console.log(err)}
-	// 	console.log(doc);
-	// })
-	// res.send("Ok");
-})//END new Chores
+})//END api/post/chores
 
 app.delete("/api/drop/:collection",function(req, res){
 	var collection = req.params.collection;

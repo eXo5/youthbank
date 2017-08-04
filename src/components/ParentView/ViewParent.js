@@ -12,8 +12,8 @@ import AddChore from '../newusers/AddChore.js'
 const newState = {};
 
 class ViewParent extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       //state for new task
@@ -81,7 +81,7 @@ class ViewParent extends React.Component {
 
   render() {
     console.log("VIEW PARENT this.props.loggedin" + this.props.loggedIn)
-    if( this.props.loggedIn) {
+    if( this.props.loggedIn ) {
 
     
     return(
@@ -188,6 +188,7 @@ class ViewParent extends React.Component {
     
    }else{    
       return(    
+
       <Redirect to={{pathname: "/"}} />    
       )    
     }

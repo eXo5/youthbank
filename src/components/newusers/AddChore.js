@@ -34,10 +34,20 @@ constructor(props){
   	event.preventDefault()
   	helper.getChores()
   	.then(results => {
-  		results.data[0].chores.map((element,i) =>{
+  		results[0].data[0].chores.map((element,i) =>{
   			console.log(element.choreName)
   		})
   })
+  }
+
+  editChore = (event, choreId) => {
+  	var choreId = event.target.id;
+  	event.preventDefault();
+  	console.log(choreId)
+  	helper.getOneChore(choreId)
+  		.then(results => {
+  			console.log(results)
+  		})
   }  
   
 
@@ -51,7 +61,10 @@ constructor(props){
   					var choreName = results.data[0].chores[i].choreName.replace(/_/g, " ");
   					var choreDesc = results.data[0].chores[i].choreDesc;
   					var choreValue = results.data[0].chores[i].choreValue;
-  					newChores.push({id: id, choreName: choreName, choreDesc: choreDesc, choreValue: choreValue});
+  					var complete = results.data[0].chores[i].complete;
+  					var childSaysComplete = results.data[0].chores[i].childSaysComplete;
+  					var pastDue = results.data[0].chores[i].pastDue;
+  					newChores.push({_id: id, choreName: choreName, choreDesc: choreDesc, choreValue: choreValue, complete: complete, childSaysComplete: childSaysComplete, pastDue: pastDue});
   				}
   				this.setState({
   					chores: newChores
@@ -62,10 +75,11 @@ constructor(props){
 
   	render(){
   			let showChores = this.state.chores.map((element, i) => {
-  				return(<div key={i}><p id={element.id}>{element.choreName}</p><Button key={i}>Edit Chore</Button></div>)
+  				return(<div key={i}><p id={element._id}>{element.choreName}</p><p>{element.choreDesc}</p><p>{element.choreValue}</p><form><input type="hidden" name="id" value={element._id} /><Button id={element._id} onClick={this.editChore} key={i}>Edit Chore</Button></form><br/></div>)
   			})
 		return(
 			<div>
+				<div>
 			<Button className="mainBtn" type="submit" onClick={this.w0rd}>Button</Button>
 				<h1>Add A Chore!</h1>
 	    <form>
@@ -74,9 +88,12 @@ constructor(props){
 		    <Input type="text" id="choreValue" value={this.state.choreValue} onChange={this.handleChange} />
 		    <Button className="mainBtn" type="submit" onClick={this.w00ts}>Button</Button>
 	    </form>
-<br />
+	    </div>
+	    <div>
+<br/>
 	    {showChores}
-    </div>
+   	 </div>
+   	</div> 
 
     )
 	}
