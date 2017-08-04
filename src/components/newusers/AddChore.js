@@ -3,6 +3,7 @@ import React from 'react';
 import {Button, Input} from 'react-materialize';
 import '../../index.css'
 import helper from "../../utils/thehelp/helper"
+import ReactModal from 'react-modal'
 // import SignIn from './components/SignIn';
 // import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
@@ -10,21 +11,43 @@ class AddChore extends React.Component {
 constructor(props){
 	super(props)
 	this.state = {
+		showModal: false,
 		choreName: "",
 		choreDesc: "", 
 		choreValue: "",
-		chores:[]
+		chores:[],
+		singleChore: {
+			child: [],
+			choreName: "",
+			choreDesc: "",
+			choreValue: "",
+			complete: false,
+			childSaysComplete: false,
+			pastDue: false,
+			createdAt: ""
+		}
 	}
 }
 
   handleChange = (event) => {
   var newState = {};
 	  newState[event.target.id] = event.target.value;
-	  this.setState(
-	    newState
-	  );
+	  this.setState({
+	  	newState
+	  })
+	}
+	handleModalChange = (event) => {
+		var newSingleChoreState = {};
+		newSingleChoreState[event.target.id] = event.target.value;
+		this.setState({
+	    singleChore: newSingleChoreState
+		})
 	}
 
+	handleModalBool = (event) => {
+		var newSingleChoreState = {};
+		console.log(event.target.checked)
+	}
   w00ts = (event, choreName, choreDesc, choreValue) => {
     event.preventDefault()
     helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue)
@@ -46,10 +69,17 @@ constructor(props){
   	console.log(choreId)
   	helper.getOneChore(choreId)
   		.then(results => {
+  			this.setState({showModal: true})
+  			var newSingleChore = {_id: results.data._id, choreName: results.data.choreName, choreDesc: results.data.choreDesc, choreValue: results.data.choreValue, complete: results.data.complete, childSaysComplete:results.data.childSaysComplete, createdAt: results.data.createdAt, pastDue:results.data.pastDue}
+  			this.setState({singleChore: newSingleChore})
+
   			console.log(results)
   		})
   }  
   
+  handleCloseModal =()=> {
+  	this.setState({showModal: false})
+  }
 
   componentDidMount(){
   helper.getChores()
@@ -93,6 +123,22 @@ constructor(props){
 <br/>
 	    {showChores}
    	 </div>
+   	 <ReactModal
+   	 isOpen={this.state.showModal}
+   	 shouldCloseOnOverlayClick={true}
+   	 onRequestClose={this.handleCloseModal}
+   	 contentLabel="Edit Chore"
+   	 >
+   	 <div>
+   	 <form>
+   	 <input type="text" id="choreName" value={this.state.singleChore.choreName} onChange={this.handleModalChange}/>
+   	 <input type="text" id="choreDesc" value={this.state.singleChore.choreDesc} onChange={this.handleModalChange}/>
+   	 <input type="text" id="choreValue" value={this.state.singleChore.choreValue} onChange={this.handleModalChange}/>
+   	 <input type="checkbox" id="complete" checked={this.state.singleChore.complete} onChange={this.handleModalBool}/>
+   	 <Button>Submit</Button>
+   	 </form>
+   	 </div>
+   	 </ReactModal>
    	</div> 
 
     )

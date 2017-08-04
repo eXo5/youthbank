@@ -1,5 +1,5 @@
 import React from 'react';
-import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
+import {SideNav, SideNavItem, Button, Col, Footer, Form, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
 import '../../index.css';
 // import List from './List';
 import ChildCards from './ChildCards';
@@ -20,7 +20,21 @@ class ViewParent extends React.Component {
       choreName: "",
       choreDesc: "",
       choreValue: "",
-
+      //state for tasks
+      chores:[],
+      showOneChore: false,
+      theChoreToShow: 0,
+      //state for find single task
+      singleChore: {
+        child: [],
+        choreName: "",
+        choreDesc: "",
+        choreValue: "",
+        complete: false,
+        childSaysComplete: false,
+        pastDue: false,
+        createdAt: ""
+    },
       //state for new kid
       email: "",
       password: "",
@@ -35,17 +49,27 @@ class ViewParent extends React.Component {
     }
   }
 
-  //sets state of data put in input fields
+  //sets state of data of input fields
   handleChange = (event) => {
-    
     newState[event.target.id] = event.target.value;
     this.setState(
       newState
     );
-
     //console.log("This State: " + JSON.stringify(this.state));
-
   }//end of handleChange
+
+  handleModalChange = (event) => {
+    var newSingleChoreState = {};
+    newSingleChoreState[event.target.id] = event.target.value;
+    this.setState({
+      singleChore: newSingleChoreState
+    })
+  }//end of handleModalChange
+
+   handleModalBool = (event) => {
+    var newSingleChoreState = {};
+    console.log(event.target.value)
+  }//end of handleModalBool
 
   handleNewChild = (event, firstName, lastName, email, password) => {
   event.preventDefault()
@@ -63,7 +87,6 @@ class ViewParent extends React.Component {
         lastName: "",
         age: ""
     })
-    
 
     }//end of handleNewChild
 
@@ -77,13 +100,66 @@ class ViewParent extends React.Component {
       })
         return alert("New Chore Added");
       }
-      
 
+    editChore = (event, choreId) => {
+      event.preventDefault();
+      var choreId = event.target.id;
+      console.log(choreId)
+      this.setState({theChoreToShow: choreId})
+      var choreToChange = {_id: this.state.singleChore[this.state.theChoreToShow]._id, choreName:this.state.singleChore[this.state.theChoreToShow].choreName, choreDesc: this.state.singleChore[this.state.theChoreToShow].choreDesc, complete: this.state.singleChore[this.state.theChoreToShow].complete, childSaysComplete: this.state.singleChore[this.state.theChoreToShow].childSaysComplete, pastDue: this.state.singleChore[this.state.theChoreToShow].pastDue};
+      this.setState({singleChore: choreToChange})
+      function waitOneSec(){ 
+        this.setState({showOneChore: true})
+      }
+
+     setTimeout(waitOneSec, 250)
+
+               
+      } 
+      
+//BEGIN LIFECYCLE EVENTS
+  componentDidMount(){
+  helper.getChores()
+      .then(results => {
+    console.log(results)
+          var newChores = [];
+          for (let i = 0; i < results.data[0].chores.length; i++){
+            var id = results.data[0].chores[i]._id;
+            var choreName = results.data[0].chores[i].choreName.replace(/_/g, " ");
+            var choreDesc = results.data[0].chores[i].choreDesc;
+            var choreValue = results.data[0].chores[i].choreValue;
+            var complete = results.data[0].chores[i].complete;
+            var childSaysComplete = results.data[0].chores[i].childSaysComplete;
+            var pastDue = results.data[0].chores[i].pastDue;
+            newChores.push({_id: id, choreName: choreName, choreDesc: choreDesc, choreValue: choreValue, complete: complete, childSaysComplete: childSaysComplete, pastDue: pastDue});
+          }
+          this.setState({
+            chores: newChores
+          })
+
+      })
+    }//END COMPONENT DID MOUNT      
   render() {
     console.log("VIEW PARENT this.props.loggedin" + this.props.loggedIn)
     if( this.props.loggedIn ) {
-
-    
+      //EDIT TASKS MODAL IS WRITTEN HERE
+      if (this.state.showOneChore === false) {var showChores = this.state.chores.map((element, i) => {
+          return(<div key={i}><p id={element._id}>{element.choreName}</p><p>{element.choreDesc}</p><p>{element.choreValue}</p><form><input type="hidden" name="id" value={element._id} /><Button id={i} onClick={this.editChore} key={i}>Edit Chore</Button></form><br/></div>)
+        })//END SHOW CHORES
+}else if (this.state.showOneChore === true){ var showChores = () => {
+  return (
+     <div>
+     <form>
+       <input type="text" id="choreName" value={this.state.singleChore.choreName} onChange={this.handleModalChange}/>
+       <input type="text" id="choreDesc" value={this.state.singleChore.choreDesc} onChange={this.handleModalChange}/>
+       <input type="text" id="choreValue" value={this.state.singleChore.choreValue} onChange={this.handleModalChange}/>
+       <Input type="checkbox" id="complete" checked={this.state.singleChore.complete} onChange={this.handleModalBool}/>
+       <Button>Submit</Button>
+     </form>
+     </div>
+    )
+  }//end var showChores
+}//end else if
     return(
       <div className="container">
 
@@ -123,7 +199,16 @@ class ViewParent extends React.Component {
               </Row>
             </Modal>
             
-            <NavItem>Edit An Existing Task</NavItem>
+            <Modal
+              header='Edit Task'
+              fixedFooter
+              trigger={
+                <NavItem>Edit An Existing Task</NavItem>
+                }>
+                <Row>
+                    {showChores}
+                </Row>
+              </Modal>
           </Dropdown>
           
            {/* MANAGE CHILDREN */}
