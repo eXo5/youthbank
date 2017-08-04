@@ -51,6 +51,7 @@ router.post("/api/new/parent", (req, res) => {
 })
 
 router.post("/api/new/child", (req, res) => {
+
         //router.post("/auth/api/new/parent")
         const { email, password, firstName, lastName, age } = req.body
     //ADD VALIDATION
@@ -66,5 +67,6 @@ router.post("/api/new/child", (req, res) => {
     
     })
   })
+
 
 module.exports = router
