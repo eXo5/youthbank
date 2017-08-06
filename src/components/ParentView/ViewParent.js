@@ -74,7 +74,7 @@ class ViewParent extends React.Component {
     this.setState({ children: results});
 
     
-    }.bind(this))
+    }.bind(this))//end of getchildren
   }
 
   //sets state of data put in input fields
@@ -219,7 +219,7 @@ class ViewParent extends React.Component {
 
            {/* MENU FOOTER */}
           <Footer className="page-footer">
-              <Button waves='light' className="mainBtn">LogOut</Button>
+              <Button waves='light' className="mainBtn" onClick={this.props.logEmOut}>LogOut</Button>
           </Footer>
 
         </SideNav>
@@ -234,9 +234,9 @@ class ViewParent extends React.Component {
       </Col>
       <Col s={9} className='grid-example'>
         <Card className='small'
-              header={<CardTitle reveal image={banner} waves="light"> Good Evening Alex </CardTitle>}
+              header={<CardTitle reveal image={banner} waves="light"> Good Morning, Jessica! </CardTitle>}
               actions={[<a href='#'></a>]}>
-              Keep working on your goal for Concert Tickets!
+              
         </Card>
 
         {/* CHILD DISPLAY */}

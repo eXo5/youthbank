@@ -64,7 +64,7 @@ class ViewChild extends React.Component {
         {/*HERE GOES AVAILABLE TASKS*/}
           <Col s={9} className='grid-example'>
             <Card className='small'
-              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
+              header={<CardTitle reveal image={background} waves="light"> Good Morning, Molly! </CardTitle>}
               actions={[<a href='google.com'> </a>]}>
               Keep working on your goal for Concert Tickets!
             </Card>
