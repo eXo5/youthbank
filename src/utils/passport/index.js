@@ -16,10 +16,10 @@ passport.deserializeUser((id, done) => {
 	Parent.findOne({_id: id }, "email", (err, user) => {
 		if (!user){
 			Child.findOne({_id: id }, "email", (err, user) => {
-				done(null, id)
+				done(null, user)
 			})
 		}else{
-			done(null, id)
+			done(null, user)
 		}
 	})
 })
