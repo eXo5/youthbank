@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import {Row, Col,  Button, Input} from 'react-materialize';
 import '../../index.css';
 import helper from '../../utils/thehelp/helper.js';
@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 // import { Route, Link } from 'react-router-dom';
 import Why from './WhyWeMadeIt';
 import Features1 from './Features1';
+import PgFooter from './PgFooter';
 import { Redirect } from 'react-router-dom';
 const newState = {};
 
@@ -101,11 +102,11 @@ return(
 		</div>
 
 		 <Why />
-			  <Features1 />
+		 <Features1 />
+		 <PgFooter />
 		</div>
 								
-								
-
+							
 	)
 
 

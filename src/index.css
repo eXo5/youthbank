@@ -3,6 +3,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family:'Open Sans', sans-serif;
+   background-position: center; 
 }
 
 main {
@@ -10,25 +11,30 @@ main {
 }
 
 
-.landingPhoto {
-  padding: 100px;
-  margin-bottom: 0px;
+.menuBtn {
+  margin-left:1100px;
 }
 
-  .signIn {
-    text-align: center;
-    position: center;
-  }
 
-  .page-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #efefef;
-    text-align: center;
-  }
+.landingPhoto {
+padding: 100px;
+margin-bottom: 0px;
+}
+
+.signIn {
+text-align: center;
+position: center;
+}
+
+.page-footer {
+/*position: absolute;
+right: 0;
+bottom: 0;
+left: 0;*/
+padding: 1rem;
+background-color: blue;
+text-align: center;
+}
 
 
 .NavbarCSS {
@@ -38,8 +44,7 @@ padding-left: 20px;
 padding-right:20px;
 
 }
-/*.navItems {
-}*/
+
 
 .landPtext {
 color: white;
@@ -59,7 +64,8 @@ nav .brand-logo {
 font-family: 'Pacifico', cursive;
 color: #ff8c00;
 font-size: 40px;
-;
+left: 50%;
+transform: translateX(-50%);
 
 }
 
@@ -75,7 +81,7 @@ text-align: center;
 
 footer.page-footer {
   padding-top: 20px;
-  background-color: #ff8c00;
+  background-color: #CDCDCD;
 }
 
 .landingPage {
@@ -149,7 +155,11 @@ font-family: 'Roboto', sans-serif;
   border-top: solid black;
   border-bottom: solid black;
   background-color: #A5A5AF;
-  padding: 80px;
+  padding: 70px;
+  text-align: center;
+}
+.WhyComp{
+  text-align: center;
 }
 
 
@@ -180,6 +190,7 @@ background-size: cover;
 .panelFour {
 
 }
+
 
 /* JESS CSS */
 /*.childCard {
@@ -219,3 +230,4 @@ div.collapsible-body {
   text-align: center;
   }
 */
+

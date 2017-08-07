@@ -1,4 +1,3 @@
-
 import React from 'react';
 // import helper from './utils/thehelp/helper.js';
 // import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
@@ -18,21 +17,6 @@ import axios from 'axios';
 
 // import axios from 'axios';
 // const newState = {};
-
-
-// const DisplayLinks = props => {
-// 	if(props.loggedIn) {
-// 		return(
-// 			<h2>Logged In</h2>
-// 			)
-// 	}else{
-// 		return(
-// 			<h2>Not Logged In</h2>
-// 			)
-// 	}
-// }
-
-
 
 
 class App extends React.Component {
@@ -106,10 +90,6 @@ componentDidMount(){
   		})
   }
 
-  // w00t = (event) => {
-  //   event.preventDefault()
-  //   helper.getChores().then(response => {console.log(response)})
-  // }
 
   render() {
  
@@ -124,8 +104,6 @@ componentDidMount(){
         <ViewParent loggedIn={this.state.loggedIn} />}  />
       <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} />}  />  
 		</Switch>
-
-			
 
 
 
