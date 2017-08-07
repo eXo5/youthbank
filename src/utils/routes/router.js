@@ -170,18 +170,36 @@ app.put("/api/put/chorecomplete", function(req, res){
 			else{
 				console.log(doc);
 				res.send("ok");
-			}
+			}	
 		})
 	//}//end if req.params.chorecomplete test condition
 })//END CHORE COMPLETE
 
-app.post("api/get/editkid", function(req, res) {
-	Child.findOne({firstName: req.body.firstName, lastName: req.body.lastName})
+app.post("/api/post/editedchore", function(req, res){
+	console.log(req.body)
+	var choreId = req.body.choreId;
+	if (req.body.choreComplete === "true") {var complete = true} else {var complete = false};
+	if (req.body.childSaysComplete === "true"){var childSaysComplete = true} else {var childSaysComplete = false};
+	if (req.body.chorePastDue === "true") {var pastDue = true} else {var pastDue = false};
+	Chore.findByIdAndUpdate(choreId, {$set: {choreName: req.body.choreName, choreDesc: req.body.choreDesc, choreValue: req.body.choreValue, complete: complete, childSaysComplete: childSaysComplete, pastDue: pastDue}}, {new: true})
+		.then(function(results) {
+			console.log(results)
+			res.send(results)
+		})
+})
+
+app.post("/api/post/editchild", function(req, res) {
+	Child.findByIdAndUpdate(req.body.id, {$set:{firstName: req.body.firstName,
+	 lastName: req.body.lastName,
+	 email: req.body.email,
+	 age: req.body.age
+	}})
 	.exec(function(err, doc) {
 		if(err) {
 			console.log(err)
 		}else{
 			console.log(doc)
+			res.send(doc)
 		}
 	})
 })

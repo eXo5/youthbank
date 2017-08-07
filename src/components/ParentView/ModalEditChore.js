@@ -6,17 +6,30 @@ class ModalEditChore extends React.Component {
 	constructor(props) {
 	super(props)
 		this.state = {
-			showModal: false
+			choreName: ""
 		}
 
 	}
 
 render() {
 	return(
-<p>Hi</p>
+<Modal header="Edit Task"
+				modalOptions={this.props.editChore}
+				fixedFooter
+				trigger={this.props.button}>
+
+				<Row>
+					<form>
+						<Input type="text" id={this.props.choreName} />
+					</form>
+				</Row>		
+				</Modal>
+
 		)
 	}//end render()
 
 }
 
 export default ModalEditChore;
+
+//<ModalEditChore editChore={this.props.editChore} button={<Button id={i} onClick={this.editChore}className="mainBtn" key={i}>Edit Chore</Button>}/>
