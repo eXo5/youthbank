@@ -141,10 +141,6 @@ var helper = {
             })
         },
 
-        getGoal: function(){
-        	axios.get("/api/get/goals");
-        },
-
 
 
         getTime: function() { //creating a new function for displaying the right time message
