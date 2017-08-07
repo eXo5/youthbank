@@ -13,10 +13,18 @@ app.get("/", function(req, res){
 });
 
 app.get("/api/get/childinfo", function(req, res){
-Child.findById(req.user.id)
+	Child.findById(req.user.id)
 	.exec(function(err, doc){
 		err ? console.log(err):console.log(doc);
-		res.send(doc)
+		//res.send(doc) only one res at a time.
+		Parent.findById(doc.parents[0])
+		.populate("chores")
+		.populate("children")
+			.exec(function(err, doc){
+				err ? console.log(err) : console.log(doc)
+				res.send(doc)
+			})
+
 	})
 })
   
