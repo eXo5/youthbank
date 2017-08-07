@@ -3,7 +3,7 @@ import axios from 'axios';
 var moment = require('moment');
 
 var helper = {
-
+  
   logOneIn: function(email, password) {
       console.log(email)
       console.log(password)
@@ -174,4 +174,3 @@ var helper = {
 }
 
    export default helper
-

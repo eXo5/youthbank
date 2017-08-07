@@ -263,5 +263,3 @@ app.post("/api/new/goals", function(req, res){
 
 
 });
-
-}
