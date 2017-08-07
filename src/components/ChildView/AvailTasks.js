@@ -5,6 +5,7 @@ import helper from '../../utils/thehelp/helper.js'
 class AvailTasks extends React.Component {
 	constructor(props){
 		super(props)
+
 	}
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -41,7 +42,5 @@ class AvailTasks extends React.Component {
 				</Row>
 									
 		)
-	}
-}
 
 export default AvailTasks;
