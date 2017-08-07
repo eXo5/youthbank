@@ -12,7 +12,7 @@ import ViewChild from './components/ChildView/ViewChild';
 import SignIn from './components/SignIn';
 import { Route, Switch } from 'react-router-dom';
 //import AddChore from './components/newusers/AddChore';
-import helper from "./utils/thehelp/helper";
+// import helper from "./utils/thehelp/helper";
 import axios from 'axios';
 
 // import axios from 'axios';

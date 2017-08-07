@@ -3,16 +3,16 @@ import {SideNav, SideNavItem, Button, Col, Footer, Dropdown, Navbar, NavItem, Mo
 import '../../index.css';
 // import List from './List';
 import ChildCards from './ChildCards';
-import banner from '../../img/ParentView/banner-parent.png';
+// import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
 import background from '../../img/ParentView/family.jpg';
 import helper from '../../utils/thehelp/helper.js';
-import { Route, Switch, Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import UnclaimedTasks from './UnclaimedTasks';
 import AmountOwed from './AmountOwed';
 import CompletedTas from './CompletedTas';
-import PendingApp from './PendingApp';
+// import PendingApp from './PendingApp';
 import PgFooter from './PgFooter';
 
 const newState = {};
@@ -76,7 +76,7 @@ class ViewParent extends React.Component {
           //fill chores
           var newChores = [];
           for (let i = 0; i < results.data[0].chores.length; i++){
-            var id = results.data[0].chores[i]._id;
+            var idOne = results.data[0].chores[i]._id;
             var choreName = results.data[0].chores[i].choreName.replace(/_/g, " ");
             var choreDesc = results.data[0].chores[i].choreDesc;
             var choreValue = results.data[0].chores[i].choreValue;
@@ -84,7 +84,7 @@ class ViewParent extends React.Component {
             var childSaysComplete = results.data[0].chores[i].childSaysComplete;
             var pastDue = results.data[0].chores[i].pastDue;
             newChores.push({
-              _id: id, 
+              _id: idOne, 
               choreName: choreName, 
               choreDesc: choreDesc, 
               choreValue: choreValue, 
@@ -127,55 +127,77 @@ class ViewParent extends React.Component {
     //console.log("This State: " + JSON.stringify(this.state));
   }//end of handleChange
 
-  handleModalChange = (event) => {
-    var newSingleChoreState = {};
-    newSingleChoreState[event.target.id] = event.target.value;
-    this.setState({
-      //nonsense!
-    })
-  }//end of handleModalChange
+  // handleModalChange = (event) => {
+  //   var newSingleChoreState = {};
+  //   newSingleChoreState[event.target.id] = event.target.value;
+  //   this.setState({
+  //     //nonsense!
+  //   })
+  // }//end of handleModalChange
 
-   handleModalBool = (event) => {
-    var newSingleChoreState = {};
-    console.log(event.target.value)
-  }//end of handleModalBool
+  //  handleModalBool = (event) => {
+  //   var newSingleChoreState = {};
+  //   console.log(event.target.value)
+  // }//end of handleModalBool
 
   handleNewChild = (event, firstName, lastName, email, password) => {
 
   event.preventDefault();
   helper.postChild(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.age).then(response =>  {
 
-      return alert("New Child Added!");
-    }
-      )
+     var newChild = {
+          email: this.state.email,
+          password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          age: this.state.age
+      };
 
-    this.setState({
+      var newChildren = this.state.children;
+
+      newChildren.push(newChild);
+
+      console.log("New Children: ");
+      console.log(newChildren);
+
+      this.setState({ 
+        children: newChildren,
         email: "",
         password: "",
         firstName: "",
         lastName: "",
         age: ""
+      });
+
+      alert("New Child Added!");
     })
 
     }//end of handleNewChild
 
     handleNewChore = (event, choreName, choreDesc, choreValue) => { 
       event.preventDefault()
-      helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue)
-      this.setState({
+      helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue).then(response => {
+
+      
+
+      this.fillChoresAndChildren();
+      
+      alert("New Chore Added!");
+
+      this.setState({ 
         choreName: "",
         choreDesc: "",
         choreValue: ""
-      })
-        return alert("New Chore Added");
-      }
+      });
+    })
+    }
 
     editChore = (event, choreId) => {
       event.preventDefault();
-      var choreId = event.target.id;
+      var choreIdEditChore = event.target.id;
 
-      console.log(choreId)
-      this.setState({theChoreToShow: choreId})
+      console.log(choreIdEditChore)
+      this.setState({theChoreToShow: choreIdEditChore})
       var choreToChange = {_id: this.state.chores[choreId]._id, choreName:this.state.chores[choreId].choreName, choreDesc: this.state.chores[choreId].choreDesc, complete: this.state.chores[choreId].complete, childSaysComplete: this.state.chores[choreId].childSaysComplete, pastDue: this.state.chores[choreId].pastDue};
       
       this.setState({singleChore: choreToChange})
@@ -185,12 +207,12 @@ class ViewParent extends React.Component {
 
     postEditedChore = (event, choreId, choreName, choreDesc, choreValue, choreComplete, choreChildSaysComplete, chorePastDue) => {
         event.preventDefault();
-        var choreId = event.target.id;
-        console.log(choreId)
+        var choreIdPostEdit = event.target.id;
+        console.log(choreIdPostEdit)
         console.log(this.state.choreName)
         console.log(this.state.choreDesc)
         console.log(this.state.choreValue)
-        helper.postEditedChore(choreId, this.state.choreName, this.state.choreDesc, this.state.choreValue, this.state.choreComplete, this.state.choreChildSaysComplete, this.state.chorePastDue )
+        helper.postEditedChore(choreIdPostEdit, this.state.choreName, this.state.choreDesc, this.state.choreValue, this.state.choreComplete, this.state.choreChildSaysComplete, this.state.chorePastDue )
           .then(results =>{
             helper.getChores()
             .then(function(){
@@ -202,8 +224,8 @@ class ViewParent extends React.Component {
 
   postEditedChild = (event, childId, firstName, lastName, email, age) => {
     event.preventDefault();
-    var childId = event.target.id;
-    helper.editChild(childId, this.state.firstName, this.state.lastName, this.state.email, this.state.age)
+    var childIdPostEdit = event.target.id;
+    helper.editChild(childIdPostEdit, this.state.firstName, this.state.lastName, this.state.email, this.state.age)
       .then(results=>{
         alert("Child has been updated")
       })
@@ -234,7 +256,7 @@ class ViewParent extends React.Component {
            <h5>{element.choreName}</h5> 
             <Input type="text" id="choreName" value={this.state.choreName} onChange={this.handleChange} />
             <h5>{element.choreDesc}</h5>
-            <Input type="text" id="choreDesc" value={this.state.schoreDesc} onChange={this.handleChange} />
+            <Input type="text" id="choreDesc" value={this.state.choreDesc} onChange={this.handleChange} />
             <h5>{element.choreValue}</h5>
             <Input type="text" id="choreValue" value={this.state.choreValue} onChange={this.handleChange} />
              <h5>{element.complete.toString()}</h5>
@@ -324,11 +346,11 @@ class ViewParent extends React.Component {
                               }>
                               <Row>
                                 <form>
-                                  <Input s={12} label="Task" id="task" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
-                                  <Input s={12} label="Description of Task" id="descript" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
-                                  <Input s={12} label="Amount" id="amount" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
+                                  <Input s={12} label="Task" id="choreName" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
+                                  <Input s={12} label="Description of Task" id="choreDesc" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
+                                  <Input s={12} label="Amount" id="choreValue" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
                                   
-                                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
+                                  <Button type="submit" waves='light' className="mainBtn" onClick={this.handleNewChore}>Submit</Button>
                                 </form>
                               </Row>
                             </Modal>
@@ -397,14 +419,15 @@ class ViewParent extends React.Component {
 
     <Row> 
       <Col s={3} className='grid-example'>
-        <UnclaimedTasks />
+        <UnclaimedTasks choreList={this.state.chores} />
+        
         <CompletedTas />
-        <PendingApp />
+        
       </Col>
       <Col s={9} className='grid-example'>
         <Card className='small'
               header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
-              actions={[<a href='#'></a>]}>
+              >
               Keep working on your goal for Concert Tickets!
         </Card>
 
@@ -412,7 +435,7 @@ class ViewParent extends React.Component {
         <div>
           <Row>
             <Col s={8}>
-                <ChildCards />
+                <ChildCards childList={this.state.children} />
             </Col>
             <Col s={4}>
                 <AmountOwed />

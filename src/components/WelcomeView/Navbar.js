@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, NavItem, Button} from 'react-materialize';
+import {Navbar, Button} from 'react-materialize';
 import '../../index.css'
 
 import { Link } from 'react-router-dom';

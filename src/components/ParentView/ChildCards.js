@@ -1,34 +1,39 @@
-import {Collapsible, CollapsibleItem, Col} from 'react-materialize';
+import {Collapsible, CollapsibleItem, Button, Col} from 'react-materialize';
 import React from 'react';
-import List from './List';
+// import List from './List';
 import '../../index.css';
+import helper from '../../utils/thehelp/helper.js';
+import PendingApp from './PendingApp';
 
-class ChildCards extends React.Component {
+const ChildCards = props => {
+  
 
-render(){
-
-  return(
-      <Col s={12}>
-        <div>
-
-          <Collapsible popout>
-            <CollapsibleItem className='childCard' header='Jane' icon='filter_drama'>
-              <List />
+    // const allYourKids = this.state.children;
+    const listKids = props.childList.map((child, i) => 
+      (     
+        <Collapsible popout key={i}>
+            <CollapsibleItem className='childCard' header={child.firstName} icon='filter_drama'>
+              <PendingApp />
+              <Button type="button" waves='light' className="mainBtn" >Submit</Button>
             </CollapsibleItem>
           </Collapsible>
+      )
+    );
 
-        <Collapsible popout>
-          <CollapsibleItem className='childCard' header='Sarah' icon='filter_drama'>
-            <List />
-          </CollapsibleItem>
-        </Collapsible>
+  return(
+      
+      <div>
+
+        {listKids}
+          
         
       </div>
 
-    </Col>
+   
 
       )
+        
   }
-}
+
 
 export default ChildCards;

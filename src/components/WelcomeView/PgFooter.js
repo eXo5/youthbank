@@ -8,14 +8,14 @@ class PgFooter extends React.Component {
 <Footer className="page-footer"
 	links={
 		<ul>
-			<li><a className="grey-text text-lighten-3" href="https://github.com/eXo5/youthbank" target="_blank">Developer Repo</a></li>
-			<li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
+			<li><a className="grey-text text-lighten-3" href="https://github.com/eXo5/youthbank" target="_blank" rel="noopener noreferrer">Developer Repo</a></li>
+			{/* <li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li> */}
 		</ul>
 	}
-	className='example'
+	
 >
 		<h5 className="orange-text">Young Money</h5>
-		<p className="grey-text text-lighten-4">&copy; Young Money Records 2017</p>
+		<p className="grey-text text-lighten-4">&copy; 2017 Oscar Abella, James Dalton, Jessica Ticzon, Michael Yingling</p>
 </Footer>
 		)
 	}

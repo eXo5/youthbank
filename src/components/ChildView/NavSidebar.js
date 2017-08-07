@@ -1,12 +1,12 @@
 import React from 'react';
-import {Navbar, SideNav, SideNavItem,Button, Col, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
-import banner from '../../img/ChildView/banner-child.png';
+import {Navbar, SideNav, SideNavItem,Button, Footer, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
+// import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
 import icon from '../../img/ChildView/vectorChild.png';
 import helper from '../../utils/thehelp/helper.js'
 
 
-const newState = {};
+// const newState = {};
 
 
 class NavSidebar extends React.Component {

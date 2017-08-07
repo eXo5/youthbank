@@ -1,4 +1,4 @@
-import {Row, Col, CardPanel, Input} from 'react-materialize';
+import {Row, Col, Input} from 'react-materialize';
 import React from 'react';
 // import List from './List';
 import '../../index.css';

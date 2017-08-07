@@ -11,8 +11,8 @@ import { Redirect } from 'react-router-dom';
 import helper from '../../utils/thehelp/helper.js'
 import CompletedTas from './CompletedTas';
 import PgFooter from './Footer'
-import banner from '../../img/ChildView/banner-child.png';
-import navBg from '../../img/ChildView/nav-background.jpg';
+// import banner from '../../img/ChildView/banner-child.png';
+// import navBg from '../../img/ChildView/nav-background.jpg';
 import background from '../../img/ChildView/background.jpg';
 const newState = {};
 

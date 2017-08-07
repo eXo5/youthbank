@@ -162,7 +162,7 @@ app.post("/api/post/chores", function(req, res){
 			console.log(err);
 			console.log("ERR^^^")
 		}else{
-			Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: doc}})
+			Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: doc}}, {new:true})
 			.exec(function(err, doc){
 				if (err) {console.log(err)}
 					else{res.send(doc)}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, CardPanel, Icon, Table} from 'react-materialize';
+import {Row, Col, Icon, Table} from 'react-materialize';
 
 class MoneyEarned extends React.Component {
 	render(){

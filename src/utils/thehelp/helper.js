@@ -74,7 +74,7 @@ var helper = {
 		console.log(choreValue)
 			//when new chore is posted, drop spaces and input underscores in choreName.
 			var choreRegExp = choreName.replace(/ /g, "_");
-		axios.post("/api/post/chores", {choreName: choreRegExp, choreDesc: choreDesc, choreValue: parseFloat(choreValue)})
+		return axios.post("/api/post/chores", {choreName: choreRegExp, choreDesc: choreDesc, choreValue: parseFloat(choreValue)})
 		.then(function(results){
 			return results;
 		});
