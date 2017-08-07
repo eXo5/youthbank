@@ -1,4 +1,4 @@
-import Goals from '../../components/ChildView/Goal.js';
+// Here we will utilize the axios library to perform GET/POST requests
 import axios from 'axios';
 
 var helper = {
@@ -89,25 +89,9 @@ var helper = {
 		axios.post("/api/post/goals", {goalItem:goalItem, goalValue:goalValue}).then(function(results){
 			return results
 		})
-	},
-
-	getGoal:function(){
-			var currentGoals = []; 
-		//trying to get goals to display in realtime with accordance to user
-		// getGoal = () => {
-		axios.get("api/get/goals").then(function(results){
-			for(var i = 0;i<results.data.goal.length;i++){
-			console.log(results.data.goal[i].goalItem);
-			currentGoals.push(results.data.goal[i].goalItem);
-			}
-			console.log(currentGoals);
-			this.setState({currentGoals:currentGoals});
-			console.log(this.state.currentGoals);
-			
-		}).catch(function(error){
-			console.log(error);
-		})
 	}
+
+
 
 
 

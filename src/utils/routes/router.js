@@ -162,15 +162,7 @@ app.post("/api/post/chores", function(req, res){
 })//END new Chores
 
 ////////////////////////////////////////////////////////////////////
-///children posting goals 
-//goal item
-//goal value
-//make route that takes in goal info,
-//post it to database, find the child the goal was made from
-//update the childs goal array
-//first test through postman
-//make arbitrary form after child login
-//add to specific child array from there
+
 
 app.post("/api/new/goals", function(req, res){
 	// console.log(req.user);
