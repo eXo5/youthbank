@@ -1,6 +1,6 @@
 import React from 'react';
 // import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
-import {Col, Row, Card, CardTitle} from 'react-materialize';
+import {Col, Row, Card, CardTitle, Collapsible, CollapsibleItem, Button } from 'react-materialize';
 import '../../index.css';
 import NavSidebar from './NavSidebar';
 import Goal from './Goal';
@@ -22,11 +22,10 @@ class ViewChild extends React.Component {
     super(props)
 
     this.state = {
-      //state for new task
-      task: "",
-      descript: "",
-      amount: "",
-      chores: [],
+      //state for chores
+      siblings: [],
+      parents:[],
+      chores:[],
 
       //state for new kid
       firstName: "",
@@ -40,7 +39,7 @@ class ViewChild extends React.Component {
     }
     
 
-  }
+}
 
   //sets state of data put in input fields
   handleChange = (event) => {
@@ -49,9 +48,8 @@ class ViewChild extends React.Component {
     this.setState(
       newState
     );
-
-
-
+    console.log("This State: " + JSON.stringify(this.state));
+  }//end of handleChange
     console.log("This State: " + JSON.stringify(this.state));
 
 
@@ -59,6 +57,7 @@ class ViewChild extends React.Component {
 
 
 fillChores = () => {
+
       helper.getChildInfo()
     .then(results => {
       console.log(results)
@@ -87,16 +86,13 @@ fillChores = () => {
  }   
 
 componentDidMount(){
- this.fillChores()
+  this.fillChores()
     console.log(helper.getTime());
-    // var greeting = helper.getTime();
-    // console.log(greeting);
     this.setState({timeGreeting: helper.getTime()}, () => {
 console.log("greeting: " + this.state.timeGreeting);
     });
     
    
-
 }
 
 
@@ -108,10 +104,10 @@ console.log("greeting: " + this.state.timeGreeting);
     return(
       <div>
 
-        <NavSidebar />
-
+      <NavSidebar />
         <Row>
           <Col s={3} className='grid-example'>
+
               <TaskToDo />
               <CompletedTas />
           </Col>
@@ -123,9 +119,10 @@ console.log("greeting: " + this.state.timeGreeting);
               actions={[<a href='google.com'> </a>]}>
               Keep working on your goal for Concert Tickets!
             </Card>
-
+       
               <Row>
                 <Col s={5} className='grid-example AvailTasks'>
+
                   <AvailTasks chores={this.state.chores}/>
                 </Col> 
                 <Col s={7} className='grid-example'>
