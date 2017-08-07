@@ -25,7 +25,9 @@ class NavSidebar extends React.Component {
       kidPW: "",
 
       goalItem: "",
-      goalValue: ""
+      goalValue: "",
+
+      timeGreeting:""
 
     }
   }
