@@ -203,6 +203,22 @@ app.post("/api/new/goals", function(req, res){
 
 });
 
+app.get("/api/get/goals", function(req, res){
+	Child.findById(req.user.id)
+	.populate("goal")
+		.exec(function(err, doc) {
+			if (err) {console.log(err)}
+			else {
+				res.json(doc);
+			}
+			
+					
+		})
+
+});
+
+
+
 //////////////////////////////////////////////////////////////////////
 
 app.delete("/api/drop/:collection",function(req, res){

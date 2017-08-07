@@ -13,27 +13,17 @@ class Goals extends React.Component {
           currentGoals: []
 
       };
-     this.componentDidMount.bind(this);
+     // this.componentDidMount.bind(this);
   }
 
-	
-	componentDidMount(){
-		var currentGoals = []; //trying to get goals to display in realtime with accordance to user
-		axios.get("api/get/goals").then(function(results){
-			for(var i = 0;i<results.data.goal.length;i++){
-			console.log(results.data.goal[i].goalItem);
-			currentGoals.push(results.data.goal[i].goalItem);
-			}
-			console.log(currentGoals);
-			this.setState({currentGoals:currentGoals});
-			console.log(this.state.currentGoals);
-			
-		}).catch(function(error){
-			console.log(error);
-		})
-		
-			// console.log("This state: " + this.state.currentGoals),
 
+  
+
+
+	componentDidMount(){
+
+		this.props.getGoal();
+		
 	}
 
 

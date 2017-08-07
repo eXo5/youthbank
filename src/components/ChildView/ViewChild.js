@@ -2,7 +2,8 @@ import React from 'react';
 import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
 import '../../index.css';
 import NavSidebar from './NavSidebar';
-import Goal from './Goal';
+import Goals from './Goal';
+import axios from 'axios';
 import MoneyEarned from './MoneyEarned';
 import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
@@ -29,6 +30,7 @@ class ViewChild extends React.Component {
       kidPW: ""
 
     }
+    this.getGoal.bind(this);
   }
 
   //sets state of data put in input fields
@@ -42,6 +44,25 @@ class ViewChild extends React.Component {
     console.log("This State: " + JSON.stringify(this.state));
 
   }//end of handleChange
+
+
+  getGoal = (event) =>{
+      var currentGoals = []; 
+    //trying to get goals to display in realtime with accordance to user
+    // getGoal = () => {
+    axios.get("api/get/goals").then(function(results){
+      for(var i = 0;i<results.data.goal.length;i++){
+      console.log(results.data.goal[i].goalItem);
+      currentGoals.push(results.data.goal[i].goalItem);
+      }
+      console.log(currentGoals);
+      this.setState({currentGoals:currentGoals});
+      console.log(this.state.currentGoals);
+      
+    }).catch(function(error){
+      console.log(error);
+    })
+  }
 
 
 
@@ -77,7 +98,7 @@ class ViewChild extends React.Component {
                   </Row>
                   <Row>
                     <Col s={12} className='grid-example'>
-                      <Goal />
+                      <Goals getGoal={this.getGoal} />
                     </Col>
                   </Row>
                 </Col> 
