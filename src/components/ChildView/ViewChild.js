@@ -14,6 +14,7 @@ import PgFooter from './Footer'
 import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
 import background from '../../img/ChildView/background.jpg';
+
 const newState = {};
 
 class ViewChild extends React.Component {
@@ -31,9 +32,13 @@ class ViewChild extends React.Component {
       lastName: "",
       email:"",
       age:"",
-      parent:""
+      parent:"",
+
+      timeGreeting:""
 
     }
+    
+
   }
 
   //sets state of data put in input fields
@@ -52,7 +57,15 @@ componentDidMount(){
   helper.getChildInfo()
     .then(results => {
       console.log(results)
-    })
+    }),
+    console.log(helper.getTime());
+    // var greeting = helper.getTime();
+    // console.log(greeting);
+    this.setState({timeGreeting: helper.getTime()}, () => {
+console.log("greeting: " + this.state.timeGreeting);
+    });
+    
+   
 }
 
 
@@ -75,7 +88,7 @@ componentDidMount(){
         {/*HERE GOES AVAILABLE TASKS*/}
           <Col s={9} className='grid-example'>
             <Card className='small'
-              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
+              header={<CardTitle reveal image={background} waves="light"> {this.state.timeGreeting}</CardTitle>}
               actions={[<a href='google.com'> </a>]}>
               Keep working on your goal for Concert Tickets!
             </Card>
