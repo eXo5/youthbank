@@ -9,7 +9,7 @@ const TaskToDo = props => {
     // const allYourKids = this.state.children;
     const listChoresHere = props.choreList.map((task, i) => 
       (   
-        <div>  
+        <div key={i}>  
           <Input name='group1' type='checkbox' value='red' label={task.choreName} /><br />
         </div>
       )

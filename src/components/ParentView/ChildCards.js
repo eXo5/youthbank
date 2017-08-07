@@ -1,8 +1,8 @@
-import {Collapsible, CollapsibleItem, Button, Col} from 'react-materialize';
+import {Collapsible, CollapsibleItem, Button} from 'react-materialize';
 import React from 'react';
 // import List from './List';
 import '../../index.css';
-import helper from '../../utils/thehelp/helper.js';
+// import helper from '../../utils/thehelp/helper.js';
 import PendingApp from './PendingApp';
 
 const ChildCards = props => {

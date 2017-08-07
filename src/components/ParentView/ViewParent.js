@@ -401,7 +401,7 @@ class ViewParent extends React.Component {
 
                            {/* MENU FOOTER */}
                           <Footer className="page-footer">
-                              <Button waves='light' className="mainBtn">LogOut</Button>
+                              <Button type="submit" waves='light' className="mainBtn" onClick={this.props.logEmOut}>LogOut</Button>
                           </Footer>
 
                         </SideNav>
