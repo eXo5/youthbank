@@ -50,11 +50,6 @@ class ViewChild extends React.Component {
     );
     console.log("This State: " + JSON.stringify(this.state));
   }//end of handleChange
-    console.log("This State: " + JSON.stringify(this.state));
-
-
-  }//end of handleChange
-
 
 fillChores = () => {
 
