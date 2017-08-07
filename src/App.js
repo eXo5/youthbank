@@ -1,4 +1,3 @@
-
 import React from 'react';
 // import helper from './utils/thehelp/helper.js';
 // import {Row, Col, Form, Button, Carousel, Modal, Footer, Input, Card, CardTitle} from 'react-materialize';
@@ -15,21 +14,6 @@ import { Route, Switch } from 'react-router-dom';
 import AddChore from './components/newusers/AddChore'
 import axios from 'axios';
 // const newState = {};
-
-
-// const DisplayLinks = props => {
-// 	if(props.loggedIn) {
-// 		return(
-// 			<h2>Logged In</h2>
-// 			)
-// 	}else{
-// 		return(
-// 			<h2>Not Logged In</h2>
-// 			)
-// 	}
-// }
-
-
 
 
 class App extends React.Component {
@@ -101,10 +85,6 @@ class App extends React.Component {
   		})
   }
 
-  // w00t = (event) => {
-  //   event.preventDefault()
-  //   helper.getChores().then(response => {console.log(response)})
-  // }
 
   render() {
  
@@ -113,15 +93,12 @@ class App extends React.Component {
    	
 			  
 		<Switch>
-
 			<Route exact path="/" render={() => <Home/> } />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
       <Route exact path="/parent" render={() => <ViewParent />}  />
       <Route exact path="/child" render={() => <ViewChild />}  />  
        <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />   
 		</Switch>
-
-			
 
 
 

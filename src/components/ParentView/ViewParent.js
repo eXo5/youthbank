@@ -10,6 +10,8 @@ import background from '../../img/ParentView/family.jpg';
 import helper from '../../utils/thehelp/helper.js';
 import UnclaimedTasks from './UnclaimedTasks';
 import AmountOwed from './AmountOwed';
+import CompletedTas from './CompletedTas';
+import PendingApp from './PendingApp';
 import PgFooter from './PgFooter';
 
 
@@ -170,6 +172,8 @@ class ViewParent extends React.Component {
     <Row> 
       <Col s={3} className='grid-example'>
         <UnclaimedTasks />
+        <CompletedTas />
+        <PendingApp />
       </Col>
       <Col s={9} className='grid-example'>
         <Card className='small'

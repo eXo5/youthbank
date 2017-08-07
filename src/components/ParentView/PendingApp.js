@@ -3,7 +3,7 @@ import React from 'react';
 // import List from './List';
 import '../../index.css';
 
-class TaskToDo extends React.Component {
+class PendingApp extends React.Component {
 
   render(){
     return(
@@ -11,7 +11,7 @@ class TaskToDo extends React.Component {
             
             <Col >
               <hr />
-                <h6>Tasks Pool</h6>
+                <h6>Pending App</h6>
                   <Input name='group1' type='checkbox' value='red' label='Do the dishes' /><br />
                   <Input name='group2' type='checkbox' value='red' label='Mow the lawn' /><br />
                   <Input name='group3' type='checkbox' value='red' label='Wash the car' /><br />
@@ -24,4 +24,4 @@ class TaskToDo extends React.Component {
 }
 
 
-export default TaskToDo;
+export default PendingApp;

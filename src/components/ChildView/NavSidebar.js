@@ -40,9 +40,11 @@ class NavSidebar extends React.Component {
 	render(){
 		return (
  	<div> 
-       <Navbar brand='YoungMoney' right>
-   
-        <SideNav
+
+    <header>
+      <div className="">
+          <Navbar brand='Young Money' right className="NavbarCSS ">
+            <SideNav
           trigger={<Button className="menuBtn">MENU</Button>}
           options={{ closeOnClick: false }}
         >
@@ -111,7 +113,22 @@ class NavSidebar extends React.Component {
           </Footer>
 
         </SideNav>
-      </Navbar>
+
+
+            <li className="navItems">
+
+              
+
+
+            </li>
+          </Navbar>
+
+        </div> 
+   </header>
+       
+
+   
+        
       </div>
 
 		)

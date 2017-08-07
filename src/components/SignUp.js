@@ -95,9 +95,7 @@ return(
 					</div>
 					<Col s={3}></Col>
           </Col>
-				</Row>
-								
-								
+				</Row>						
     	
 	)
 

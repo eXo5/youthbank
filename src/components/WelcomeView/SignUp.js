@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import {Row, Col,  Button, Input} from 'react-materialize';
 import '../../index.css';
 import helper from '../../utils/thehelp/helper.js';
@@ -105,8 +105,7 @@ return(
 		 <PgFooter />
 		</div>
 								
-								
-
+							
 	)
 
 
