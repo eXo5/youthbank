@@ -15,7 +15,6 @@ class PgNavbar extends React.Component {
 	    	{/*we have to import react-router */}
 
 
-
 						<li className="navItems">
 
 							<Link to="/signin">

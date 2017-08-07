@@ -9,6 +9,7 @@ class Why extends React.Component {
 				<Row>
 			    		<Col s={3} className="">
 			    		</Col>
+
 			    		<Col s={2} className="WhyComp1">
 			    			<Icon medium> thumb_up </Icon>
 			    			<h5> Simple </h5>
@@ -25,6 +26,7 @@ class Why extends React.Component {
 			    			<Icon medium> home </Icon>
 			    			<h5> Effective </h5>
 			    			<p> Help your children learn the value of their earning potential by letting them set their own goals and work toward them. </p>
+
 			    			
 			    		</Col>
 			    		<Col s={3} className="">

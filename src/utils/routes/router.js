@@ -22,19 +22,18 @@ app.get("/api/get/chores/", function(req, res) {
 })
 
 app.get("/api/get/pchores", function(req, res){
-	Parent.findById(req.user.id)
-	.populate("Chore")
+	Parent.find({_id: req.user.id})
+	.populate("children")
+	.populate("chores")
 		.exec(function(err, doc) {
 			if (err) {console.log(err)}
 			else {
 				console.log(doc)
 				console.log("^^^DOC")
-				console.log(doc.chores[16].choreName)
+				console.log(doc[0].chores)
 				console.log("^^^CHORENAME?")
-				return doc;
+				res.send(doc)
 			}
-			return doc
-					res.json(doc)
 		})
 
 })
@@ -177,5 +176,41 @@ app.post("api/get/editkid", function(req, res) {
 		}
 	})
 })
+
+////goals
+app.post("/api/new/goals", function(req, res){
+	// console.log(req.user);
+	// c onsole.log(req.body);
+
+	var goalItem = req.body.goalItem;
+	// console.log(item);
+	var goalValue = req.body.goalValue;
+	// console.log(value);
+
+	var goal = new Goal({
+		goalItem: req.body.item,
+		goalValue: req.body.value
+	})
+
+	goal.save(function(err, doc){
+		if(err){
+			console.log(err);
+			console.log("ERR^^^")
+		}else{
+			Child.findByIdAndUpdate({_id: req.user._id}, {$push: {goal: doc}})
+			.exec(function(err, doc){
+				if (err) {console.log(err)}
+					else{
+						res.send(doc)
+					}
+					console.log(doc);
+					console.log("IF DOC^^^^")
+			})
+			console.log("new goal added");
+		}
+	})
+
+
+});
 
 }

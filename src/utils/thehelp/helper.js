@@ -75,12 +75,21 @@ var helper = {
 	},
 	
 //NOt 100% sure about returning axios verbs other than get.
-	deleteChore: function(event, choreName) {
+	deleteChore: function(choreName) {
 		console.log(choreName);
 		axios.delete("/api/delete/" + choreName, function(results){
 			console.log(results);
 		});
+	},
+
+	postGoal: function(goalItem, goalValue){ //helper function for kids to post goals
+		console.log(goalValue);
+		console.log(goalItem );
+		axios.post("/api/new/goals", {goalItem: goalItem, goalValue: parseFloat(goalValue)}).then(function(results){
+			 console.log(results);
+		})
 	}
+
 };
 
 export default helper;

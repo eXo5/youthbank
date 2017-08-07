@@ -3,6 +3,9 @@ import {Navbar, SideNav, SideNavItem,Button, Col, Footer, Dropdown, NavItem, Mod
 import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
 import icon from '../../img/ChildView/vectorChild.png';
+import helper from '../../utils/thehelp/helper.js'
+
+
 const newState = {};
 
 
@@ -19,14 +22,17 @@ class NavSidebar extends React.Component {
       //state for new kid
       kidName: "",
       kidUN: "",
-      kidPW: ""
+      kidPW: "",
+
+      goalItem: "",
+      goalValue: ""
 
     }
   }
 
   //sets state of data put in input fields
   handleChange = (event) => {
-    
+    var newState = {};
     newState[event.target.id] = event.target.value;
     this.setState(
       newState
@@ -35,6 +41,19 @@ class NavSidebar extends React.Component {
     console.log("This State: " + JSON.stringify(this.state));
 
   }//end of handleChange
+
+   handleSubmit = (event, goalItem, goalValue) => {
+    event.preventDefault()
+    console.log("handleSubmit")
+    helper.postGoal(this.state.goalItem, this.state.goalValue)
+
+    this.setState({
+      goalItem: "",
+      goalValue: ""
+      })
+  }
+
+
 
 
 	render(){
@@ -89,7 +108,7 @@ class NavSidebar extends React.Component {
 
           {/* MODAL FOR NEW CHILD */}
             <Modal
-              header='Set Up a New Account for Child'
+              header='Add A Goal'
               fixedFooter
               trigger={
                 <NavItem>Modify Existing Goal</NavItem>
@@ -100,6 +119,29 @@ class NavSidebar extends React.Component {
                   <Input s={12} label="User Name" id="kidUN" value={this.state.kidUN} onChange={this.handleChange}><Icon></Icon></Input>
                   <Input s={12} label="Password" id="kidPW" value={this.state.kidPW} onChange={this.handleChange}><Icon></Icon></Input>
                   <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
+                </form>
+              </Row>
+            </Modal>
+            
+            <NavItem>Edit </NavItem>
+          </Dropdown>
+
+          <Dropdown trigger={
+              <SideNavItem href='#!second' icon='face'>Add A Goal</SideNavItem>
+            }>
+
+          {/* MODAL FOR NEW CHILD */}
+            <Modal
+              header='Add A Goal '
+              fixedFooter
+              trigger={
+                <NavItem>Add A Goal</NavItem>
+              }>
+              <Row>
+                <form>
+                  <Input s={12} label="goalItem" id="goalItem" value={this.state.goalItem} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="goalValue" id="goalValue" value={this.state.goalValue} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Button onClick={this.handleSubmit} waves='light' node='a' className="mainBtn">Submit</Button>
                 </form>
               </Row>
             </Modal>
@@ -131,8 +173,8 @@ class NavSidebar extends React.Component {
         
       </div>
 
-		)
-	}
+    )
+  }
 }
 
 export default NavSidebar

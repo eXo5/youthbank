@@ -23,9 +23,9 @@ class ViewParent extends React.Component {
 
     this.state = {
       //state for new task
-      task: "",
-      descript: "",
-      amount: "",
+      choreName: "",
+      choreDesc: "",
+      choreValue: "",
 
       //state for new kid
       email: "",
@@ -49,7 +49,7 @@ class ViewParent extends React.Component {
       newState
     );
 
-    console.log("This State: " + JSON.stringify(this.state));
+    //console.log("This State: " + JSON.stringify(this.state));
 
   }//end of handleChange
 
@@ -73,8 +73,23 @@ class ViewParent extends React.Component {
 
     }//end of handleNewChild
 
-  render() {
+    handleNewChore = (event, choreName, choreDesc, choreValue) => { 
+      event.preventDefault()
+      helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue)
+      this.setState({
+        choreName: "",
+        choreDesc: "",
+        choreValue: ""
+      })
+        return alert("New Chore Added");
+      }
+      
 
+  render() {
+    console.log("VIEW PARENT this.props.loggedin" + this.props.loggedIn)
+    if( this.props.loggedIn) {
+
+    
     return(
       <div>
 
@@ -198,7 +213,19 @@ class ViewParent extends React.Component {
 
         <PgFooter />
       </div>
-    )
+   )
+   } else if (this.props.loggedIn === null) {   
+      return (<div>    
+             <h1>...</h1>
+        </div>)    
+    
+   }else{    
+      return(    
+      <Redirect to={{pathname: "/"}} />    
+      )    
+    }
+
+    
   }
 }
 
