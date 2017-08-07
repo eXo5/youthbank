@@ -11,7 +11,7 @@ import ViewParent from './components/ParentView/ViewParent';
 import ViewChild from './components/ChildView/ViewChild';
 import SignIn from './components/SignIn';
 import { Route, Switch } from 'react-router-dom';
-import AddChore from './components/newusers/AddChore';
+//import AddChore from './components/newusers/AddChore';
 import helper from "./utils/thehelp/helper";
 import axios from 'axios';
 
@@ -39,7 +39,7 @@ componentDidMount(){
   axios.get('/auth/user').then(response => {
       console.log(response.data.user);
      
-      if (!!response.data.user) {
+      if (response.data.user) {
         console.log('THERE IS A USER')
         this.setState({
           loggedIn: true,
@@ -103,7 +103,6 @@ componentDidMount(){
       <Route exact path="/parent" render={() => 
         <ViewParent loggedIn={this.state.loggedIn} />}  />
       <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} />}  />  
-       <Route exact path="/addchore" render={() => <AddChore _logout={this._logout} />} />   
 		</Switch>
 
 

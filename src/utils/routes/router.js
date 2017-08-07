@@ -11,6 +11,14 @@ module.exports = function(app) {
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
+
+app.get("/api/get/childinfo", function(req, res){
+Child.findById(req.user.id)
+	.exec(function(err, doc){
+		err ? console.log(err):console.log(doc);
+		res.send(doc)
+	})
+})
   
 //post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js
@@ -28,14 +36,29 @@ app.get("/api/get/pchores", function(req, res){
 		.exec(function(err, doc) {
 			if (err) {console.log(err)}
 			else {
-				console.log(doc)
+				console.log(doc[0])
 				console.log("^^^DOC")
-				console.log(doc[0].chores)
+				//console.log(doc[0].chores)
 				console.log("^^^CHORENAME?")
 				res.send(doc)
 			}
 		})
 
+})
+
+app.post("/api/get/onechore", function(req, res){
+	console.log(req.body._id)
+	Chore.findById(req.body._id)
+		.populate("child")
+		.exec(function(err, doc){
+			if (err) {
+				console.log(err)
+			}else{
+				console.log(doc)
+				res.send(doc)
+			}
+
+		})
 })
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
@@ -100,7 +123,7 @@ app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a d
 	   }
 	})
 
-})//END get Chores
+})
 
 ////////////////////////////  James ////////////////////////////////////////////////////////
 
@@ -140,13 +163,7 @@ app.post("/api/post/chores", function(req, res){
 		}
 	})
 
-	// Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: chore}}).exec(function(err, doc){
-
-	// 	if(err) {console.log(err)}
-	// 	console.log(doc);
-	// })
-	// res.send("Ok");
-})//END new Chores
+})//END api/post/chores
 
 app.delete("/api/drop/:collection",function(req, res){
 	var collection = req.params.collection;
@@ -161,18 +178,36 @@ app.put("/api/put/chorecomplete", function(req, res){
 			else{
 				console.log(doc);
 				res.send("ok");
-			}
+			}	
 		})
 	//}//end if req.params.chorecomplete test condition
 })//END CHORE COMPLETE
 
-app.post("api/get/editkid", function(req, res) {
-	Child.findOne({firstName: req.body.firstName, lastName: req.body.lastName})
+app.post("/api/post/editedchore", function(req, res){
+	console.log(req.body)
+	var choreId = req.body.choreId;
+	if (req.body.choreComplete === "true") {var complete = true} else {var complete = false};
+	if (req.body.childSaysComplete === "true"){var childSaysComplete = true} else {var childSaysComplete = false};
+	if (req.body.chorePastDue === "true") {var pastDue = true} else {var pastDue = false};
+	Chore.findByIdAndUpdate(choreId, {$set: {choreName: req.body.choreName, choreDesc: req.body.choreDesc, choreValue: req.body.choreValue, complete: complete, childSaysComplete: childSaysComplete, pastDue: pastDue}}, {new: true})
+		.then(function(results) {
+			console.log(results)
+			res.send(results)
+		})
+})
+
+app.post("/api/post/editchild", function(req, res) {
+	Child.findByIdAndUpdate(req.body.id, {$set:{firstName: req.body.firstName,
+	 lastName: req.body.lastName,
+	 email: req.body.email,
+	 age: req.body.age
+	}})
 	.exec(function(err, doc) {
 		if(err) {
 			console.log(err)
 		}else{
 			console.log(doc)
+			res.send(doc)
 		}
 	})
 })

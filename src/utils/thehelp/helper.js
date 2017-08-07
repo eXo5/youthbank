@@ -53,6 +53,21 @@ var helper = {
 		});
 	},
 
+	editChild: function(id, firstName, lastName, email, age){
+		return axios.post("/api/post/editchild", {
+			id: id,
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+			age: age
+		})
+			.then(function(results){
+				console.log(results)
+			});
+
+	},
+	
+
 	postChore: function(choreName, choreDesc, choreValue){
 		console.log(choreName)
 		console.log(choreDesc)
@@ -64,10 +79,28 @@ var helper = {
 			return results;
 		});
 	},
+	postEditedChore: function(choreId, choreName, choreDesc, choreValue, choreComplete, choreChildSaysComplete, chorePastDue){
+		console.log(choreId)
+		return axios.post("/api/post/editedchore", {choreId: choreId, choreName: choreName, choreDesc: choreDesc, choreValue: parseFloat(choreValue), choreComplete: choreComplete, childSaysComplete:choreChildSaysComplete, chorePastDue: chorePastDue})
+			.then(function(results){
+				console.log(results)
+				return results;
+			})
+		},
+
+		getChildInfo: function(){
+			return axios.get("/api/get/childinfo")
+		},
 
 	getChores: function(){
 		 return axios.get("/api/get/pchores")
 		 	
+	},
+
+	getOneChore: function(choreId){
+	return	axios.post("/api/get/onechore/", {_id: choreId}).then(function(results){
+			return results;
+		})
 	},
 
 	choreComplete: function(parentId, choreName ){ 
