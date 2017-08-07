@@ -9,6 +9,7 @@ import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
 import PgFooter from './Footer';
 import { Redirect } from 'react-router-dom';
+import helper from '../../utils/thehelp/helper.js'
 // import banner from '../../img/ChildView/banner-child.png';
 // import navBg from '../../img/ChildView/nav-background.jpg';
 // import icon from '../../img/ChildView/vectorChild.png';
@@ -26,9 +27,11 @@ class ViewChild extends React.Component {
       amount: "",
 
       //state for new kid
-      kidName: "",
-      kidUN: "",
-      kidPW: ""
+      firstName: "",
+      lastName: "",
+      email:"",
+      age:"",
+      parent:""
 
     }
   }
@@ -45,11 +48,18 @@ class ViewChild extends React.Component {
 
   }//end of handleChange
 
+componentDidMount(){
+  helper.getChildInfo()
+    .then(results => {
+      console.log(results)
+    })
+}
 
 
   render() {
     console.log("VIEW CHILD this.props.loggedIn: " + this.props.loggedIn);
     if (this.props.loggedIn) {
+
 
     return(
       <div>

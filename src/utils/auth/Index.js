@@ -62,8 +62,11 @@ router.post("/api/new/child", (req, res) => {
 					if (err) console.log(err);
 					console.log(doc)
 				})
+				console.log(savedUser)
+				Child.findByIdAndUpdate(savedUser._id, {$push: {parents:req.user.id}}, {new:true}).exec(function(err, doc){
+					err ? console.log(err) : console.log(doc);
+				})
 			return res.json(savedUser)
-	
 	})
 
 	

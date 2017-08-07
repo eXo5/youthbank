@@ -55,7 +55,7 @@ componentDidMount(){
   axios.get('/auth/user').then(response => {
       console.log(response.data.user);
      
-      if (!!response.data.user) {
+      if (response.data.user) {
         console.log('THERE IS A USER')
         this.setState({
           loggedIn: true,

@@ -86,7 +86,11 @@ var helper = {
 				console.log(results)
 				return results;
 			})
-		},	
+		},
+
+		getChildInfo: function(){
+			return axios.get("/api/get/childinfo")
+		},
 
 	getChores: function(){
 		 return axios.get("/api/get/pchores")

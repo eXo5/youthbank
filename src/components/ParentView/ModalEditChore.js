@@ -14,7 +14,6 @@ class ModalEditChore extends React.Component {
 render() {
 	return(
 <Modal header="Edit Task"
-				modalOptions={this.props.editChore}
 				fixedFooter
 				trigger={this.props.button}>
 

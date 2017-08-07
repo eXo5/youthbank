@@ -11,6 +11,14 @@ module.exports = function(app) {
 app.get("/", function(req, res){
   res.sendFile(__dirname + "./public/index.html");
 });
+
+app.get("/api/get/childinfo", function(req, res){
+Child.findById(req.user.id)
+	.exec(function(err, doc){
+		err ? console.log(err):console.log(doc);
+		res.send(doc)
+	})
+})
   
 //post route for new users, parents AND children
 //Routes for new Parents/Children and login/logout found in /auth/index.js
