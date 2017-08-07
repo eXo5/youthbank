@@ -68,6 +68,14 @@ app.post("/api/get/onechore", function(req, res){
 
 		})
 })
+
+app.post("/api/post/chorecomplete", function(req, res){
+	Chore.findByIdAndUpdate(req.body.choreId, {$set: {complete: true}})
+	.exec(function(err, doc){
+		err ? console.log(err) : console.log(doc);
+		res.send(doc);
+	})
+})
 ////////////////////////////////////////  James /////////////////////////////////////////////////////
 
 app.get("/api/get/chores/:choreName", function(req, res){ //here we will get a dueDate for when the chores should be complete

@@ -1,6 +1,6 @@
 import React from 'react';
 // import {Navbar, Card, CardTitle, SideNav, SideNavItem,Button, Col, Dropdown, NavItem, Modal, Row, Icon, Input} from 'react-materialize';
-import {Col, Row, Card, CardTitle} from 'react-materialize';
+import {Col, Row, Card, CardTitle, Collapsible, CollapsibleItem, Button } from 'react-materialize';
 import '../../index.css';
 import NavSidebar from './NavSidebar';
 import Goal from './Goal';
@@ -21,10 +21,10 @@ class ViewChild extends React.Component {
     super(props)
 
     this.state = {
-      //state for new task
-      task: "",
-      descript: "",
-      amount: "",
+      //state for chores
+      siblings: [],
+      parents:[],
+      chores:[],
 
       //state for new kid
       firstName: "",
@@ -43,16 +43,39 @@ class ViewChild extends React.Component {
     this.setState(
       newState
     );
-
     console.log("This State: " + JSON.stringify(this.state));
-
   }//end of handleChange
 
-componentDidMount(){
-  helper.getChildInfo()
+  fillChores = () => {
+      helper.getChildInfo()
     .then(results => {
       console.log(results)
-    })
+      var newChores = [];
+      //push chores into newChores for setting state
+      for (var i = 0; i < results.data.chores.length; i++) {
+        var id = results.data.chores[i]._id;
+        var choreName = results.data.chores[i].choreName.replace(/_/g, " ");
+        var choreDesc = results.data.chores[i].choreDesc;
+        var choreValue = results.data.chores[i].choreValue;
+        var complete = results.data.chores[i].complete;
+        var childSaysComplete = results.data.chores[i].childSaysComplete;
+        var pastDue = results.data.chores[i].pastDue;
+        newChores.push({
+          _id: id,
+          choreName: choreName, 
+          choreDesc: choreDesc, 
+          choreValue: choreValue, 
+          complete: complete, 
+          childSaysComplete: childSaysComplete, 
+          pastDue: pastDue})
+      
+    }
+    this.setState({chores: newChores})
+  })
+ }   
+
+componentDidMount(){
+      this.fillChores()
 }
 
 
@@ -64,10 +87,10 @@ componentDidMount(){
     return(
       <div>
 
-        <NavSidebar />
-
+      <NavSidebar />
         <Row>
           <Col s={3} className='grid-example'>
+
               <TaskToDo />
               <CompletedTas />
           </Col>
@@ -79,10 +102,10 @@ componentDidMount(){
               actions={[<a href='google.com'> </a>]}>
               Keep working on your goal for Concert Tickets!
             </Card>
-
+       
               <Row>
                 <Col s={4} className='grid-example AvailTasks'>
-                  <AvailTasks />
+                  <AvailTasks chores={this.state.chores}/>
                 </Col> 
                 <Col s={8} className='grid-example'>
                   <Row> 
