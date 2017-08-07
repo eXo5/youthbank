@@ -13,7 +13,7 @@ import CompletedTas from './CompletedTas';
 import PgFooter from './Footer'
 import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
-impor background from '../../img/ChildView/background1.png';
+import background from '../../img/ChildView/background1.png';
 
 const newState = {};
 
