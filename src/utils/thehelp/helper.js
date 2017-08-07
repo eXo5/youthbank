@@ -3,7 +3,7 @@ import axios from 'axios';
 var moment = require('moment');
 
 var helper = {
-
+  
         logOneIn: function(email, password) {
             console.log(email)
             console.log(password)
@@ -118,9 +118,12 @@ var helper = {
             })
         },
 
-        choreComplete: function(parentId, choreName) {
-
-        },
+         choreComplete: function(choreId){ 
+          return axios.post("/api/post/chorecomplete", {choreId: choreId})
+        .then(function(results){      
+        })
+    	
+	},
 
         //NOt 100% sure about returning axios verbs other than get.
         deleteChore: function(choreName) {
@@ -173,3 +176,4 @@ var helper = {
     }
 
         export default helper;
+

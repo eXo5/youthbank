@@ -9,7 +9,3 @@ import ViewChild from './components/ChildView/ViewChild';
 
 ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
 
-// ReactDOM.render(<BrowserRouter><ViewParent /></BrowserRouter>, document.getElementById('root'));
-
-
-//registerServiceWorker();

@@ -1,33 +1,47 @@
 import React from 'react';
 import {Row, Col, Collapsible, CollapsibleItem, Button} from 'react-materialize';
+import helper from '../../utils/thehelp/helper.js'
 
 class AvailTasks extends React.Component {
-	render(){
-		return(
-				<Row>
-						
-						<Col>
-									<h6> Open Tasks: </h6>
-									<Collapsible>
-										<CollapsibleItem header='Walk Dogs' icon='pets'>
-											Worth: $8. Other details..
-											<br /><br />
-											<Button floating small className='red' waves='light' icon='add' />
-										</CollapsibleItem>
-										<CollapsibleItem header='Take Out Trash' icon='delete'>
-											Worth: $3. Other details..
-											<Button floating small className='red' waves='light' icon='add' />
-										</CollapsibleItem>
-										<CollapsibleItem header='Paint Garage' icon='format_paint'>
-											Worth: $25. Other details..
-											<Button floating small className='red' waves='light' icon='add' />
-										</CollapsibleItem>
-									</Collapsible>
-						</Col>
-				</Row>
-									
-		)
+	constructor(props){
+		super(props)
 	}
+	handleSubmit = (event) => {
+		event.preventDefault();
+		helper.choreComplete(event)
+		.then(results=> {
+			console.log(results)
+			return alert("Your parents have been updated.")
+		})
+	}
+render(){
+              var showChores = 
+                this.props.chores.map((element,i)=>{
+              
+          return (
+           <CollapsibleItem header={element.choreName}>
+                <div>
+                    <p>Description: {element.choreDesc}</p>
+                  <p>Worth: {element.choreValue}</p>
+              <Button id={element.id} onClick={this.handleSubmit} floating small className="red" waves="light" icon="add">Submit</Button>
+            </div>
+           </CollapsibleItem>
+            )
+        })
+       
+        return(
+                <Row>
+                        
+                        <Col>
+                            <h6> Open Tasks: </h6>
+                            <Collapsible>
+                                    {showChores}
+                            </Collapsible>        
+                        </Col>
+                </Row>
+                                    
+        )
+    }
 }
 
 export default AvailTasks;
