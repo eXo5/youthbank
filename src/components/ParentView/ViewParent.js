@@ -6,7 +6,7 @@ import ChildCards from './ChildCards';
 import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
-import background from '../../img/ParentView/family.jpg';
+import background from '../../img/ParentView/background1.jpg';
 import helper from '../../utils/thehelp/helper.js';
 import { Route, Switch, Link, Redirect } from 'react-router-dom'
 import UnclaimedTasks from './UnclaimedTasks';
