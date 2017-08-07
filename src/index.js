@@ -7,7 +7,7 @@ import {BrowserRouter} from 'react-router-dom';
 // import ViewChild from './components/ChildView/ViewChild';
 //import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter><ViewChild /></BrowserRouter>, document.getElementById('root'));
 
 // ReactDOM.render(<BrowserRouter><ViewParent /></BrowserRouter>, document.getElementById('root'));
 

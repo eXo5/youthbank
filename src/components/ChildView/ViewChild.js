@@ -7,11 +7,10 @@ import Goal from './Goal';
 import MoneyEarned from './MoneyEarned';
 import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
-import PgFooter from './Footer';
-import { Redirect } from 'react-router-dom';
-// import banner from '../../img/ChildView/banner-child.png';
-// import navBg from '../../img/ChildView/nav-background.jpg';
-// import icon from '../../img/ChildView/vectorChild.png';
+import CompletedTas from './CompletedTas';
+import PgFooter from './Footer'
+import banner from '../../img/ChildView/banner-child.png';
+import navBg from '../../img/ChildView/nav-background.jpg';
 import background from '../../img/ChildView/background.jpg';
 const newState = {};
 
@@ -59,6 +58,7 @@ class ViewChild extends React.Component {
         <Row>
           <Col s={3} className='grid-example'>
               <TaskToDo />
+              <CompletedTas />
           </Col>
 
         {/*HERE GOES AVAILABLE TASKS*/}
