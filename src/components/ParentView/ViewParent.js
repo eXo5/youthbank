@@ -206,6 +206,7 @@ class ViewParent extends React.Component {
     helper.editChild(childId, this.state.firstName, this.state.lastName, this.state.email, this.state.age)
       .then(results=>{
         alert("Child has been updated")
+        console.log("If only it were that easy")
       })
 
   }    
@@ -367,8 +368,8 @@ class ViewParent extends React.Component {
                               </Row>
                             </Modal>
                                 <Modal
-                                    id="editModal"
-                                    header='Edit Task'
+                                    id="editChild"
+                                    header='Edit Child'
                                     fixedFooter
                                     trigger={
                             <NavItem>Edit An Exisiting Child</NavItem>
