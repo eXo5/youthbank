@@ -106,7 +106,7 @@ class SignIn extends Component {
         <Col s={3}></Col>
           <Col s={6}>
             <Tabs className='signIn z-depth-1'>
-              <Tab title="Parent" active>
+              <Tab title="Parent" active className="sign">
 
                 <form>
                   <Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
@@ -122,7 +122,7 @@ class SignIn extends Component {
                 </form>
 
               </Tab>
-              <Tab title="Child">
+              <Tab title="Child"className="sign">
 
                 <form>
                   <Input type="email" label="Email" s={12} id="email" value={this.state.email} onChange={this.handleChange}/>

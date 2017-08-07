@@ -13,7 +13,7 @@ import CompletedTas from './CompletedTas';
 import PgFooter from './Footer'
 import banner from '../../img/ChildView/banner-child.png';
 import navBg from '../../img/ChildView/nav-background.jpg';
-import background from '../../img/ChildView/background.jpg';
+import background from '../../img/ChildView/background1.png';
 const newState = {};
 
 class ViewChild extends React.Component {
@@ -25,6 +25,7 @@ class ViewChild extends React.Component {
       task: "",
       descript: "",
       amount: "",
+      chores: [],
 
       //state for new kid
       firstName: "",
@@ -44,15 +45,44 @@ class ViewChild extends React.Component {
       newState
     );
 
+
+
     console.log("This State: " + JSON.stringify(this.state));
+
 
   }//end of handleChange
 
-componentDidMount(){
-  helper.getChildInfo()
+
+fillChores = () => {
+      helper.getChildInfo()
     .then(results => {
       console.log(results)
-    })
+      var newChores = [];
+      //push chores into newChores for setting state
+      for (var i = 0; i < results.data.chores.length; i++) {
+        var id = results.data.chores[i]._id;
+        var choreName = results.data.chores[i].choreName.replace(/_/g, " ");
+        var choreDesc = results.data.chores[i].choreDesc;
+        var choreValue = results.data.chores[i].choreValue;
+        var complete = results.data.chores[i].complete;
+        var childSaysComplete = results.data.chores[i].childSaysComplete;
+        var pastDue = results.data.chores[i].pastDue;
+        newChores.push({
+          _id: id,
+          choreName: choreName, 
+          choreDesc: choreDesc, 
+          choreValue: choreValue, 
+          complete: complete, 
+          childSaysComplete: childSaysComplete, 
+          pastDue: pastDue})
+      
+    }
+    this.setState({chores: newChores})
+  })
+ }   
+
+componentDidMount(){
+ this.fillChores()
 }
 
 
@@ -81,10 +111,10 @@ componentDidMount(){
             </Card>
 
               <Row>
-                <Col s={4} className='grid-example AvailTasks'>
-                  <AvailTasks />
+                <Col s={5} className='grid-example AvailTasks'>
+                  <AvailTasks chores={this.state.chores}/>
                 </Col> 
-                <Col s={8} className='grid-example'>
+                <Col s={7} className='grid-example'>
                   <Row> 
                     <Col s={12} className='grid-example'>
                       <MoneyEarned />

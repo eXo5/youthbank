@@ -10,11 +10,22 @@ main {
   flex: 1 0 auto;
 }
 
-
 .menuBtn {
   margin-left:1100px;
 }
 
+.row .col .sign{
+  /*width: 100%;*/
+}
+.row .col{
+  /*width: 100%;*/
+}
+.row .col.m6 {
+     /*width: 100%; */
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
 
 .landingPhoto {
 padding: 100px;
@@ -32,10 +43,17 @@ right: 0;
 bottom: 0;
 left: 0;*/
 padding: 1rem;
-background-color: blue;
 text-align: center;
 }
 
+.footerText{
+
+}
+
+.footer-copyright {
+  height: 0;
+  width: 0;
+}
 
 .NavbarCSS {
 background-color: #CDCDCD;
@@ -66,7 +84,6 @@ color: #ff8c00;
 font-size: 40px;
 left: 50%;
 transform: translateX(-50%);
-
 }
 
 .page-footer {
@@ -77,6 +94,10 @@ left: 0;*/
 padding: 1rem;
 /*background-color: #CDCDCD;*/
 text-align: center;
+}
+
+.footerLogo {
+  font-family: 'Pacifico', cursive;
 }
 
 footer.page-footer {
@@ -124,7 +145,7 @@ font-family: 'Roboto', sans-serif;
 /*SIGN UP COMPONENT INPUT COLOR*/
 /* label color */
 .input-field label {
- color: white;
+ color: black;
 }
 /* label focus color */
 /*.input-field input[type=text]:focus + label {

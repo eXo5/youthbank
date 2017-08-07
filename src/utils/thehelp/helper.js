@@ -103,8 +103,11 @@ var helper = {
 		})
 	},
 
-	choreComplete: function(parentId, choreName ){ 
-
+  choreComplete: function(choreId){ 
+    return axios.post("/api/post/chorecomplete", {choreId: choreId})
+        .then(function(results){      
+        })
+    	
 	},
 	
 //NOt 100% sure about returning axios verbs other than get.
