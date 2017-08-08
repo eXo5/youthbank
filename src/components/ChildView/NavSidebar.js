@@ -80,12 +80,12 @@ class NavSidebar extends React.Component {
             <SideNavItem href='#!icon' icon='list'>Manage Tasks</SideNavItem>
             }>
             
-            <NavItem>Edit An Existing Task</NavItem>
+            <NavItem>Edit Existing Tasks</NavItem>
           </Dropdown>
           
            {/* MANAGE CHILDREN */}
           <Dropdown trigger={
-              <SideNavItem href='#!second' icon='face'>Manage Goal</SideNavItem>
+              <SideNavItem href='#!second' icon='face'>Manage Goals</SideNavItem>
             }>
 
           {/* MODAL FOR NEW CHILD */}
@@ -97,22 +97,14 @@ class NavSidebar extends React.Component {
               }>
               <Row>
                 <form>
-                  <Input s={12} label="Child Name" id="kidName" value={this.state.kidName} onChange={this.handleChange}><Icon>face</Icon></Input>
-                  <Input s={12} label="User Name" id="kidUN" value={this.state.kidUN} onChange={this.handleChange}><Icon></Icon></Input>
-                  <Input s={12} label="Password" id="kidPW" value={this.state.kidPW} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Goal" id="kidName" value={this.state.kidName} onChange={this.handleChange}><Icon>face</Icon></Input>
+                  <Input s={12} label="Cost" id="kidUN" value={this.state.kidUN} onChange={this.handleChange}><Icon></Icon></Input>
                   <Button waves='light' node='a' className="mainBtn" href='http://www.google.com'>Submit</Button>
                 </form>
               </Row>
             </Modal>
             
-            <NavItem>Edit </NavItem>
-          </Dropdown>
-
-          <Dropdown trigger={
-              <SideNavItem href='#!second' icon='face'>Add A Goal</SideNavItem>
-            }>
-
-          {/* MODAL FOR NEW CHILD */}
+            {/* MODAL FOR NEW CHILD */}
             <Modal
               header='Add A Goal '
               fixedFooter
@@ -121,15 +113,20 @@ class NavSidebar extends React.Component {
               }>
               <Row>
                 <form>
-                  <Input s={12} label="goalItem" id="goalItem" value={this.state.goalItem} onChange={this.handleChange}><Icon></Icon></Input>
-                  <Input s={12} label="goalValue" id="goalValue" value={this.state.goalValue} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Goal" id="goalItem" value={this.state.goalItem} onChange={this.handleChange}><Icon></Icon></Input>
+                  <Input s={12} label="Cost" id="goalValue" value={this.state.goalValue} onChange={this.handleChange}><Icon></Icon></Input>
                   <Button onClick={this.handleSubmit} waves='light' node='a' className="mainBtn">Submit</Button>
                 </form>
               </Row>
             </Modal>
             
-            <NavItem>Edit </NavItem>
           </Dropdown>
+
+         
+
+          
+            
+           
 
            {/* MENU FOOTER */}
           <Footer className="SideNav-footer">
