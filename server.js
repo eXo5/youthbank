@@ -67,6 +67,11 @@ require("./src/utils/routes/router.js")(app, passport)
 //set the static build.
 app.use(express.static("build"));
 
+app.get("/", function(req,res){
+
+	res.sendFile(__dirname + "/build/static/index.html");
+
+});
 // -------------------------------------------------
 mongoose.Promise = global.Promise;
 // MongoDB configuration (Change this URL to your own DB)
