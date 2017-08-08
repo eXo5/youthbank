@@ -34,10 +34,10 @@ var helper = {
           password: password,
           firstName: firstName,
           lastName: lastName
-      });
-      // .then(function(results){
-      // 	return console.log(results)
-      // })
+      })
+      .then(function(results){
+      	return results;
+      })
 
   },
 
@@ -50,7 +50,7 @@ var helper = {
               age: age
           })
           .then(function(results) {
-              console.log(results);
+              return results;
           });
   },
 
