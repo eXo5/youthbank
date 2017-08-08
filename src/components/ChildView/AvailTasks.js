@@ -42,5 +42,7 @@ class AvailTasks extends React.Component {
 				</Row>
 									
 		)
+	}
+}
 
 export default AvailTasks;

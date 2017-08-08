@@ -14,16 +14,17 @@ app.get("/", function(req, res){
 
 app.get("/api/get/childinfo", function(req, res){
 	Child.findById(req.user.id)
+	.populate("parents")
 	.exec(function(err, doc){
 		err ? console.log(err):console.log(doc);
-		//res.send(doc) only one res at a time.
-		Parent.findById(doc.parents[0])
-		.populate("chores")
-		.populate("children")
-			.exec(function(err, doc){
-				err ? console.log(err) : console.log(doc)
-				res.send(doc)
-			})
+		return res.send(doc)//	 only one res at a time.
+		// Parent.findById(doc.parents[0])
+		// .populate("chores")
+		// .populate("children")
+		// 	.exec(function(err, doc){
+		// 		err ? console.log(err) : console.log(doc)
+		// 		res.send(doc)
+		// 	})
 
 	})
 })
@@ -170,10 +171,11 @@ app.post("/api/post/chores", function(req, res){
 			console.log(err);
 			console.log("ERR^^^")
 		}else{
-			Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: doc}})
+			Parent.findByIdAndUpdate({_id: req.user._id}, {$push: {chores: doc}}, {new:true})
+			.populate("chores")
 			.exec(function(err, doc){
 				if (err) {console.log(err)}
-					else{res.send(doc)}
+					else{return res.send(doc)}
 			})
 			console.log("new chore added");
 		}
@@ -260,6 +262,6 @@ app.post("/api/new/goals", function(req, res){
 			console.log("new goal added");
 		}
 	})
+})
 
-
-});
+}

@@ -14,7 +14,7 @@ import AmountOwed from './AmountOwed';
 import CompletedTas from './CompletedTas';
 import PendingApp from './PendingApp';
 import PgFooter from './PgFooter';
-
+import axios from 'axios'
 const newState = {};
 
 class ViewParent extends React.Component {
@@ -62,8 +62,9 @@ class ViewParent extends React.Component {
       lastName: "",
       age: "",
       
-
+      parentName:"",
       //redirect route
+      loggedIn: false,
       redirectTo: null
 
     }
@@ -73,6 +74,7 @@ class ViewParent extends React.Component {
     helper.getChores()
       .then(results => {
           console.log(results)
+         
           //fill chores
           var newChores = [];
           for (let i = 0; i < results.data[0].chores.length; i++){
@@ -114,7 +116,8 @@ class ViewParent extends React.Component {
           }//end kids loop
           this.setState({
             chores: newChores,
-            children: newKids
+            children: newKids,
+            parentName: results.data[0].firstName
           })
       })
   }
@@ -160,12 +163,18 @@ class ViewParent extends React.Component {
     }//end of handleNewChild
 
     handleNewChore = (event, choreName, choreDesc, choreValue) => { 
-      event.preventDefault()
+      event.preventDefault();
       helper.postChore(this.state.choreName, this.state.choreDesc, this.state.choreValue)
-      this.setState({
+      .then(results=>{
+        console.log(results)
+        var returnedResultTrue = results.data.chores.slice(-1)[0];
+        console.log(returnedResultTrue)
+          this.setState({
         choreName: "",
         choreDesc: "",
-        choreValue: ""
+        choreValue: "",
+        chores: [...this.state.chores, returnedResultTrue]
+        })
       })
         return alert("New Chore Added");
       }
@@ -195,7 +204,7 @@ class ViewParent extends React.Component {
             helper.getChores()
             .then(function(){
               alert("Chore has been updated");
-               (this).find(".close_link").click("closeOnClick");
+               ("").click("closeOnClick");
             })
           })
       }
@@ -306,7 +315,7 @@ class ViewParent extends React.Component {
                             user={{
                               background: navBg,
                               image: icon,
-                              name: 'John Doe'
+                              name: this.state.parentName
                             }}
                           />
 
@@ -324,11 +333,11 @@ class ViewParent extends React.Component {
                               }>
                               <Row>
                                 <form>
-                                  <Input s={12} label="Task" id="task" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
-                                  <Input s={12} label="Description of Task" id="descript" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
-                                  <Input s={12} label="Amount" id="amount" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
+                                  <Input s={12} label="Task" id="choreName" value={this.state.choreName} onChange={this.handleChange}><Icon>build</Icon></Input>
+                                  <Input s={12} label="Description of Task" id="choreDesc" value={this.state.choreDesc} onChange={this.handleChange}><Icon></Icon></Input>
+                                  <Input s={12} label="Amount" id="choreValue" value={this.state.choreValue} onChange={this.handleChange}><Icon></Icon></Input>
                                   
-                                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
+                                  <Button type="submit" onClick={this.handleNewChore} waves='light' className="mainBtn">Submit</Button>
                                 </form>
                               </Row>
                             </Modal>
@@ -367,8 +376,8 @@ class ViewParent extends React.Component {
                               </Row>
                             </Modal>
                                 <Modal
-                                    id="editModal"
-                                    header='Edit Task'
+                                    id="editChild"
+                                    header='Edit Child'
                                     fixedFooter
                                     trigger={
                             <NavItem>Edit An Exisiting Child</NavItem>
@@ -379,7 +388,14 @@ class ViewParent extends React.Component {
 
                            {/* MENU FOOTER */}
                           <Footer className="page-footer">
-                              <Button waves='light' className="mainBtn">LogOut</Button>
+                         
+                              <Button waves='light' className="mainBtn" onClick={()=>{
+                                axios.post("/auth/logout")
+                                  .then(response=>{
+                                    console.log('fuck it');
+                                  })
+                              }}>LogOut</Button>
+                         
                           </Footer>
 
                         </SideNav>
@@ -403,8 +419,8 @@ class ViewParent extends React.Component {
       </Col>
       <Col s={9} className='grid-example'>
         <Card className='small'
-              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
-              actions={[<a href='#'></a>]}>
+              header={<CardTitle reveal image={background} waves="light"> Good Evening {this.state.parentName} </CardTitle>}
+              actions={[<a href='##'></a>]}>
               Keep working on your goal for Concert Tickets!
         </Card>
 

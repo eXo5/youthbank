@@ -77,22 +77,24 @@ componentDidMount(){
 
 
   _logout = (event) => {
-  	event.preventDefault()
+  	event.preventDefault();
   	console.log("Logged Out")
   	axios.post("/auth/logout")
   		.then(response => {
   			if (response.status === 200) {
   				this.setState({
   					loggedIn: false,
-  					user: null
+  					user: null,
+            redirectTo: "/"
   				})
+
   			}
   		})
   }
 
 
   render() {
- 
+ // if(res.user){this.setState({loggedIn: true, user: res.user})}
     return (
 
    	
@@ -101,8 +103,8 @@ componentDidMount(){
 			<Route exact path="/" render={() => <Home/> } />
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
       <Route exact path="/parent" render={() => 
-        <ViewParent loggedIn={this.state.loggedIn} />}  />
-      <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} />}  />  
+        <ViewParent loggedIn={this.state.loggedIn} />} _logout={this.props._logout} />
+      <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} _logout={this._logout} />}  />  
 		</Switch>
 
 

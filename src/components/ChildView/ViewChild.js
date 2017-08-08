@@ -58,14 +58,14 @@ fillChores = () => {
       console.log(results)
       var newChores = [];
       //push chores into newChores for setting state
-      for (var i = 0; i < results.data.chores.length; i++) {
-        var id = results.data.chores[i]._id;
-        var choreName = results.data.chores[i].choreName.replace(/_/g, " ");
-        var choreDesc = results.data.chores[i].choreDesc;
-        var choreValue = results.data.chores[i].choreValue;
-        var complete = results.data.chores[i].complete;
-        var childSaysComplete = results.data.chores[i].childSaysComplete;
-        var pastDue = results.data.chores[i].pastDue;
+      for (var i = 0; i < results.data.parents[0].chores.length; i++) {
+        var id = results.data.parents[0].chores[i]._id;
+        var choreName = results.data.parents[0].chores[i].choreName.replace(/_/g, " ");
+        var choreDesc = results.data.parents[0].chores[i].choreDesc;
+        var choreValue = results.data.parents[0].chores[i].choreValue;
+        var complete = results.data.parents[0].chores[i].complete;
+        var childSaysComplete = results.data.parents[0].chores[i].childSaysComplete;
+        var pastDue = results.data.parents[0].chores[i].pastDue;
         newChores.push({
           _id: id,
           choreName: choreName, 

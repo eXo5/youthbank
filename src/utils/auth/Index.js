@@ -23,7 +23,7 @@ router.post("/login/parent", passport.authenticate("local-parent"), (req, res) =
 
 router.post("/login/child", passport.authenticate("local-child"), (req, res) => {
 	//router.post("/auth/login")
-	res.json({user: {email: req.user.email, _id: req.user._id} })
+	return res.json({user: {email: req.user.email, _id: req.user._id} })
 })
 
 router.post("/logout", (req, res) => {
