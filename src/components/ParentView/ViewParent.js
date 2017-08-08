@@ -6,7 +6,7 @@ import ChildCards from './ChildCards';
 // import banner from '../../img/ParentView/banner-parent.png';
 import navBg from '../../img/ParentView/nav-background.jpg';
 import icon from '../../img/ParentView/vectorParent.png';
-import background from '../../img/ParentView/family.jpg';
+import background from '../../img/ParentView/background1.jpg';
 import helper from '../../utils/thehelp/helper.js';
 import { Redirect } from 'react-router-dom'
 import UnclaimedTasks from './UnclaimedTasks';
@@ -61,6 +61,8 @@ class ViewParent extends React.Component {
       firstName: "",
       lastName: "",
       age: "",
+
+      parentName: "",
       
 
       //redirect route
@@ -114,7 +116,8 @@ class ViewParent extends React.Component {
           }//end kids loop
           this.setState({
             chores: newChores,
-            children: newKids
+            children: newKids,
+            parentName: results.data[0].firstName
           })
       })
   }
@@ -241,30 +244,37 @@ class ViewParent extends React.Component {
     if( this.props.loggedIn ) {
       //EDIT TASKS MODAL IS WRITTEN HERE
         var showChores = this.state.chores.map((element, i) => {
-          return(<div key={i}>
-                  <p id={element._id}>{element.choreName}</p>
-                  <p>{element.choreDesc}</p>
-                  <p>{element.choreValue}</p>
+          return(
+                  <div key={i}>
+                  <hr/>
+                  <p id={element._id}>
+                  <em>Task Name:</em><br/>
+                  {element.choreName}</p>
+                  <p><em>Description:</em><br />
+                  {element.choreDesc}</p>
+                  <p>
+                  <em>Value:</em><br/>
+                  ${element.choreValue}</p>
                   
                   <Modal header="Edit Task"
         fixedFooter
-        trigger={<Button id={i} className="mainBtn" key={i}>Edit Chore</Button>}
+        trigger={<Button id={i} className="mainBtn" key={i}>Edit Task</Button>}
       >{/*Modal for editing specific chore*/}
 
         <Row>
           <form>
-           <h5>{element.choreName}</h5> 
-            <Input type="text" id="choreName" value={this.state.choreName} onChange={this.handleChange} />
-            <h5>{element.choreDesc}</h5>
-            <Input type="text" id="choreDesc" value={this.state.choreDesc} onChange={this.handleChange} />
-            <h5>{element.choreValue}</h5>
-            <Input type="text" id="choreValue" value={this.state.choreValue} onChange={this.handleChange} />
-             <h5>{element.complete.toString()}</h5>
-            <Input type="text" id="choreComplete" value={this.state.choreComplete} onChange={this.handleChange} />
-             <h5>{element.childSaysComplete.toString()}</h5>
-            <Input type="text" id="choreChildSaysComplete" value={this.state.choreChildSaysComplete} onChange={this.handleChange} />
-             <h5>{element.pastDue.toString()}</h5>
-              <Input type="text" id="chorePastDue" value={this.state.chorePastDue} onChange={this.handleChange} />
+           
+            <Input type="text" s={12} label={element.choreName} id="choreName" value={this.state.choreName} onChange={this.handleChange} />
+            
+            <Input type="text" s={12} label={element.choreDesc} id="choreDesc" value={this.state.choreDesc} onChange={this.handleChange} />
+            
+            <Input type="text" s={12} label={element.choreValue} id="choreValue" value={this.state.choreValue} onChange={this.handleChange} />
+             
+            <Input type="text" s={12} label="Is Task Complete?" id="choreComplete" value={this.state.choreComplete} onChange={this.handleChange} />
+             
+            <Input type="text" s={12} label="Child Says Task is Complete?" id="choreChildSaysComplete" value={this.state.choreChildSaysComplete} onChange={this.handleChange} />
+            
+              <Input type="text" s={12} label="Task is past due?" id="chorePastDue" value={this.state.chorePastDue} onChange={this.handleChange} />
             <Button id={element._id} onClick={this.postEditedChore}>Submit Changes</Button>
           </form>
         </Row>    
@@ -278,30 +288,27 @@ class ViewParent extends React.Component {
         var showKids = this.state.children.map((element, i)=>{
           return(
               <div key={i}>
-                <p className="kidStats" id={element.id}>{element.firstName}</p>
-                <p className="kidStats" >{element.lastName}</p>
-                <p className="kidStats" >{element.email}</p>
-                <p className="kidStats" >{element.age}</p>
+                <p>{element.firstName} {element.lastName}<br/>
+                {element.email}<br />
+                {element.age} years old</p>
               {/*Insert Goals array?*/}
               <Modal 
-              header="Edit Children"
+              header="Edit Child"
               //if only it were that easy
               fixedFooter
               trigger={<Button id={i} className="mainBtn" key={i}>Edit Child</Button>}
               >
               <Row>
+              <Col s={12}>
                 <form>
-                  <h5>{element.firstName}</h5>
-                  <Input type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
-                  <h5>{element.lastName}</h5>
-                  <Input type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} />
-                  <h5>{element.email}</h5>
-                  <Input type="text" id="email" value={this.state.email} onChange={this.handleChange} />
-                   <h5>{element.age}</h5>
-                  <Input type="text" id="age" value={this.state.age} onChange={this.handleChange} />
-
-                  <Button id={element.id} type="submit" className="mainBtn" onClick={this.postEditedChild}>Confirm Child</Button>
+                  
+                  <Input type="text" s={6} label={element.firstName} id="firstName" value={this.state.firstName} onChange={this.handleChange}/>
+                  <Input type="text" s={6} label={element.lastName} id="lastName" value={this.state.lastName} onChange={this.handleChange} />     
+                  <Input type="text" s={6} label={element.email} id="email" value={this.state.email} onChange={this.handleChange} />
+                  <Input type="text" s={6} label={element.age} id="age" value={this.state.age} onChange={this.handleChange} /><br/>
+                  <Button id={element.id} type="submit" className="mainBtn" onClick={this.postEditedChild}>Save Changes</Button>
                 </form>
+                </Col>
                </Row>
               </Modal>  
               </div>
@@ -328,7 +335,7 @@ class ViewParent extends React.Component {
                             user={{
                               background: navBg,
                               image: icon,
-                              name: 'John Doe'
+                              name: this.state.parentName
                             }}
                           />
 
@@ -389,8 +396,8 @@ class ViewParent extends React.Component {
                               </Row>
                             </Modal>
                                 <Modal
-                                    id="editModal"
-                                    header='Edit Task'
+                                    id="editChild"
+                                    header='Edit Children'
                                     fixedFooter
                                     trigger={
                             <NavItem>Edit An Exisiting Child</NavItem>
@@ -400,7 +407,7 @@ class ViewParent extends React.Component {
                           </Dropdown>
 
                            {/* MENU FOOTER */}
-                          <Footer className="page-footer">
+                          <Footer className="SideNav-footer">
                               <Button type="submit" waves='light' className="mainBtn" onClick={this.props.logEmOut}>LogOut</Button>
                           </Footer>
 
@@ -426,9 +433,9 @@ class ViewParent extends React.Component {
       </Col>
       <Col s={9} className='grid-example'>
         <Card className='small'
-              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
+              header={<CardTitle reveal image={background} waves="light"> Good Morning, {this.state.parentName} </CardTitle>}
               >
-              Keep working on your goal for Concert Tickets!
+              
         </Card>
 
         {/* CHILD DISPLAY */}

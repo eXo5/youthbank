@@ -64,7 +64,7 @@ componentDidMount(){
     return(
       <div>
 
-        <NavSidebar />
+        <NavSidebar logEmOut={this.props._logout} />
 
         <Row>
           <Col s={3} className='grid-example'>

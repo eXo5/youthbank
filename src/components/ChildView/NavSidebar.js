@@ -150,8 +150,8 @@ class NavSidebar extends React.Component {
           </Dropdown>
 
            {/* MENU FOOTER */}
-          <Footer className="page-footer">
-              <Button waves='light' className="mainBtn">LogOut</Button>
+          <Footer className="SideNav-footer">
+              <Button type="submit" waves='light' className="mainBtn" onClick={this.props.logEmOut}>LogOut</Button>
           </Footer>
 
         </SideNav>

@@ -5,22 +5,17 @@ import '../../index.css';
 class PgFooter extends React.Component {
 	render() {
 		return(
-<Footer copyrights="&copy 2015 Copyright Text"
-	moreLinks={
-		<a className="grey-text text-lighten-4 right page-footer" href="#!">More Links</a>
-	}
-	links = {
+<Footer className="page-footer"
+	links={
 		<ul>
-			<li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
-			<li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
-			<li><a className="grey-text text-lighten-3" href="#!">Link 3</a></li>
-			<li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
+			<li><a className="black-text text-lighten-3 footerText" href="https://github.com/eXo5/youthbank" target="_blank" rel="noopener noreferrer">Developer Repo</a></li>
+			<li><a className="black-text text-lighten-3 footerText" href="https://www.indeed.com" target="_blank" rel="noopener noreferrer">Careers</a></li>
+			<li><a className="black-text text-lighten-3 footerText" href="/" target="_blank" rel="noopener noreferrer">Site Map</a></li>
 		</ul>
 	}
-	className='example'
 >
-		<h5 className="white-text">Footer Content</h5>
-		<p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+		<h5 className="orange-text footerLogo">Young Money</h5>
+		<p className="black-text text-lighten-4">&copy; Young Money 2017 <br />Oscar Abella, James Dalton, Jessica Ticzon, Michael Yingling</p>
 </Footer>
 		)
 	}
