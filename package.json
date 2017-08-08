@@ -33,7 +33,8 @@
     "start": "react-scripts start & node server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+     "prod": "export NODE_ENV=\"production\" && nodemon server/server.js"
   },
   "proxy": "http://localhost:3001"
 }
