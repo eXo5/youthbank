@@ -8,7 +8,7 @@ class MoneyEarned extends React.Component {
 					<Row> 
 						<Col>
 						<Icon>account_balance</Icon>
-						<h6> Account Balance : $24.00</h6>
+						<h6> Total Made : $30.00</h6>
 						<h8> Recent Transactions (10 days): </h8>
 						<Table>
 							<thead>
@@ -22,18 +22,18 @@ class MoneyEarned extends React.Component {
 							<tbody>
 								<tr>
 									<td>Do Laundry</td>
-									<td>$10.00</td>
-									<td>$24.00</td>
+									<td>$5.00</td>
+									<td>$30.00</td>
 								</tr>
 								<tr>
 									<td>Help Sis w. homework</td>
 									<td>$4.00</td>
-									<td>$14.00</td>
+									<td>$25.00</td>
 								</tr>
 								<tr>
 									<td>Clean Bathroom</td>
 									<td>$8.00</td>
-									<td>$10.00</td>
+									<td>$21.00</td>
 								</tr>
 							</tbody>
 						</Table>

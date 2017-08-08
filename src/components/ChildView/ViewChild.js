@@ -7,6 +7,7 @@ import Goal from './Goal';
 import MoneyEarned from './MoneyEarned';
 import AvailTasks from './AvailTasks';
 import TaskToDo from './TaskToDo';
+// import UnclaimedTasks from '../ParentView/UnclaimedTasks';
 import { Redirect } from 'react-router-dom';
 import helper from '../../utils/thehelp/helper.js'
 import CompletedTas from './CompletedTas';
@@ -31,10 +32,14 @@ class ViewChild extends React.Component {
       lastName: "",
       email:"",
       age:"",
-      parent:""
+      parent:"",
+
+      chores: []
 
     }
   }
+
+
 
   //sets state of data put in input fields
   handleChange = (event) => {
@@ -51,8 +56,35 @@ class ViewChild extends React.Component {
 componentDidMount(){
   helper.getChildInfo()
     .then(results => {
+      console.log("SUCCESS!!!!!!! ")
       console.log(results)
+
+      var newChores = [];
+          for (let i = 0; i < results.data.chores.length; i++){
+            var idOne = results.data.chores[i]._id;
+            var choreName = results.data.chores[i].choreName.replace(/_/g, " ");
+            var choreDesc = results.data.chores[i].choreDesc;
+            var choreValue = results.data.chores[i].choreValue;
+            var complete = results.data.chores[i].complete;
+            var childSaysComplete = results.data.chores[i].childSaysComplete;
+            var pastDue = results.data.chores[i].pastDue;
+            newChores.push({
+              _id: idOne, 
+              choreName: choreName, 
+              choreDesc: choreDesc, 
+              choreValue: choreValue, 
+              complete: complete, 
+              childSaysComplete: childSaysComplete, 
+              pastDue: pastDue});
+          }
+
+          this.setState({
+            chores: newChores
+            
+          })
     })
+
+
 }
 
 
@@ -68,21 +100,21 @@ componentDidMount(){
 
         <Row>
           <Col s={3} className='grid-example'>
-              <TaskToDo />
+              <TaskToDo/>
               <CompletedTas />
           </Col>
 
         {/*HERE GOES AVAILABLE TASKS*/}
           <Col s={9} className='grid-example'>
             <Card className='small'
-              header={<CardTitle reveal image={background} waves="light"> Good Evening Alex </CardTitle>}
-              actions={[<a href='google.com'> </a>]}>
+              header={<CardTitle reveal image={background} waves="light"> Good Morning, Molly </CardTitle>}
+              >
               Keep working on your goal for Concert Tickets!
             </Card>
 
               <Row>
                 <Col s={4} className='grid-example AvailTasks'>
-                  <AvailTasks />
+                  <AvailTasks choreList={this.state.chores}/>
                 </Col> 
                 <Col s={8} className='grid-example'>
                   <Row> 

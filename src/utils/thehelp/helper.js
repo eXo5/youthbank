@@ -6,7 +6,7 @@ var helper = {
 	logOneIn: function(email, password) {
 		console.log(email)
 		console.log(password)
-		  axios.post("/auth/login/parent", {
+		return axios.post("/auth/login/parent", {
 		 	email: email, 
 		 	password: password
 		 })
@@ -18,7 +18,7 @@ var helper = {
 	logInChild: function(email, password) {
 		console.log(email)
 		console.log(password)
-		  axios.post("/auth/login/child", {
+		return axios.post("/auth/login/child", {
 		 	email: email, 
 		 	password: password
 		 })

@@ -18,7 +18,7 @@ class Why extends React.Component {
 			    		</Col>
 			    		<Col s={2} className="WhyComp1">
 			    			<Icon medium> restore </Icon>
-			    			<h5> Time-Knowing </h5>
+			    			<h5> Time-Saving </h5>
 			    			<p> By incentivizing your children to do chores, save yourself time from having to do tasks.</p>
 			    			 
 			    		</Col>

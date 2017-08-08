@@ -390,7 +390,7 @@ class ViewParent extends React.Component {
                                   <Input s={6} label="Last Name" id="lastName" value={this.state.lastName} onChange={this.handleChange}/>
                                   <Input s={12} label="Age" id="age" value={this.state.age} onChange={this.handleChange}/>
                                   <Input type="email" label="Email"s={12} id="email" value={this.state.email} onChange={this.handleChange}/>
-                                  <Input type="password" label="password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
+                                  <Input type="password" label="Password" s={12} id="password" value={this.state.password} onChange={this.handleChange}/>
                                   <Button waves='light'  className="mainBtn" type="submit" onClick={this.handleNewChild}>Submit</Button>
                                 </form>
                               </Row>
@@ -457,7 +457,7 @@ class ViewParent extends React.Component {
    )
    } else if (this.props.loggedIn === null) {   
       return (<div>    
-             <h1>...</h1>
+             <h1> </h1>
         </div>)    
     
    }else{    

@@ -71,7 +71,7 @@ class NavSidebar extends React.Component {
             user={{
               background: navBg,
               image: icon,
-              name: 'John Doe'
+              name: 'Molly'
             }}
           />
 
@@ -79,24 +79,6 @@ class NavSidebar extends React.Component {
           <Dropdown trigger={
             <SideNavItem href='#!icon' icon='list'>Manage Tasks</SideNavItem>
             }>
-
-            {/* MODAL FOR NEW TASKS */}
-            <Modal
-              header='Add A New Task'
-              fixedFooter
-              trigger={
-                <NavItem>Add A New Task</NavItem>
-              }>
-              <Row>
-                <form>
-                  <Input s={12} label="Task" id="task" value={this.state.task} onChange={this.handleChange}><Icon>build</Icon></Input>
-                  <Input s={12} label="Description of Task" id="descript" value={this.state.descript} onChange={this.handleChange}><Icon></Icon></Input>
-                  <Input s={12} label="Amount" id="amount" value={this.state.amount} onChange={this.handleChange}><Icon></Icon></Input>
-                  
-                  <Button type="submit" waves='light' className="mainBtn">Submit</Button>
-                </form>
-              </Row>
-            </Modal>
             
             <NavItem>Edit An Existing Task</NavItem>
           </Dropdown>

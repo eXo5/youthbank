@@ -102,7 +102,7 @@ componentDidMount(){
 			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
       <Route exact path="/parent" render={() => 
         <ViewParent loggedIn={this.state.loggedIn} logEmOut={this._logout}/>}  />
-      <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} logEmOut={this._logout}/>}  />  
+      <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} />}  />  
 		</Switch>
 
 
