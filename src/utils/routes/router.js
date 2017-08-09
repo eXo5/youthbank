@@ -9,7 +9,7 @@ var Chore = require("../db/models/chore-model.js"); //JD
 module.exports = function(app) {
 
 app.get("/", function(req, res){
-  res.sendFile(__dirname + "./public/index.html");
+  res.sendFile(__dirname + "/build/static/index.html");
 });
 
 app.get("/api/get/childinfo", function(req, res){
