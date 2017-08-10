@@ -8,8 +8,17 @@ var Chore = require("../db/models/chore-model.js"); //JD
 
 module.exports = function(app) {
 
-app.get("/", function(req, res){
-  res.sendFile(__dirname + "/build/static/index.html");
+app.get("/*", function(req, res){
+  if(process.env.NODE_ENV === 'production') {
+	const path = require("path")
+	console.log("YOU ARE IN THE PRODUCTION ENV")
+	app.use("/static", express.static(path.join(__dirname, + "../build/static")))
+	app.get("/", (req, res) => {
+		res.sendFile(path.join(__dirname, '../build/'))
+	})
+} else {
+	res.sendFile(__dirname + "/public/index.html")
+	}
 });
 
 app.get("/api/get/childinfo", function(req, res){

@@ -40,21 +40,25 @@ class SignIn extends Component {
     event.preventDefault()
     console.log("handleSubmit")
     helper.logOneIn(this.state.email, this.state.password)
-
-    this.setState({
+      .then(results => {
+        this.setState({
       email: "",
       password: "",
       redirectTo: "/parent"})
+      }) 
   }
 
     handleSubmitKid = (event, email, password) => {
     event.preventDefault()
     console.log("Email: " + this.state.email + "  PASSWORD: " + this.state.password)
     helper.logInChild(this.state.email, this.state.password)
-    this.setState({
-      email: "",
-      password: "",
-      redirectTo: "/child"})
+      .then(results => {
+        this.setState({
+          email: "",
+          password: "",
+          redirectTo: "/child"
+        }) 
+    })
   }
   // saveUser = (event, firstName, lastName, email, password) => {
   //   event.preventDefault();

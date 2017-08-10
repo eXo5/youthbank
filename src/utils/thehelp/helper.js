@@ -12,7 +12,8 @@ var helper = {
               password: password
           })
           .then(function(results) {
-              return console.log(results)
+            console.log(results)
+              return results;
           })
   },
 
@@ -24,7 +25,8 @@ var helper = {
               password: password
           })
           .then(function(results) {
-              return console.log(results)
+              console.log(results)
+              return results;
           })
   },
 

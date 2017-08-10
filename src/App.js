@@ -46,19 +46,22 @@ componentDidMount(){
           user: response.data.user
         })
          console.log("This State: " + JSON.stringify(this.state));
-      } else {
-        this.setState({
-          loggedIn: false,
-          user: null
+      // } else {
+      //   this.setState({
+      //     loggedIn: false,
+      //     user: null
           
-        })
-      }
-    });
+      //   })
+      // }
+    
+    }
+  })
 }
 
 
   _loginParent = (event, email, password) => {
-    event.preventDefault()
+    event.preventDefault();
+    console.log("_loginParent fired")
   	axios
   		.post("/auth/login/parent", {
   			email,
@@ -66,6 +69,7 @@ componentDidMount(){
   		})
   		.then(response => {
   			console.log(response)
+        console.log("_loginParent^^^RESPONSE .then(fired)")
   			if(response.status === 200) {
   				this.setState({
   					loggedIn: true,
@@ -94,17 +98,16 @@ componentDidMount(){
 
 
   render() {
- // if(res.user){this.setState({loggedIn: true, user: res.user})}
     return (
 
    	
 			  
 		<Switch>
 			<Route exact path="/" render={() => <Home/> } />
-			<Route exact path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
-      <Route exact path="/parent" render={() => 
+			<Route path="/signin" render={() => <SignIn _login={this._loginParent}/>} />
+      <Route path="/parent" render={() => 
         <ViewParent loggedIn={this.state.loggedIn} />} _logout={this.props._logout} />
-      <Route exact path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} _logout={this._logout} />}  />  
+      <Route path="/child" render={() => <ViewChild loggedIn={this.state.loggedIn} _logout={this._logout} />}  />  
 		</Switch>
 
 

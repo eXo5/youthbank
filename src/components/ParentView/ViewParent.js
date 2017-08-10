@@ -204,7 +204,7 @@ class ViewParent extends React.Component {
             helper.getChores()
             .then(function(){
               alert("Chore has been updated");
-               ("").click("closeOnClick");
+               //("").click("closeOnClick");
             })
           })
       }
@@ -224,7 +224,7 @@ class ViewParent extends React.Component {
     this.fillChoresAndChildren()
     }//END COMPONENT DID MOUNT      
   render() {
-    console.log("VIEW PARENT this.props.loggedin" + this.props.loggedIn)
+    console.log("VIEW PARENT this.props.loggedin: " + this.props.loggedIn)
     if( this.props.loggedIn ) {
       //EDIT TASKS MODAL IS WRITTEN HERE
         var showChores = this.state.chores.map((element, i) => {
@@ -393,6 +393,7 @@ class ViewParent extends React.Component {
                                 axios.post("/auth/logout")
                                   .then(response=>{
                                     console.log('fuck it');
+                                    
                                   })
                               }}>LogOut</Button>
                          
