@@ -26,9 +26,8 @@ var PORT = process.env.PORT || 3001;
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.text());
+// app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
 
 // Run session for reasons
 app.use(
@@ -66,7 +65,7 @@ app.use("/auth", require("./src/utils/auth"))
 require("./src/utils/routes/router.js")(app, passport)
 
 //set the static build.
-app.use(express.static("build"));
+app.use(express.static("public"));
 
 // -------------------------------------------------
 mongoose.Promise = global.Promise;

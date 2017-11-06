@@ -122,7 +122,8 @@ var helper = {
 
    choreComplete: function(choreId){ 
     return axios.post("/api/post/chorecomplete", {choreId: choreId})
-  .then(function(results){      
+  .then(function(results){   
+    console.log(results)   
   })
 
 },
@@ -167,9 +168,6 @@ var helper = {
         return "Good Evening";
         console.log("Good Evening"); //if the current hour is greater than or equal to 6pm and less than 2 am
       }
-
-
-
 
 
   }
