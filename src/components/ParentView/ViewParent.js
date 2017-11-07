@@ -215,6 +215,7 @@ class ViewParent extends React.Component {
     helper.editChild(childId, this.state.firstName, this.state.lastName, this.state.email, this.state.age)
       .then(results=>{
         alert("Child has been updated")
+        console.log("If only it were that easy")
       })
 
   }    
